@@ -1,0 +1,78 @@
+import React from 'react';
+import Modal from "react-native-modal";
+import styled from 'styled-components';
+import {height, width} from '../../constants/Layout';
+import Colors from "../../constants/Colors";
+import Fonts from "../../constants/Fonts";
+
+const Container = styled.View`
+	min-height : ${height*0.1};
+	width : ${width*0.7};
+	padding : 10px;
+	background-color : white;
+	margin-bottom : 100px;
+	border-width : 0.6px;
+	border-color : ${Colors.lightGreenColor};
+`;
+const OrderView = styled.View`
+	flex-direction : row;
+	justify-content : space-between;
+`;
+const Text = styled.Text`
+	font-family : ${Fonts.normalFont};
+	font-size : 15px;
+`;
+
+const Item = ({order}) => {
+	let item = (
+		<OrderView>
+			<Text>{order.name}</Text>
+			<Text>x {order.qty}</Text>
+		</OrderView>
+	);
+	return item;
+}
+const OrderDetailModal = (props) => {
+	let totalAmount = 0;
+	let content=(
+		<Modal
+			isVisible={props.active}
+			onBackButtonPress={props.updateActive}	
+			onBackdropPress={props.updateActive}
+			animationIn={'slideInRight'}
+			animationOut={'slideOutRight'}
+			animationOutTiming={10}
+			deviceWidth={width}
+			deviceHeight={height}
+			backdropColor={'white'}
+			backdropOpacity={0.6}
+			style={{alignItems : 'center', justifyContent : 'flex-end'}}
+		>
+			{
+				props.active
+				?
+				<Container>
+					{
+						props.order.items.map((order, index)=>{ 
+							totalAmount+=order.price*order.qty
+							return <Item order={order} key={index} />
+						})
+					}
+					<OrderView>
+						<Text>Total Amount</Text> 
+						<Text>Rs {totalAmount}</Text>
+					</OrderView>
+					<OrderView>
+						<Text>Payment Mode</Text> 
+						<Text>COD</Text>
+					</OrderView>				
+				</Container>				
+				:
+				<Text />
+			}
+		</Modal>
+	);
+	return content;
+}
+
+export default OrderDetailModal;
