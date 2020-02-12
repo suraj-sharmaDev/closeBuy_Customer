@@ -48,7 +48,7 @@ const RecentOrderedItem = ({item, navigation}) => {
 				<ShopName>{item.pickup_address}</ShopName>
 			</View>
 			<View>
-				<ItemPrice>Rs {item.total_amount}</ItemPrice>
+				<ItemPrice>Rs {parseInt(item.total_amount)+20}</ItemPrice>
 			</View>
 		</Container>
 	)

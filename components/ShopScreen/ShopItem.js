@@ -67,7 +67,7 @@ const ShopItem = ({ data, available }) => {
 								    textDecorationColor: '#000'
 							}}
 						>
-							Rs {data.product_price}
+							Rs {Math.round(data.product_price*1.05)}
 						</ItemPrice>
 						<ItemPrice
 							style={{
@@ -79,7 +79,7 @@ const ShopItem = ({ data, available }) => {
 							5% off
 						</ItemPrice>
 					</View>
-					<ItemPrice style={{ fontSize : 15}}>Rs {data.product_price * 0.95}</ItemPrice>					
+					<ItemPrice style={{ fontSize : 15}}>Rs {data.product_price}</ItemPrice>					
 				</View>
 			</ItemDetailView>
 			{

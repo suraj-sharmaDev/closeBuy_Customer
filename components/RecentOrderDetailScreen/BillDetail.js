@@ -42,10 +42,10 @@ const Item = ({item}) => {
 		<BillView>
 			<View>
 				<Text>{item.name}</Text>
-				<Text>{item.qty} x {item.price}</Text>
+				<Text>{item.qty} x Rs {Math.round(item.price)}</Text>
 			</View>
 			<View>			
-				<Text>{item.qty * item.price}</Text>
+				<Text>Rs {item.qty * Math.round(item.price)}</Text>
 			</View>
 		</BillView>
 	);
@@ -73,21 +73,32 @@ const BillDetail = ({bill, totalAmount}) => {
 					<View>
 						<Row>
 							<BoldText>Total Price</BoldText>
-							<BoldText>{total}</BoldText>							
+							<BoldText>Rs {total}</BoldText>							
 						</Row>
 						<Row>
 							<BoldText>Discount</BoldText> 
-							<BoldText>{total-totalAmount}</BoldText>						
+							<BoldText>Rs {total-totalAmount}</BoldText>						
 						</Row>
 						<Row>
+							<BoldText>Delivery Charge</BoldText> 
+							<BoldText>Rs 20</BoldText>						
+						</Row>						
+						<Row>
 							<BoldText>You paid</BoldText> 
-							<BoldText>{totalAmount}</BoldText>
+							<BoldText>Rs {totalAmount+20}</BoldText>
 						</Row>
 					</View>
 					:
-					<BillView>
-						<Text>You paid : {total}</Text>
-					</BillView>
+					<View>
+						<Row>
+							<BoldText>Delivery Charge</BoldText>
+							<BoldText>Rs 20</BoldText>							
+						</Row>
+						<Row>
+							<BoldText>Total Price</BoldText>
+							<BoldText>Rs {Math.round(total+20)}</BoldText>							
+						</Row>
+					</View>
 				}
 			</View>
 		</Container>

@@ -54,7 +54,7 @@ const InputFields = ({handleSubmit}) => {
 		<InputBox key={j}>
 			<Input
 				ref={ref => refs.push(ref)}
-				keyboardType="default"
+				keyboardType="numeric"
 				style={{fontSize: 16}}
 	            blurOnSubmit={false}				
 				onChangeText={e => focusNext(e, j)}

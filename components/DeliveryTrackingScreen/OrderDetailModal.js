@@ -7,7 +7,7 @@ import Fonts from "../../constants/Fonts";
 
 const Container = styled.View`
 	min-height : ${height*0.1};
-	width : ${width*0.7};
+	width : ${width*0.8};
 	padding : 10px;
 	background-color : white;
 	margin-bottom : 100px;
@@ -26,8 +26,8 @@ const Text = styled.Text`
 const Item = ({order}) => {
 	let item = (
 		<OrderView>
-			<Text>{order.name}</Text>
-			<Text>x {order.qty}</Text>
+			<Text numberOfLines={1} style={{paddingRight:10}}>{order.name}</Text>
+			<Text>Rs {order.price} x {order.qty}</Text>
 		</OrderView>
 	);
 	return item;
@@ -58,9 +58,13 @@ const OrderDetailModal = (props) => {
 							return <Item order={order} key={index} />
 						})
 					}
-					<OrderView>
+					<OrderView style={{ borderBottomWidth:1, borderBottomColor : Colors.greyColor, paddingBottom : 10}}>
+						<Text>Delivery Charge</Text>
+						<Text>Rs 20</Text>
+					</OrderView>					
+					<OrderView style={{ paddingTop : 10}}>
 						<Text>Total Amount</Text> 
-						<Text>Rs {totalAmount}</Text>
+						<Text>Rs {totalAmount+20}</Text>
 					</OrderView>
 					<OrderView>
 						<Text>Payment Mode</Text> 
