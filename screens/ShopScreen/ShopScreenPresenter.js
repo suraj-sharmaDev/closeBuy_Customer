@@ -61,7 +61,9 @@ const ShopScreenPresenter = ({navigation, Shop }) => {
 	    	updateActive={()=>updateSearchActive(!searchActive)}
 	    />
 	  	<ScrollView ref={(ref)=>listRef=ref} showsVerticalScrollIndicator={false} removeClippedSubviews={true}>
-		    <ShopThumbnail image={Shop.image}/>
+		    { 
+		    	//<ShopThumbnail image={Shop.image}/>
+			}
 		    <View onLayout={(e)=>listUpdater(e.nativeEvent.layout.y)}>
 			    <ShopScreenBody 
 			      	Shop={Shop}

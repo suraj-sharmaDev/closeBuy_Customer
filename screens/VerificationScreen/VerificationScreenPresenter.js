@@ -1,17 +1,29 @@
 import React from "react";
 import { Platform, Dimensions, BackHandler } from 'react-native';
 import styled from "styled-components";
-import Color from "../../constants/Colors";
-
+import Colors from "../../constants/Colors";
+import Fonts from "../../constants/Fonts";
 import {Verify, GenerateOtp} from "../../middleware/API";
 import {AlertService} from '../../middleware/AlertService';
 
 import InputForm from '../../components/VerificationScreen/InputForm';
+import Header from '../../components/VerificationScreen/Header';
 
 const {height, width} = Dimensions.get('window');
 
 const Theme = styled.View`
-  background-color : ${Color.homeBackgroundColor};
+  height : ${height};
+  width : ${width};
+  background-color : ${Colors.homeBackgroundColor};
+`;
+const HeaderText = styled.Text`
+  text-transform : uppercase;
+  text-align : center;
+  font-size : 20px;
+  font-family : ${Fonts.boldFont};
+  color : ${Colors.darkGreyColor};
+  border-bottom-width : 1px;
+  border-bottom-color : ${Colors.greyColor};
 `;
 
 const VerificationScreenPresenter = ({user, verifiedHandler, changeNumber}) => {
@@ -46,10 +58,13 @@ const VerificationScreenPresenter = ({user, verifiedHandler, changeNumber}) => {
   }
   let content = (
     <Theme>
+      <Header 
+        userMobile={user.userMobile}
+        handleChangeNumber={handleChangeNumber}
+      />
       <InputForm 
         handleVerify={handleVerify} 
         handleResendOtp={handleResendOtp} 
-        handleChangeNumber={handleChangeNumber}
       />
     </Theme>
   );

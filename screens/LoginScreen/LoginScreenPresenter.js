@@ -33,7 +33,7 @@ const LoginScreenPresenter = ({login, logout}) => {
         duration : 300
       }),
       Animated.timing(formHeight,{
-        toValue : height*0.30,
+        toValue : height*0.35,
         duration : 300
       })      
     ]).start();    

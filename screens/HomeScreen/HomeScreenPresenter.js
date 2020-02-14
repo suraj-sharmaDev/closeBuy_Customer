@@ -19,7 +19,7 @@ import OffersPresenter from "../../components/HomeScreen/OffersPresenter";
 import ShopListWithSearchBar from "../../components/HomeScreen/ShopListWithSearchBar";
 import Color from "../../constants/Colors";
 
-const Theme = styled.ScrollView`
+const Theme = styled.View`
   background-color : ${Color.homeBackgroundColor};
 `;
 const View = styled.View`
@@ -119,28 +119,25 @@ const HomeScreenPresenter = ({navigation, ...props}) => {
     //Two cases will arrive if service out of range or not
     if(outOfRange){
       content=(
-        <Theme>
-          <DeliveryLocationHeader navigation={navigation} currentAddress={currentAddress}/>
-          <ScrollView>
-            <ServiceOutOfRange />
-          </ScrollView>
-        </Theme>
+          <ServiceOutOfRange />
       );
     }
     else
     {
       content=(
-        <Theme stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
-          <DeliveryLocationHeader navigation={navigation} currentAddress={currentAddress}/>
           <ScrollView>
             <OffersPresenter OfferData={Offers} navigation={navigation}/>
             <ShopListWithSearchBar Shops={Shops} navigation={navigation}/>
           </ScrollView>
-        </Theme>
       );
     }
   }
-  return content;
+  return (
+    <Theme>
+      <DeliveryLocationHeader navigation={navigation} currentAddress={currentAddress}/>
+      {content}
+    </Theme>
+  );
 };
 
 const mapStateToProps = state => {

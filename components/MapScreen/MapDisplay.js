@@ -21,7 +21,6 @@ const MapDisplay = (props) => {
     <MapContainer onLayout={event=> screenCheck(event)}>
       <MapView
         style={{ height : '100%'}}
-        customMapStyle={CustomMap}        
         minZoomLevel={10}
         ref={props._mapRef}
         initialRegion={props.userLocation}

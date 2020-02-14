@@ -49,6 +49,7 @@ export default function OffersPresenter({OfferData, navigation}) {
       <FlatList
         data={OfferData}
         horizontal = {true}
+        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <Item
             type={item.offer_type}

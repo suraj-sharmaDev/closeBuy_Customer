@@ -6,28 +6,28 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Color from "../../constants/Colors";
 import Font from "../../constants/Fonts";
 const Container = styled.View`
-  flex-direction : row;
   elevation:12;
   background-color : white;
   border-bottom-color : ${Color.greyColor};
   border-bottom-width : 1.6;
   border-bottom-left-radius : 12px;
   border-bottom-right-radius : 12px;  
-  padding : 10px;
-  padding-bottom : 15px;
+  padding : 5px;
+  padding-bottom : 10px;
   shadow-opacity: 0.46;
   shadow-radius: 11.14px;
   shadow-color: #000;
   shadow-offset: 5px 5px;
 `;
 const Location = styled.TouchableOpacity`
-  flex : 1;
   flex-direction : row;
+  padding-bottom : 5px;
+`;
+const Straightline = styled.View`
+  width : 100%;
   border-bottom-color : ${Color.lightGreenColor};
   border-bottom-width : 1;
-  width : 100%;
 `;
-
 const InfoBox = styled.View`
   flex:1;
   flex-direction : column;
@@ -44,7 +44,7 @@ const Address = styled.Text`
   font-size : 13px;
   color : ${Color.blackColor};
   font-family  : ${Font.normalFont};
-  margin-top : -5px;
+  margin-top : 0px;
   text-transform : uppercase;
 `;
 const DeliveryLocationHeader = ({ navigation, currentAddress }) => {
@@ -75,6 +75,9 @@ const DeliveryLocationHeader = ({ navigation, currentAddress }) => {
           // />
         }
       </Location>
+      <View style={{paddingLeft:25, paddingRight:25}}>
+        <Straightline />
+      </View>
     </Container>
   );
   return content;

@@ -18,9 +18,8 @@ const InputBox = styled.View`
   justify-content : center;
   align-items : center;
   background-color : white;
-  border-width : 1px;
-  border-color : ${Colors.lightGreyColor};
-  border-radius : 12px;
+  border-bottom-width : 1px;
+  border-bottom-color : ${Colors.lighterGreenColor};
 `;
 const Input = styled.TextInput`
   justify-content : center;

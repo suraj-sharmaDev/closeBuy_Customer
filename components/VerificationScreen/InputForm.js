@@ -8,15 +8,8 @@ import FormButton from './FormButton';
 
 const Container = styled.SafeAreaView`
 	padding : 20px 10px;
-`;
-const HeaderText = styled.Text`
-	text-transform : uppercase;
-	text-align : center;
-	font-size : 20px;
-	font-family : ${Fonts.boldFont};
-	color : ${Colors.darkGreyColor};
-	border-bottom-width : 1px;
-	border-bottom-color : ${Colors.greyColor};
+	height : 40%;
+	width : 100%;
 `;
 
 const InputForm = ({ handleVerify, handleResendOtp, handleChangeNumber }) => {
@@ -33,12 +26,10 @@ const InputForm = ({ handleVerify, handleResendOtp, handleChangeNumber }) => {
 	}
 	let content = (
 		<Container>
-			<HeaderText>OTP Verification</HeaderText>
 			<InputFields handleSubmit={handleSubmit}/>
 			<FormButton 
 				handleResend={handleResendOtp} 
 				handleSubmit={handleSubmit} 
-				handleChangeNumber={handleChangeNumber}
 			/>
 		</Container>
 	);

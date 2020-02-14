@@ -18,12 +18,15 @@ const ShopsContainer = props => {
 	      <FlatList
 	        data={props.data}
 	        horizontal = {false}
-	        renderItem={({ item }) => (
-	          <ShopDetailCard
-	            info = {item}
-	            navigation = {props.navigation}
-	          />
-	        )}
+	        renderItem={({ item }) => {
+	        	item = {...item, online_status:'1'}
+		        return(
+		          <ShopDetailCard
+		            info = {item}
+		            navigation = {props.navigation}
+		          />
+		        )}
+	    	}
 	        keyExtractor={item => item.dist_point_id}
 	        extraData={props.data}
 	      />

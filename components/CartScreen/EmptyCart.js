@@ -18,19 +18,18 @@ const InfoBox = styled.View`
 	align-items : center;
 	justify-content : center;
 `;
-const InfoImage = styled.Image`
-	width : 150px;
-	height : 120px;
-`;
+const Image = styled.Image``;
 const InfoText = styled.Text`
-	font-size : 18px;
+	margin-top : 30px;
+	font-size : 20px;
 	font-family : ${Fonts.normalFont};
+	color : ${Colors.lightGreyColor};
 `;
 const EmptyCart = () => {
 	let content = (
 		<Container>
 			<InfoBox>
-				<Icon name='emoji-sad' size={150} color={Colors.greyColor} />
+				<Image source={require('../../assets/images/empty-cart.png')} />
 				<InfoText>
 					No Items in your cart
 				</InfoText>

@@ -1,4 +1,4 @@
-const tintColor = "#202020";
+const tintColor = "#05AF5D";
 const authBorderColor = "rgba(255, 255, 255, 0.5)";
 
 export default {
@@ -13,7 +13,7 @@ export default {
   greenColor : "#05AF5D",
   disabledGreenColor : "#D4DAD7",
   lightGreenColor : "#36BC7B",
-  lighterGreenColor : "#E7F9F0",
+  lighterGreenColor : "#B4E3CC",
   greyColor: "#E0E0E0",
   lightGreyColor: "#ACACAC",
   semiDarkGreyColor : "#8E8E8E",

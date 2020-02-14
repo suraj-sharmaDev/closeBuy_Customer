@@ -100,9 +100,9 @@ const MapInput = props => {
   return (
     <Container style={{width: width}}>
       <Description>
-        <View style={{width: width / 2}}>
+        <View style={{width: width}}>
           <DescpText>{props.userLocation.reverseAddress.title}</DescpText>
-          <Address numberOfLines={2}>
+          <Address numberOfLines={1}>
             {props.userLocation.reverseAddress.street}
           </Address>
         </View>

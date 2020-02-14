@@ -83,7 +83,7 @@ const ShopItem = ({ data, available }) => {
 				</View>
 			</ItemDetailView>
 			{
-				available==='1'
+				(available==='1' && data.product_stock!=='0')
 				?
 				<ShopQuantityButton 
 					item={{shopId : data.dist_point_id , 
@@ -95,7 +95,7 @@ const ShopItem = ({ data, available }) => {
 				/>				
 				:
 				<Button activeOpacity={1}>
-					<Text>Not available</Text>
+					<Text>Not Available</Text>
 				</Button>
 			}
 		</ItemContainer>

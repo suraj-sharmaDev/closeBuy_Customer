@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, Dimensions } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components';
 import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
@@ -8,33 +9,20 @@ import {AlertService} from '../../middleware/AlertService';
 const {height, width} = Dimensions.get('window');
 
 const Container = styled.View``;
+const View = styled.View``;
 const InfoText= styled.Text`
-	margin-top : 20px;
-	width : ${width*0.7};
-	color : ${Colors.lightGreenColor};
+	color : ${Colors.blackColor};
 	font-size : 14px;
 	font-family : ${Fonts.normalFont};
 `;
 const ButtonGroup = styled.View`
-	margin-top : 10px;
+	margin : 30px 0px;
 	flex-direction : row;
 	align-items : center;
-	justify-content : space-between;
-`;
-const ChangeMobileButton = styled.TouchableOpacity`
-	padding : 5px 2px;
-	border-width : 1px;
-	border-color : ${Colors.lightGreenColor};
-	align-items : center;
-`;
-const ChangeText = styled.Text`
-	font-size : 16px;
-	font-family : ${Fonts.normalFont};
-	color : ${Colors.lightGreenColor};
+	justify-content : center;
 `;
 const ResendButton = styled.TouchableOpacity`
 	padding : 5px 0px;
-	border-width : 1px;
 	width : 100px;
 	align-items : center;
 `;
@@ -43,12 +31,12 @@ const ResendText = styled.Text`
 	font-family : ${Fonts.normalFont};
 `;
 const SubmitButton = styled.TouchableOpacity`
-	margin-top : 30px;	
-	padding : 10px 0px;
+	flex-direction: row;
+	align-items: center;
+	justify-content : center;	
+	padding: 5px;
+	border-radius: 10px;
 	background-color : ${Colors.greenColor};
-	flex-direction : row;
-	justify-content : center;
-	align-items : center;
 `;
 const ButtonText = styled.Text`
 	color : white;
@@ -76,8 +64,10 @@ const FormButton = props => {
 	}
 	let content = (
 		<Container>
-			<InfoText>If you don't receive OTP in 2 minutes, click on Resend OTP</InfoText>
 			<ButtonGroup>
+				<InfoText>
+					Didn't receive OTP?
+				</InfoText>
 				<ResendButton 
 					onPress={handleResend} 
 					style={{ borderColor : resendEnable?Colors.greenColor:Colors.disabledGreenColor}}
@@ -85,12 +75,26 @@ const FormButton = props => {
 				>
 					<ResendText style={{color : resendEnable?Colors.greenColor : Colors.greyColor}}>Resend OTP</ResendText>
 				</ResendButton>
-				<ChangeMobileButton onPress={handleChangeNumber}>
-					<ChangeText>Change Number</ChangeText>
-				</ChangeMobileButton>				
 			</ButtonGroup>
-			<SubmitButton onPress={props.handleSubmit}>
-				<ButtonText>Submit</ButtonText>
+			<SubmitButton 
+				onPress={props.handleSubmit}
+			>
+				<View
+					style={{
+						flex: 1.25,
+						flexDirection: 'row',
+						justifyContent: 'flex-end',
+					}}>
+					<ButtonText style={{color: 'white', fontSize: 20}}>Continue</ButtonText>
+				</View>
+				<View
+					style={{
+						flex: 0.75,
+						flexDirection: 'row',
+						justifyContent: 'flex-end',
+					}}>
+					<Icon name="arrow-right-drop-circle" size={25} style={{color: 'white'}} />
+				</View>
 			</SubmitButton>
 		</Container>
 	);

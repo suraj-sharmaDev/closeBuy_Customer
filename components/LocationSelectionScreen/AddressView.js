@@ -44,14 +44,12 @@ const AddressView = ({address, place_id, type, onLocationSelect, ...props}) => {
 	}
 	content = (
 		<AddressRow onPress={()=>onLocationSelect(place_id)}>
-			<View style={{marginRight: 10}}>
+			<View style={{marginRight : 20}}>
 				<Icon name={IconName} size={22} />
 			</View>
-			<View style={{flexDirection: 'column'}}>
-				<Address>{addressTitle}</Address>
-				<View style={{marginTop: 5, width: '95%'}}>
-					<AddressDetail>{addressInfo}</AddressDetail>
-				</View>
+			<View style={{justifyContent:'center'}}>
+				<Address>{addressTitle}</Address>				
+				<AddressDetail>{addressInfo}</AddressDetail>
 			</View>
 		</AddressRow>
 	);
