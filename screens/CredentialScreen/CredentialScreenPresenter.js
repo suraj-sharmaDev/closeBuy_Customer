@@ -13,8 +13,8 @@ const Theme = styled.View`
 `;
 
 const CredentialScreenPresenter = ({onCredential}) => {
-  let imageHeight = new Animated.Value(height*0.60);
-  let formHeight = new Animated.Value(height*0.40);
+  let imageHeight = new Animated.Value(height*0.75);
+  let formHeight = new Animated.Value(height*0.25);
   let imageAnimationStyle = { height : imageHeight};  
   let formAnimationStyle = { height : formHeight}; 
 
@@ -43,11 +43,11 @@ const CredentialScreenPresenter = ({onCredential}) => {
   const inputBlurred = () => {
     Animated.parallel([
       Animated.timing(imageHeight,{
-        toValue : height*0.60,
+        toValue : height*0.75,
         duration : 300
       }),
       Animated.timing(formHeight,{
-        toValue : height*0.40,
+        toValue : height*0.25,
         duration : 300
       })      
     ]).start();    

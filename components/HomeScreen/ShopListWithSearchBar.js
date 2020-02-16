@@ -22,14 +22,20 @@ const Container = styled.View`
 `;
 
 const FilterContainer = styled.TouchableOpacity`
+  elevation : 3;
+  shadow-opacity: 0.1;
+  shadow-radius: 2.14px;
+  shadow-color: #606060;
+  shadow-offset: 0px 1px;  
+  border-radius : 7px;
+
   align-items : center;
   justify-content : center;
   margin-top : 20px;
   margin-right : 20px;
   padding : 0px 10px;
-  height : 30px;
-  border-radius : 10px;
-  background-color : ${Colors.searchBarColor};
+  height : 40px;
+  background-color : white;
 `;
 
 const ShopListWithSearchBar = ({Shops, navigation}) => {
@@ -72,7 +78,7 @@ const ShopListWithSearchBar = ({Shops, navigation}) => {
       <Container>
         <FakedSearchBar navigation={navigation}>
           <FilterContainer onPress={toggleModal}>
-            <Icon name="filter" size={16} color={Colors.darkGreyColor} />
+            <Icon name="filter" size={18} color={Colors.darkGreyColor} />
           </FilterContainer>   
         </FakedSearchBar>
         <FilterList 

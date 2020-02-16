@@ -12,16 +12,22 @@ const SearchBarContainer = styled.View`
   flex-direction : row;  
   align-items : center;
 `;
-const Search = styled.TouchableOpacity`
+const Search = styled.TouchableOpacity`  
+  elevation : 3;
   flex-direction : row;
   flex : 5;
+  shadow-opacity: 0.1;
+  shadow-radius: 2.14px;
+  shadow-color: #606060;
+  shadow-offset: 0px 1px;  
+  border-radius : 7px;
+
+  background-color : white;
   align-items : center;
   justify-content : center;
   margin : 20px 15px 0px 20px;
   padding-left : 10px;
-  height : 30px;
-  border-radius : 12px;
-  background-color : ${Colors.searchBarColor};
+  height : 40px;
 `;
 const InputFaked = styled.View`
   flex : 1;

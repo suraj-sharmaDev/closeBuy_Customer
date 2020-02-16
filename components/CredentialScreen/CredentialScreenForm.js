@@ -6,43 +6,34 @@ import Fonts from '../../constants/Fonts';
 
 const {height, width} = Dimensions.get('window');
 const Container = styled.View`
-	height : ${height};
+	height : 85%;
 	width : ${width};
 	padding : 10px;
-`;
-const IntroView = styled.View`
-	padding : 10px;
-	border-width : 1px;
-	border-color : ${Colors.greyColor};
-`;
-const IntroText = styled.Text`
-	font-family : ${Fonts.normalFont};
-	font-size : 16px;
-`;
-const InfoText = styled.Text`
-	font-family : ${Fonts.normalFont};
-	font-size : 12px;
-	color : ${Colors.redColor};
+	justify-content : center;
 `;
 const FormView = styled.View`
-	margin-top : 20px;
-	align-items : center;
 	justify-content : center;
+`;
+const Label = styled.Text`
+	padding : 0px 10px;
+	font-size : 16px;
+	font-family : ${Fonts.normalFont};
+	color : ${Colors.darkGreyColor}
 `;
 const Input = styled.TextInput`
 	width : 100%;
 	padding : 7px 10px;
 	border-width : 1px;
-	border-color : ${Colors.lightGreenColor};
-	font-family : ${Fonts.boldFont};
-	font-size : 14px;	
+	border-color : ${Colors.greyColor};
+	font-size : 14px;
+	border-radius : 7px;
 `;
 const Button = styled.TouchableOpacity`
 	width : 100%;
+	margin-top : auto;	
 	padding : 10px 8px;	
 	align-items : center;
 	justify-content : center;	
-	margin-top : 10px;
 	border-radius : 7px;
 	background-color : ${Colors.greenColor}
 `;
@@ -62,14 +53,17 @@ const CredentialScreenForm = props => {
 	let content = (
 		<Container>
 			<FormView>
+				<Label>Enter your name</Label>
 				<Input 
-					placeholder = "Enter your name"
-					onChangeText={e => changeHandler(e)}					
+					placeholder = "Suraj Sharma"
+					onChangeText={e => changeHandler(e)}
+					style={{ fontFamily : Fonts.normalFont }}
+					autoFocus={true}
 				/>
-				<Button onPress={()=>props.clickHandler(userName)}>
-					<ButtonText>Submit</ButtonText>
-				</Button>
 			</FormView>
+			<Button onPress={()=>props.clickHandler(userName)}>
+				<ButtonText>Submit</ButtonText>
+			</Button>			
 		</Container>
 	);
 	return content;

@@ -134,7 +134,13 @@ const HomeScreenPresenter = ({navigation, ...props}) => {
   }
   return (
     <Theme>
-      <DeliveryLocationHeader navigation={navigation} currentAddress={currentAddress}/>
+      {
+        currentAddress 
+        ?
+          <DeliveryLocationHeader navigation={navigation} currentAddress={currentAddress}/>        
+        :
+          null
+      }
       {content}
     </Theme>
   );

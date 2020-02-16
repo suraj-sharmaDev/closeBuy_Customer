@@ -22,7 +22,7 @@ const Text = styled.Text`
 const FloatingButton = props => {
 	let content = (
 		<Container>
-			<FAB onPress={props.updateActive}>
+			<FAB activeOpacity={0.5} onPress={props.updateActive}>
 				<Text>Categories</Text>
 			</FAB>
 		</Container>

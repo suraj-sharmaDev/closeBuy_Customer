@@ -8,6 +8,13 @@ import Colors from "../constants/Colors";
 import Font from "../constants/Fonts";
 
 const SearchBarContainer = styled.View`
+  elevation : 3;
+  shadow-opacity: 0.1;
+  shadow-radius: 2.14px;
+  shadow-color: #606060;
+  shadow-offset: 0px 1px;  
+  border-radius : 7px;
+
   flex-direction : row;
   flex : 5;
   align-items : center;
@@ -15,8 +22,7 @@ const SearchBarContainer = styled.View`
   margin : 20px 15px 0px 20px;
   padding : 0px 10px;
   height : 40px;
-  border-radius : 12px;
-  background-color : ${Colors.searchBarColor};
+  background-color : white;
 `;
 
 const Input = styled.TextInput`

@@ -7,8 +7,18 @@ import Font from "../constants/Fonts";
 import ProductItem from './ExploreScreen/ProductItem';
 
 const Container = styled.SafeAreaView`
-	flex: 1;
-	padding: 20px 10px 20px 10px;
+  flex : 1;
+  elevation : 26;
+  shadow-opacity: 0.46;
+  shadow-radius: 11.14px;
+  shadow-color: #000;
+  shadow-offset: 5px 5px;  
+  background-color : white;
+  border-top-width : 1;
+  border-top-color : ${Colors.boxShadowColor};
+  border-top-left-radius : 20px;
+  border-top-right-radius : 20px;  
+  padding : 10px 20px;
 `;
 
 const MenuItem = styled.TouchableOpacity`
