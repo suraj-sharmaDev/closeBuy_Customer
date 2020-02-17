@@ -30,26 +30,6 @@ const HeaderText = styled.Text`
 	font-size : 18px;
 `;
 
-DATA = {
-	"id": "1",
-	"customer_id": "1",
-	"dist_point_id": "1",
-	"deliveryBoy_id": "1",
-	"items_added": "[{\"id\":\"1\",\"name\":\"Pancake Batter\",\"price\":\"40\",\"qty\":4}, {\"id\":\"2\",\"name\":\"Amul Butter\",\"price\":\"80\",\"qty\":3}]",
-	"payment_type": "COD",
-	"total_amount": "380",
-	"delivery_address": "{\"savedAs\":\"home\",\"coordinate\":{\"latitude\":10.0459618,\"longitude\":76.3179568,\"latitudeDelta\":0.005,\"longitudeDelta\":0.0028125},\"houseDetail\":\"Arafa nagar\",\"landmark\":\"Near benelli showroom\"}",
-	"order_status": "pending",
-	"delivery_status": "completed",
-	"time_stamp": "2020-01-18 05:31:41",
-	"dist_id": "1",
-	"dist_point_name": "Aquarius",
-	"pickup_address": "Near Edappally",
-	"coordinates": "{\"latitude\":\"10.070628\",\"longitude\":\"76.331167\"}",
-	"dist_category": "Fish Farm",
-	"rating": "3",
-	"image": "dist1/distpoint1/fish_farm.jpg"
-}
 const RecentOrderDetailScreenPresenter = (props) => {
 	const order=props.navigation.getParam('item');
 	const reorderHandler = () => {

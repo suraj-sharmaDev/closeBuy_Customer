@@ -18,7 +18,7 @@ const Container = styled.View`
 `;
 const TrackView = styled.TouchableOpacity`
 	width : 100%;
-	background-color : ${Colors.lightGreenColor};
+	background-color : ${Colors.greenColor};
 	padding : 10px;
 	align-items : center;
 	justify-content : center;

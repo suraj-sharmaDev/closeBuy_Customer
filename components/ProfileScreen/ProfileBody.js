@@ -34,6 +34,7 @@ const Text = styled.Text`
 const ProfileBody = ({navigation}) => {
   return (
   <Container>
+    <RecentOrderCard navigation={navigation}/>
     <ProfileOptions navigation={navigation}/>
     <PowerView>
       <Logout />

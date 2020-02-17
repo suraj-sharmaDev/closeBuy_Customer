@@ -6,8 +6,7 @@ import Icon from '../assets/images/icons';
 import Colors from "../constants/Colors";
 import Font from "../constants/Fonts";
 
-const Container = styled.SafeAreaView`
-  flex : 1;
+const Container = styled.View`
   padding : 10px;
 `; 
 

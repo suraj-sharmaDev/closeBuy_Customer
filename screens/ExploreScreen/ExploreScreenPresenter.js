@@ -53,13 +53,11 @@ const ExploreScreenPresenter = ({navigation, ...props}) => {
   let content = <ExploreScreenLoader />;
   if(selectedId!==null){
     content = (
-      <Container>
-        <Content> 
-          <ExploreScreenHeader navigation={navigation} categoryName={currentCategoryData.categoryName}/>
-          <ScrollCategory selected={selectedId} onSelect = {onSelect} data={currentCategoryData.subCategory}/>
-          <ExploreMenu navigation={navigation} products={products} selectedId={selectedId}/>
-        </Content>
-      </Container>
+      <Theme>
+        <ExploreScreenHeader navigation={navigation} categoryName={currentCategoryData.categoryName}/>
+        <ScrollCategory selected={selectedId} onSelect = {onSelect} data={currentCategoryData.subCategory}/>
+        <ExploreMenu navigation={navigation} products={products} selectedId={selectedId}/>
+      </Theme>
     );
   }
   return content;

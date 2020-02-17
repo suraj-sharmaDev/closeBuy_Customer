@@ -1,4 +1,5 @@
 import React from 'react';
+import {Linking} from 'react-native';
 import styled from 'styled-components';
 import Icon  from "react-native-vector-icons/MaterialCommunityIcons";
 import Fonts from '../../constants/Fonts';
@@ -40,8 +41,13 @@ const ButtonText = styled.Text`
 	font-size : 16px;
 	text-transform : capitalize;
 `;
+const CallButton = styled.TouchableOpacity``;
 const OrderDetail = props =>{
 	const [active, updateActive] = React.useState(false);
+
+	const callDeliveryBoy = (mobile) => {
+		Linking.openURL(`tel:${mobile}`);
+	}
 	let orderPlaced =false;
 	let deliveryAssigned = false;
 	let orderArriving = false;
@@ -62,12 +68,17 @@ const OrderDetail = props =>{
 					orderPlaced
 					?
 					<React.Fragment>
-						<DeliveryImage>
-							<Icon name="account" size={50} color={Colors.greyColor}/>
-						</DeliveryImage>
-						<Text style={{color : Colors.semiDarkGreyColor, fontSize : 15}}>
-							Delivery Boy Assigned...
-						</Text>
+						<View style={{alignItems:'center'}}>
+							<DeliveryImage>
+								<Icon name="account" size={50} color={Colors.greyColor}/>
+							</DeliveryImage>
+							<Text style={{color : Colors.semiDarkGreyColor, fontSize : 15}}>
+								{props.order.deliveryBoyName}
+							</Text>
+						</View>
+						<CallButton activeOpacity={0.8} style={{padding : 12}} onPress={()=>callDeliveryBoy(props.order.deliveryBoyMobile)}>
+							<Icon name="phone" size={24} color={Colors.greenColor} />
+						</CallButton>
 					</React.Fragment>										
 					:					
 					<React.Fragment>

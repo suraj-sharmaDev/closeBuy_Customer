@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, FlatList, StyleSheet, Text, } from 'react-native';
+import { FlatList, View } from 'react-native';
 import styled from "styled-components";
 import Color from "../../constants/Colors";
 
@@ -13,7 +13,10 @@ const Container = styled.SafeAreaView`
 export default function ShopList({Shops, refresh, navigation}) {
   React.useEffect(()=>{
 
-  },[])
+  },[]);
+  const renderListFooter = () => {
+    return <View style={{paddingBottom : 100}} />
+  };    
   return (
     <Container>
       <FlatList
@@ -25,6 +28,7 @@ export default function ShopList({Shops, refresh, navigation}) {
             navigation = {navigation}
           />
         )}
+        ListFooterComponent={renderListFooter}
         keyExtractor={item => item.dist_point_id}
         extraData={refresh}
       />

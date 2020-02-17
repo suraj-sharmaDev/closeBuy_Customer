@@ -13,7 +13,7 @@ const Container = styled.View`
 const Button = styled.TouchableOpacity`
 	width : ${width*0.6};
 	padding : 8px 10px;
-	background-color : ${Colors.lightGreenColor};	
+	background-color : ${Colors.greenColor};	
 	align-items : center;
 	justify-content : center;
 	border-radius : 7px;

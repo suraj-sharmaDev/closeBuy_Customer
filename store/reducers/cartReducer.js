@@ -14,7 +14,9 @@ const initialState = {
   orderId : 0,
   shopCoordinate : null,
   deliveryCoordinate : null,
-  deliveryStatus : null
+  deliveryStatus : null,
+  deliveryBoyName : '',
+  deliveryBoyMobile : 0
 };
 
 const onRetrieveCart = (state, data) => {
@@ -32,7 +34,9 @@ const onRetrieveCart = (state, data) => {
     orderId : 0,  
     shopCoordinate : null,
     deliveryCoordinate : null,
-    deliveryStatus : null
+    deliveryStatus : null,
+    deliveryBoyName : '',
+    deliveryBoyMobile : 0
   }
   return newState;
 }
@@ -146,6 +150,8 @@ const onTrackStart = (state, data) => {
   newState.deliveryCoordinate = JSON.parse(data.deliveryBoy_coordinates);
   newState.shopCoordinate = JSON.parse(data.distribution_point_coordinates);
   newState.deliveryStatus = data.delivery_status;        
+  newState.deliveryBoyName = data.deliveryBoy_name;
+  newState.deliveryBoyMobile = data.deliveryBoy_mobile;
   return newState;
 }
 const onOrderStatusUpdate = (state, status) => {
@@ -167,7 +173,9 @@ const onTrackEnd = () => {
     tracking : false,
     orderId : 0,        
     deliveryCoordinate : null,
-    deliveryStatus : null    
+    deliveryStatus : null,
+    deliveryBoyName : '',
+    deliveryBoyMobile : 0        
   };  
   return initialState;
 }

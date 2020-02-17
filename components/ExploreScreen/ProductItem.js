@@ -18,13 +18,13 @@ const ItemDetailView = styled.TouchableOpacity`
 `;
 const ImageView = styled.View`
 	width : 100px;
-	height : 120px;
+	height : 100px;
 	border-radius : 7px;
 	background-color : ${Colors.preLoadingColor};
 `;
 const ItemImage = styled.Image`
 	width : 100px;
-	height : 120px;
+	height : 100px;
 	border-radius : 7px;
 `;
 const ItemName = styled.Text`

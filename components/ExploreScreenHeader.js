@@ -5,8 +5,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import Colors from "../constants/Colors";
 import Font from "../constants/Fonts";
 
-const Container = styled.SafeAreaView`
-  flex : 1;
+const Container = styled.View`
   elevation:5;
   background-color : white;
   border-bottom-color : ${Colors.greyColor};
@@ -22,7 +21,7 @@ const Container = styled.SafeAreaView`
 `;
 
 const HeaderButtons = styled.View`
-  flex : 1;
+  width : 100%;
   flex-direction : row;
 `;
 
@@ -45,7 +44,7 @@ const ExploreScreenHeader = ({navigation, categoryName}) => {
   let content = (
     <Container>
       <HeaderButtons>
-        <View style={{flex:1}}>
+        <View>
           <BackButton onPress={()=>navigation.goBack()}>
             <Entypo name="chevron-left" size={30} color={Colors.greenColor}/>
           </BackButton>              

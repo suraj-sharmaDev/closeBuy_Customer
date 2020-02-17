@@ -23,7 +23,7 @@ export default {
 "mop": require("./mop.png"),
 "oil": require("./oil.png"),
 "organic": require("./organic.png"),
-"packed food": require("./packed food.png"),
+"packed_food": require("./packed_food.png"),
 "pants": require("./pants.png"),
 "salted_nuts": require("./salted_nuts.png"),
 "shampoo": require("./shampoo.png"),

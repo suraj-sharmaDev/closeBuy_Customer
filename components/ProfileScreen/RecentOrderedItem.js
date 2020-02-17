@@ -5,7 +5,6 @@ import Font from "../../constants/Fonts";
 import CategoryIcon from "./CategoryIcon";
 
 const Container = styled.TouchableOpacity`
-	flex : 1;
 	flex-direction : row;
 	align-items : center;
 	justify-content : space-between;

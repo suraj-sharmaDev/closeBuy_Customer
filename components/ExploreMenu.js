@@ -6,8 +6,9 @@ import Font from "../constants/Fonts";
 
 import ProductItem from './ExploreScreen/ProductItem';
 
-const Container = styled.SafeAreaView`
-  flex : 1;
+const Container = styled.View`
+  min-height : 100%;
+  height : auto;
   elevation : 26;
   shadow-opacity: 0.46;
   shadow-radius: 11.14px;
@@ -45,10 +46,13 @@ const View = styled.View``;
 
 const ExploreMenu = ({navigation, products, selectedId}) => {
 	let content = null;
+	const renderListFooter = () => {
+		return <View style={{paddingBottom: 100}} />
+	}
 	if (Object.keys(products).length===0) {
 		content = (
 			<Container>
-				<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+				<View style={{alignItems: 'center', justifyContent: 'center'}}>
 					<BigWarningText>No Items Found!</BigWarningText>
 				</View>
 			</Container>
@@ -58,10 +62,13 @@ const ExploreMenu = ({navigation, products, selectedId}) => {
 			<Container>
 				<FlatList
 					numColumns={2}
+					showsVerticalScrollIndicator={false}
 					data={products}
+					contentContainerStyle={{ paddingBottom: 140}}
 					renderItem={({item, index}) => (
 						<ProductItem data={item} navigation={navigation} />
 					)}
+			        ListFooterComponent={renderListFooter}					
 					keyExtractor={item => item.product_id}
 					extraData={selectedId}
 				/>
