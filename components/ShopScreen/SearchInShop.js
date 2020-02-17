@@ -40,7 +40,7 @@ const SearchOutputItem = styled.TouchableOpacity`
 `;
 const SearchOutput = ({data, onSearchItemPress}) => {
 	let Body = (
-		<SearchOutputItem onPress={()=>onSearchItemPress(data.yPosition)}>
+		<SearchOutputItem onPress={()=>onSearchItemPress(data.sectionIndex, data.itemIndex)}>
 			<Text>{data.itemName}</Text>
 		</SearchOutputItem>
 	);
@@ -104,7 +104,12 @@ const SearchInShop = ({data, scroll, ...props}) => {
 				for(j=0,maxJ=data[i].children.length;j<maxJ;j++){
 					itemName = data[i].children[j].itemName.toLowerCase();
 					if(itemName.indexOf(text)!=-1){
-						contentBody.push(<SearchOutput key={data[i].children[j].id} data={data[i].children[j]} onSearchItemPress={onSearchItemPress}/>); 
+						contentBody.push(
+							<SearchOutput 
+								key={data[i].children[j].id} 
+								data={data[i].children[j]} 
+								onSearchItemPress={onSearchItemPress}
+						/>); 
 					}
 				}
 			}
@@ -113,45 +118,41 @@ const SearchInShop = ({data, scroll, ...props}) => {
 			updateModalBody(contentBody);
 		}
 	}
-	const onSearchItemPress = yPosition =>{
-		scroll(yPosition);
+	const onSearchItemPress = (sectionIndex, itemIndex) =>{
+		props.updateActive();
+		scroll(sectionIndex, itemIndex);
 	}
-	// let content = (
-	// 	<Container>
-	// 		<ModalHeader searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} doSearch={doSearch}/>
-	// 		{
-	// 			modalBody.length>0
-	// 			?
-	// 			modalBody
-	// 			:
-	// 			null
-	// 		}
-	// 	</Container>
-	// );
 	let content=(
-		<Modal
-		isVisible={props.active}
-		onBackButtonPress={handleBackPress}	
-		onBackdropPress={props.updateActive}
-		animationIn={'slideInRight'}
-		animationOut={'slideOutRight'}
-		animationOutTiming={10}
-		deviceWidth={width}
-		deviceHeight={height}
-		backdropColor={'white'}
-		backdropOpacity={0.3}
-		style={{ justifyContent:'flex-start', margin:0, padding:0}}>
-			<Container>
-				<ModalHeader updateActive={props.updateActive} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} doSearch={doSearch}/>
-				{
-					modalBody.length>0
-					?
-					modalBody
-					:
-					null
-				}
-			</Container>
-		</Modal>
+		<React.Fragment>
+			<Modal
+			isVisible={props.active}
+			onBackButtonPress={handleBackPress}	
+			onBackdropPress={props.updateActive}
+			animationIn={'slideInRight'}
+			animationOut={'slideOutRight'}
+			animationOutTiming={10}
+			deviceWidth={width}
+			deviceHeight={height}
+			backdropColor={'white'}
+			backdropOpacity={0.3}
+			style={{ justifyContent:'flex-start', margin:0, padding:0}}>
+				<Container>
+					<ModalHeader 
+						updateActive={props.updateActive} 
+						searchTerm={searchTerm} 
+						updateSearchTerm={updateSearchTerm} 
+						doSearch={doSearch}
+					/>
+					{
+						modalBody.length>0
+						?
+						modalBody
+						:
+						null
+					}
+				</Container>
+			</Modal>
+		</React.Fragment>
 	);
 	return content;
 }

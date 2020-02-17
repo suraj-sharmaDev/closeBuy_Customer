@@ -3,6 +3,7 @@ import { Platform, Text } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import CartBadge from "../components/NavigationComponents/CartBadge";
+import TabBarLabel from "../components/TabBarLabel";
 import TabBarIcon from "../components/TabBarIcon";
 import Colors from "../constants/Colors";
 import HomeScreen from "../screens/HomeScreen";
@@ -25,6 +26,12 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
+  tabBarLabel: ({ focused }) => (
+    <TabBarLabel
+      focused={focused}
+      name={"Home"}
+    />
+  ),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -43,6 +50,12 @@ const SearchStack = createStackNavigator(
 );
 
 SearchStack.navigationOptions = {
+  tabBarLabel: ({ focused }) => (
+    <TabBarLabel
+      focused={focused}
+      name={"Search"}
+    />
+  ),  
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -62,6 +75,12 @@ const CartStack = createStackNavigator(
 
 
 CartStack.navigationOptions = {
+  tabBarLabel: ({ focused }) => (
+    <TabBarLabel
+      focused={focused}
+      name={"Cart"}
+    />
+  ),  
   tabBarIcon: ({ focused }) => (
     <CartBadge
       focused={focused}
@@ -73,6 +92,12 @@ CartStack.navigationOptions = {
 const ProfileStack = ProfileTabNavigator;
 
 ProfileStack.navigationOptions = ({navigation}) => {
+  let tabBarLabel = ({ focused }) => (
+    <TabBarLabel
+      focused={focused}
+      name={"Profile"}
+    />
+  );
   let tabBarIcon = ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -86,7 +111,8 @@ ProfileStack.navigationOptions = ({navigation}) => {
 
     return {
       tabBarVisible,
-      tabBarIcon
+      tabBarIcon,
+      tabBarLabel
     };
 };
 
@@ -100,7 +126,7 @@ export default createBottomTabNavigator(
   {
     initialRouteName: "HomeStack",
     tabBarOptions: {
-      showLabel: false,
+      showLabel: true,
       style: {
         elevation : 26,
         borderTopColor: Colors.boxShadowColor,

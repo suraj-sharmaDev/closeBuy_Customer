@@ -1,12 +1,12 @@
 import React from 'react';
-import {ToastAndroid} from 'react-native';
+import {ToastAndroid, Linking} from 'react-native';
 import styled from "styled-components";
 import Colors from "../../constants/Colors";
 
 import ProfileOptionTab from "./ProfileOptionTab";
 
 const Container = styled.View`
-	padding-top : 5px;
+	padding : 5px 20px;	
 `;
 
 function comingSoon(){
@@ -19,8 +19,16 @@ function comingSoon(){
   );  
 }
 
+function customerSupport(){
+	Linking.openURL(`tel:${7994505594}`)	
+}
 const ProfileOptions = ({navigation}) => (
 	<Container>
+		<ProfileOptionTab
+			iconName="unread"
+			optionText="Recent Orders"
+			navigation={() => navigation.navigate('ManageAddress')}
+		/>
 		<ProfileOptionTab
 			iconName="location-pin"
 			optionText="My Delivery Address"
@@ -46,6 +54,11 @@ const ProfileOptions = ({navigation}) => (
 			optionText="Notifications"
 			navigation={comingSoon}
 		/>
+		<ProfileOptionTab
+			iconName="phone"
+			optionText="Customer Care"
+			navigation={customerSupport}
+		/>		
 	</Container>
 );
 

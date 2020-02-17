@@ -25,7 +25,8 @@ const UserInfo = styled.View`
 const UserName = styled.Text`
 	font-size : 32px;
 	font-family  : ${Font.normalFont};
-	color : ${Colors.darkGreyColor}
+	color : ${Colors.darkGreyColor};
+	text-transform : capitalize;
 `;
 const Text = styled.Text`
 	font-size : 16px;

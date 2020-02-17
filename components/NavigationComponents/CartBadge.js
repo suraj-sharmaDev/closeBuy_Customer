@@ -8,10 +8,10 @@ const Container = styled.View`
 	flex-direction : row;
 `;
 const Badge = styled.View`
-	height : 18px;
-	width : auto;
+	height : 10px;
+	width : 10px;
 	padding : 4px;
-	border-radius : 9px;
+	border-radius : 5px;
 	background-color : ${Colors.greenColor};
 	margin-top : -5px;
 	align-items : center;
@@ -39,7 +39,9 @@ const CartBadge = ({name, focused, ...props}) => {
 				props.cart.items.length > 0 && props.cart.tracking===false
 				?
 				<Badge>
-					<Text>{props.cart.items.length}</Text>
+					{
+						//<Text>{props.cart.items.length}</Text>
+					}
 				</Badge>				
 				:
 				null

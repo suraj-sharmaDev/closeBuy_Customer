@@ -33,10 +33,10 @@ const ItemCard = props => {
 	let amount = props.info.price * props.info.qty;
 	let content = (
 		<Card>
-			<View style={{ flexDirection : 'row', justifyContent : 'center', alignItems : 'center'}}>
+			<View style={{ flexDirection : 'row', justifyContent : 'center', alignItems : 'center', width : '60%'}}>
 				<Icon name="brightness-1" style={{ marginRight : 10 }}/>
 				<View>
-					<Text>{props.info.name}</Text>
+					<Text numberOfLines={1}>{props.info.name}</Text>
 					<OriginalPrice>Rs {props.info.price}</OriginalPrice>
 				</View>
 			</View>

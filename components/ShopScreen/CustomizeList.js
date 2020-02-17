@@ -8,6 +8,7 @@ import Color from "../../constants/Colors";
 import Font from "../../constants/Fonts";
 
 const {height, width}=Dimensions.get('window');
+
 const Container = styled.View`
 	background-color : white;
 	min-height : 50px;
@@ -17,6 +18,7 @@ const Container = styled.View`
 	border-width : 1px;
 	border-color : ${Color.greyColor};
 `;
+const View = styled.View``;
 const Header = styled.View`
 	padding : 4px;
 	width : ${width*0.8};
@@ -30,10 +32,10 @@ const HeaderText = styled.Text`
 `;
 const ListItem = styled.TouchableOpacity`
 	width : 100%;
-	padding : 10px 20px;
+	padding : 3px 20px;
 	flex-direction : row;
 	justify-content : space-between;
-	align-items : flex-start;
+	align-items : center;
 `;
 const Label = styled.Text`
 	color : ${Color.darkGreyColor};
@@ -41,7 +43,12 @@ const Label = styled.Text`
 	font-size : 14px;
 	font-family : ${Font.normalFont};
 `;
-
+const SubLabel = styled.Text`
+	color : ${Color.darkGreyColor};
+	text-transform : capitalize;
+	font-size : 12px;
+	font-family : ${Font.normalFont};
+`;
 const CustomizeList = ({extras, active, updateActive, onCustomiseHandler}) => {
 	const [selected, setSelected] = React.useState(null);
 
@@ -65,8 +72,10 @@ const CustomizeList = ({extras, active, updateActive, onCustomiseHandler}) => {
 	for(var key in extras){
 		modalBody.push(
 			<ListItem key={key} activeOpacity={1}>
-				<Label>{key}</Label>
-				<Label>additional Rs {extras[key]}</Label>					
+				<View>
+					<Label>{key}</Label>
+					<SubLabel>additional Rs {extras[key]}</SubLabel>					
+				</View>
 				<CheckBox 
 					checked={selected===key?true:false}
 					onPress={()=>onOptionSelect({name:key, amount:extras[key]})}					

@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from "../../constants/Colors";
 import Font from "../../constants/Fonts";
 const Container = styled.View`
-	flex : 1;
 	flex-direction : row;
 	align-items : center;
 	padding : 0px 10px;	

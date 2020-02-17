@@ -23,7 +23,13 @@ const ProfileOptionTab = ({iconName, optionText, navigation}) => (
 			<OptionText>{optionText}</OptionText>
 		</View>
 		<View>
-			<Entypo name="chevron-thin-right" size={22} style={{color : Colors.darkGreyColor}}/>
+			{
+				optionText!=='Customer Care'
+				?
+					<Entypo name="chevron-thin-right" size={22} style={{color : Colors.darkGreyColor}}/>				
+				:
+					null
+			}
 		</View>
 	</OptionButton>
 );

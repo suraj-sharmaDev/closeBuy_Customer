@@ -78,7 +78,7 @@ const ShopListWithSearchBar = ({Shops, navigation}) => {
       <Container>
         <FakedSearchBar navigation={navigation}>
           <FilterContainer onPress={toggleModal}>
-            <Icon name="filter" size={18} color={Colors.darkGreyColor} />
+            <Icon name="filter" size={18} color={Colors.lightGreyColor} />
           </FilterContainer>   
         </FakedSearchBar>
         <FilterList 

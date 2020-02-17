@@ -1,29 +1,30 @@
 import React from 'react';
 import styled from "styled-components";
+
+import {height, width} from '../../constants/Layout';
 import Colors from "../../constants/Colors";
 import Font from "../../constants/Fonts";
 import ShopQuantityButton from "./ShopQuantityButton";
 
 const View = styled.View``;
 const ItemContainer = styled.View`
-	flex : 1;
+	width : 100%;
 	flex-direction : row;
 	align-items : center;
 	justify-content : space-between;
-	padding : 10px 5px;
+	padding : 10px 10px;
 `;
 const ItemDetailView = styled.View`
-	flex : 2;
 	flex-direction : row;
 `;
 const ImageView = styled.View`
   	background-color : ${Colors.preLoadingColor};  
-	width : 100px;
+	width : ${width *0.25};
 	height : 120px;
-	border-radius : 7px;	
+	border-radius : 7px;
 `;
 const ItemImage = styled.Image`
-	width : 100px;
+	width : ${width *0.25};
 	height : 120px;
 	border-radius : 7px;
 `;
@@ -35,7 +36,7 @@ const ItemName = styled.Text`
 const ItemSubCategory = styled.Text`
   font-size : 15px;
   font-family  : ${Font.normalFont};
-  color : ${Colors.blackColor};
+  color : ${Colors.lightGreyColor};
 `;
 const ItemPrice = styled.Text`
   font-family  : ${Font.normalFont};
@@ -54,7 +55,7 @@ const ShopItem = ({ data, available }) => {
 				<ImageView>
 					<ItemImage source={{ uri : data.product_image_path }}/>			
 				</ImageView>
-				<View style={{textAlign:'left', marginLeft:10}}>
+				<View style={{textAlign:'left', marginLeft:10, width : width*0.46 }}>
 					<ItemName>{data.product_name}</ItemName>
 					<ItemSubCategory>In {data.sub_category_name}</ItemSubCategory>
 					<View style={{ flexDirection : 'row'}}>

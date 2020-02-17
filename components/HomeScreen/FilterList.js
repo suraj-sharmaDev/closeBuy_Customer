@@ -78,7 +78,7 @@ const FilterList = ({active, selected, filterHandler, toggleModal}) =>{
 					<Button 
 						activeOpacity={0.6}
 						disabled={selected==='distance'}
-						style={{ backgroundColor : selected==='distance'?Colors.lightGreenColor : 'white', padding:4 }}
+						style={{ backgroundColor : selected==='distance'?Colors.darkGreenColor : 'white', padding:4 }}
 						onPress={()=>filterHandler('distance')}
 					>
 						<ButtonText style={{ color : selected==='distance'? 'white' : 'black'}}>Distance</ButtonText>
@@ -86,7 +86,7 @@ const FilterList = ({active, selected, filterHandler, toggleModal}) =>{
 					<Button 
 						activeOpacity={0.6}
 						disabled={selected==='rating'}
-						style={{ backgroundColor : selected==='rating'?Colors.lightGreenColor : 'white', padding:4 }}						
+						style={{ backgroundColor : selected==='rating'?Colors.darkGreenColor : 'white', padding:4 }}						
 						onPress={()=>filterHandler('rating')}						
 					>
 						<ButtonText style={{ color : selected==='rating'? 'white' : 'black'}}>Rating</ButtonText>

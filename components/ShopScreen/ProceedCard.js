@@ -12,6 +12,8 @@ const Container = styled.TouchableOpacity`
 	justify-content : space-between;
 	align-items : center;
 	width : 100%;
+	border-top-left-radius : 10px;
+	border-top-right-radius : 10px;	
 `;
 const View = styled.View``;
 const ItemText = styled.Text`
@@ -56,7 +58,7 @@ const ProceedCard = props => {
 								`${data.count} items`
 						}
 					</ItemText>
-					<View style={{ flexDirection:'row', marginLeft : -5 }}>
+					<View style={{ flexDirection:'row', marginLeft : -5, alignItems:'center' }}>
 						<Icon name="currency-inr" style={{ color : 'white', fontSize:18}}/>				
 						<Amount>{data.amount}</Amount>
 					</View>

@@ -11,7 +11,7 @@ import FloatingList from './FloatingList';
 const Container = styled.View`
 	width : 100%;
 	position : absolute;
-	bottom : 46px;
+	bottom : 0px;
 	flex-direction : column;
 	align-items : center;
 	justify-content : center;

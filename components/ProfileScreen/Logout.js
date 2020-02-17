@@ -10,19 +10,19 @@ import Fonts from "../../constants/Fonts";
 
 const Button = styled.TouchableOpacity`
 	margin : 6px 0px;
-	padding : 4px 2px;
-	border-width : 1.2px;
-	border-color : ${Colors.lightGreyColor};
-	border-radius : 7px;
+	padding : 4px 4px;
+	border-top-width : 7px;
+	border-bottom-width : 7px;	
+	border-color : #ECECEC;
 	flex-direction : row;
 	align-items : center;
 	justify-content : space-between;
 `;
 const ButtonText = styled.Text`
-	font-size : 16px;
-	font-family  : ${Fonts.boldFont};
+	font-size : 18px;
+	font-family  : ${Fonts.normalFont};
 	color : ${Colors.lightGreyColor};
-	text-transform : uppercase;	
+	text-transform : capitalize;	
 `;
 
 const Logout = (props) => {

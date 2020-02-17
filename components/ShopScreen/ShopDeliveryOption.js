@@ -4,11 +4,11 @@ import styled from "styled-components";
 import Entypo from "react-native-vector-icons/Entypo";
 import {connect} from 'react-redux';
 
+import Fonts from "../../constants/Fonts";
 import Colors from "../../constants/Colors";
 import {height, width} from '../../constants/Layout';
 
 const Container = styled.View`
-	flex : 1;
 	flex-direction : column;
 	padding : 10px 10px 10px 10px;
 	border-bottom-width : 1;
@@ -17,12 +17,12 @@ const Container = styled.View`
 const View = styled.View``;
 const Label = styled.Text`
   font-size : 12px;
-  font-family  : 'Roboto';
+  font-family  : ${Fonts.normalFont};
   color : ${Colors.lightGreyColor};	
 `;
 const Address = styled.Text`
 	font-size : 15px;
-	font-family  : 'Roboto-Regular';
+	font-family  : ${Fonts.normalFont};
 	color : ${Colors.blackColor};
 	width : ${width * 0.7};
 `;
@@ -31,7 +31,7 @@ const Button = styled.TouchableOpacity`
 `;
 const Change = styled.Text`
 	font-size : 15px;
-	font-family  : 'Roboto-Regular';
+    font-family  : ${Fonts.normalFont};
 	color : ${Colors.greenColor};
 `;
 const ShopDeliveryOption = ({ navigation, ...props }) => {
@@ -45,8 +45,8 @@ const ShopDeliveryOption = ({ navigation, ...props }) => {
 			<View>
 				<Label>DELIVERING TO</Label>			
 			</View>
-			<View style={{flex:1, flexDirection:'row', justifyContent : 'space-between'}}>
-				<View style={{flex:1, flexDirection:'row'}}>
+			<View style={{flexDirection:'row', justifyContent : 'space-between'}}>
+				<View style={{flexDirection:'row', alignItems : 'center'}}>
 					<Entypo name="check" size={15} color={Colors.greenColor}/>			
 					<Address numberOfLines={1}>{address}</Address>	
 				</View>

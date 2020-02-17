@@ -39,7 +39,6 @@ const MapDisplay = (props) => {
     <MapContainer>
       <MapView
         style={{height: '100%', width : '100%'}}
-        customMapStyle={CustomMap}        
         minZoomLevel={10}
         ref={_mapRef}
         initialRegion={props.userLocation}

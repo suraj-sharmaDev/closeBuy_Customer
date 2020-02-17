@@ -4,77 +4,74 @@ import { Platform } from 'react-native';
 import styled from "styled-components";
 import Color from "../../constants/Colors";
 
-import ShopScreenHeaderButtons from "../../components/ShopScreen/ShopScreenHeaderButtons";
-import SearchInShop from "../../components/ShopScreen/SearchInShop";
-import ShopThumbnail from "../../components/ShopScreen/ShopThumbnail";
+import ShopScreenLoader from '../../components/ShopScreen/ShopScreenLoader';
+import ShopScreenHeader from "../../components/ShopScreen/ShopScreenHeader";
 import ShopScreenBody from "../../components/ShopScreen/ShopScreenBody";
 import FooterCard from "../../components/ShopScreen/FooterCard";
 const Theme = styled.View`
   background-color : ${Color.homeBackgroundColor};
+  flex : 1;
 `;
-const ScrollView = styled.ScrollView``;
-const View = styled.View``;
-const Text = styled.Text``;
 
 const ShopScreenPresenter = ({navigation, Shop }) => {
-	let listRef = React.useRef(null); 
-	const [isLoading, updateLoading] = React.useState(true);
-	const [categoryList, updateCategoryList] = React.useState([]);
-	const [searchActive, updateSearchActive] = React.useState(false); 	
+	const [categoryList, updateCategoryList] = React.useState(null);
 	useEffect(()=>{
-
-	})
-	const listUpdater = (parentYPosition) => {
-		if(categoryList.length===0){
-			let pushData = [];
-			let yPosition = parentYPosition;
-			let itemHeight = 140;
-			for(i=0,maxI=Shop.categories.length;i<maxI;i++){
-				let newData = {categoryName : Shop.categories[i].categoryName, yPosition : yPosition, children : []};
-				for(j=0, maxJ=Shop.categories[i].items.length;j<maxJ;j++)
-				{
-					let childData = {id:Shop.categories[i].items[j].product_id, itemName:Shop.categories[i].items[j].product_name, yPosition:yPosition};
-					yPosition += itemHeight;
-					newData.children.push(childData);
-				}
-				pushData.push(newData); 
+		createCategoryList();
+	},[])
+	const createCategoryList = () => {
+		let categories = [];
+		for(var i=0; i<Object.keys(Shop.categories).length; i++){
+			let newData = {categoryName : Shop.categories[i].title, sectionIndex : i, children : []};			
+			for(var j=i; j<Object.keys(Shop.categories[i].data).length; j++){
+				let childData = {
+					id:Shop.categories[i].data[j].product_id, 
+					itemName:Shop.categories[i].data[j].product_name, 
+					sectionIndex:i,
+					itemIndex:j
+				};
+				newData.children.push(childData);				
 			}
-			updateCategoryList(pushData);
-			updateLoading(false);			
+			categories.push(newData); 
 		}
+		updateCategoryList(categories);
 	}
-	const scroll = (yPosition) => {
-		updateSearchActive(false);
-		listRef.scrollTo({
-		    x: 0,
-		    y: yPosition,
-		    animated: true,
-		});
+	const scroll = (sectionIndex, itemIndex) => {
+		// updateSearchActive(false);
+		_list.scrollToLocation({
+         animated: true,
+         sectionIndex: sectionIndex,
+         itemIndex: itemIndex
+		})
 	}
+	_listRef = (ref) => {
+		_list = ref;
+	}	
 	let content = (
 	  <Theme>
-	    <ShopScreenHeaderButtons navigation={navigation} updateSearchActive={()=>updateSearchActive(!searchActive)}/>
-	    <SearchInShop 
-	    	data={categoryList} 
-	    	scroll={scroll} 
-	    	active={searchActive} 
-	    	updateActive={()=>updateSearchActive(!searchActive)}
-	    />
-	  	<ScrollView ref={(ref)=>listRef=ref} showsVerticalScrollIndicator={false} removeClippedSubviews={true}>
-		    { 
-		    	//<ShopThumbnail image={Shop.image}/>
-			}
-		    <View onLayout={(e)=>listUpdater(e.nativeEvent.layout.y)}>
-			    <ShopScreenBody 
-			      	Shop={Shop}
-			     	navigation={navigation} 
-			    />	  		
-			</View>
-	  	</ScrollView>
-		<FooterCard loading={isLoading} navigation={navigation} scroll={scroll} categoryList={categoryList}/>	  	
+	  	<ShopScreenHeader
+			navigation={navigation}
+			categoryList={categoryList}
+			scroll={scroll}
+			Shop={Shop}
+	  	/>
+		<ShopScreenBody 
+			Shop={Shop.categories} 
+			available={Shop.online_status}
+			navigation={navigation} 
+		/>
+		<FooterCard 
+			loading={categoryList===null} 
+			navigation={navigation} 
+			scroll={scroll} 
+			categoryList={categoryList}
+		/>	  	
 	   </Theme>
-	);	
-	return content;
+	);		
+	if(categoryList===null){
+		return <ShopScreenLoader />;
+	}else {
+		return content;
+	}
 }
 
 export default React.memo(ShopScreenPresenter);

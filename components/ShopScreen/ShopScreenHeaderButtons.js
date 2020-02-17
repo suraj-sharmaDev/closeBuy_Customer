@@ -19,7 +19,7 @@ const MenuButton = styled.TouchableOpacity`
 	width : 40px;
 `;
 
-const ShopScreenHeaderButtons = ({navigation, updateSearchActive}) => {
+const ShopScreenHeaderButtons = ({navigation, updateActive}) => {
 	let content = (
 	    <HeaderButtons>
 	    	<View style={{flex:1}}>
@@ -27,7 +27,7 @@ const ShopScreenHeaderButtons = ({navigation, updateSearchActive}) => {
 		          <Entypo name="chevron-left" size={30} color={Colors.greenColor}/>
 		        </BackButton>      
 		    </View>
-	        <MenuButton onPress={updateSearchActive}>
+	        <MenuButton onPress={updateActive}>
 	          <SearchIcon name="search" size={26} color={Colors.greenColor}/>
 	        </MenuButton>
 	    </HeaderButtons>

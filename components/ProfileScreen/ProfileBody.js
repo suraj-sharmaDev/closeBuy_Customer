@@ -19,7 +19,7 @@ const Container = styled.SafeAreaView`
   border-top-right-radius : 20px;
   flex : 4;
   flex-direction : column;
-  padding : 20px 20px 0px 20px;	  
+  padding : 20px 0px 0px 0px;	  
 `;
 const PowerView = styled.View`
   margin-top : auto;
@@ -34,7 +34,6 @@ const Text = styled.Text`
 const ProfileBody = ({navigation}) => {
   return (
   <Container>
-    <RecentOrderCard navigation={navigation}/>
     <ProfileOptions navigation={navigation}/>
     <PowerView>
       <Logout />

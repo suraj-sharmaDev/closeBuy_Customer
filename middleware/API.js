@@ -73,7 +73,7 @@ export const GetAllShops = async(coordinates) => {
 	return result;
 }
 export const ShopInformation = async(shopId) => {
-	const url = `${ShopInformationApi}?shopId=${shopId}`;
+	const url = `${ShopInformationApi}?shopId=${shopId}&appVer=2`;
 	const response = await fetch(url);
 	const result = await response.json();
 	return result;

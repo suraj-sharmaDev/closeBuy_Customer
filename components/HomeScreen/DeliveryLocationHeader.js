@@ -57,7 +57,7 @@ const DeliveryLocationHeader = ({ navigation, currentAddress }) => {
         <Icon
           name="location-on"
           size={26}
-          color={Color.blackColor}
+          color={Color.darkGreenColor}
           style={{paddingTop: 6}}
         />
         <InfoBox>

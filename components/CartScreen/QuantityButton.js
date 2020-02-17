@@ -40,12 +40,12 @@ const Quantity = styled.View`
 	flex-direction : row;
 	align-items : center;
 	justify-content : center;	
-	background-color : ${Colors.greenColor};
+	background-color : white;
 `;
 
 const QuantityText = styled.Text`
 	font-family : ${Font.normalFont};
-	color : white;
+	color : ${Colors.greenColor};
 `;
 const Label = styled.Text`
 	font-family : ${Font.normalFont};

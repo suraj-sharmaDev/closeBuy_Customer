@@ -15,7 +15,7 @@ const FAB = styled.TouchableOpacity`
 	border-radius : 10px;	
 `;
 const Text = styled.Text`
-	font-size : 16px;
+	font-size : 14px;
 	font-family : ${Font.boldFont};
 	color : white;
 `;

@@ -34,15 +34,15 @@ const Label = styled.Text`
 	font-family : ${Font.normalFont};
 `;
 const FloatingList = ({active, scroll, categoryList, updateActive}) => {
-	const onCategorySelect = (yPosition) => {
+	const onCategorySelect = (sectionIndex) => {
 		updateActive();
-		scroll(yPosition);
+		scroll(sectionIndex, 0);
 	}
 	let modalBody = (<Label>Nothing!</Label>);
 	if(categoryList.length!==0){
 		modalBody = (
 			categoryList.map((category, index)=>(
-				<ListItem key={index} onPress={()=>onCategorySelect(category.yPosition)}>
+				<ListItem key={index} onPress={()=>onCategorySelect(category.sectionIndex)}>
 					<Label>{category.categoryName}</Label>
 					<View>
 						<Entypo name="chevron-right" size={30} color={Color.greenColor} />
@@ -59,8 +59,8 @@ const FloatingList = ({active, scroll, categoryList, updateActive}) => {
 		animationOutTiming={50}
 		deviceWidth={width}
 		deviceHeight={height}
-		backdropColor={'white'}
-		backdropOpacity={0.6}
+		backdropColor={Color.lightGreenColor}
+		backdropOpacity={0.07}
 		style={{ justifyContent:'flex-end', alignItems:'center', paddingBottom : 25}}>
 			<Container>
 				{modalBody}

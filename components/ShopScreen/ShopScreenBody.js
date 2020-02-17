@@ -1,42 +1,60 @@
 import React, { useEffect } from "react";
-import { FlatList, Text } from "react-native";
+import { SectionList } from "react-native";
 import styled from "styled-components";
-import ShopScreenLoader from './ShopScreenLoader';
-import ShopInfoCard from "./ShopInfoCard";
-import ShopDeliveryOption from "./ShopDeliveryOption";
-import Products from "./Products";
+
+import Colors from "../../constants/Colors";
+import Fonts from "../../constants/Fonts";
+import ShopItem from './ShopItem';
 
 const Container = styled.View`
-	flex-direction : column;
-	height : auto;
-	padding-bottom : 200px;
+	flex : 1;
 `;
-const Button = styled.TouchableOpacity``;
-const ShopScreenBody = ({ Shop, navigation, onIncrement, onDecrement }) => {
-	const [isLoading, updateLoading] = React.useState(true);
+const View = styled.View``;
+const Label = styled.Text`
+	font-size : 18px;
+	font-family : ${Fonts.normalFont};
+	color : ${Colors.darkGreyColor};
+`;
+const ShopScreenBody = ({ Shop, available, navigation }) => {
 	useEffect(()=>{
-		updateLoading(false);
 	},[]);
+
+	const renderSectionHeader = ({section}) => {
+		return (
+			<Label style={{ textTransform:'capitalize'}}>
+				{section.title}
+			</Label>
+		);
+	};
+
+	const renderListFooter = () => {
+		return <View style={{paddingBottom : 100}} />
+	};	
+
+	const extractKey = ({product_id}) => product_id	
+	
 	let content = (
 		<Container>
-			<ShopInfoCard name={Shop.dist_point_name} category={Shop.dist_category} rating={Shop.rating}/>	
-			<ShopDeliveryOption navigation={navigation} />
-			{
-				<FlatList
-					data={Shop.categories}
-					renderItem={({item}) => (
-						<Products dataList={item} available={Shop.online_status}/>
-					)}
-					keyExtractor={item => item.categoryName}
-				/>	
-			}	
+	      <SectionList
+	      	ref={_listRef}
+	        sections={Shop}
+			renderItem={({item}) => (
+				<ShopItem
+					data={item}
+					available={'1'}
+				/>
+			)}
+	        renderSectionHeader={renderSectionHeader}
+	        ListFooterComponent={renderListFooter}
+			getItemLayout={(data, index) => (
+			    {length: 140, offset: 140 * index, index}
+			  )}	        
+	        onScrollToIndexFailed={()=>{}}
+	        keyExtractor={extractKey}
+	      />
 		</Container>
 	);
-	if(isLoading){
-		return <ShopScreenLoader />;
-	}else {
-		return content;
-	}
+	return content;
 }
 
 export default React.memo(ShopScreenBody);
