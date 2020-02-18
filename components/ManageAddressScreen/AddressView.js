@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {AlertService} from '../../middleware/AlertService';
 import Color from "../../constants/Colors";
 import Font from "../../constants/Fonts";
 
@@ -48,13 +50,17 @@ const DeleteText = styled.Text`
 `;
 const AddressView = ({address, index, ...props}) => {
 	let IconName;
-	let addressInfo = address.houseDetail+','+address.landmark;
-	if(address.savedAs === 'Home'){
+	let addressInfo = address.coordinate.reverseAddress.title+', '+address.houseDetail+','+address.landmark;
+	if(address.savedAs === 'home'){
 		IconName="home-outline";
-	}else if(address.savedAs === 'Work'){
+	}else if(address.savedAs === 'work'){
 		IconName="briefcase-outline";
 	}else{
 		IconName="map-marker-outline";
+	}
+
+	const deleteAddress = () => {
+	    AlertService('Delete', 'Are you sure?', ()=>props.deleteAddress(address, index));		
 	}
 	let content = (
 		<Container>
@@ -62,10 +68,10 @@ const AddressView = ({address, index, ...props}) => {
 				<View style={{ marginRight : 10 }}>
 					<Icon name= {IconName} size={22}/>
 				</View>
-				<View style={{ flexDirection : 'column' }}>
+				<View style={{ flexDirection : 'column', width:'70%' }}>
 					<Address>{address.savedAs}</Address>
-					<View style={{	marginTop : 5, width : '95%'}}>
-						<AddressDetail>{addressInfo}</AddressDetail>
+					<View style={{	marginTop : 5, width : '100%'}}>
+						<AddressDetail numberOfLines={2}>{addressInfo}</AddressDetail>
 					</View>
 				</View>
 			</AddressRow>
@@ -76,7 +82,7 @@ const AddressView = ({address, index, ...props}) => {
 				<Button>
 					<Text>|</Text>
 				</Button>
-				<Button>
+				<Button onPress={()=>deleteAddress()}>
 					<DeleteText>Delete</DeleteText>
 				</Button>
 			</ButtonRow>

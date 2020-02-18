@@ -8,13 +8,13 @@ import Fonts from '../../constants/Fonts';
 
 const {height, width} = Dimensions.get('window');
 const Container = styled.View`
-	height : ${height};
+	height : 100%;
 	width : ${width};
 	align-items : center;
-	justify-content : center;
+	justify-content : flex-end;	
 `;
 const InfoBox = styled.View`
-	flex-direction : column;
+	height : 50%;
 	align-items : center;
 	justify-content : center;
 `;
@@ -29,11 +29,13 @@ const EmptyCart = () => {
 	let content = (
 		<Container>
 			<InfoBox>
-				<Image source={require('../../assets/images/empty-cart.png')} />
 				<InfoText>
 					No Items in your cart
 				</InfoText>
 			</InfoBox>
+			<Image 
+				source={require('../../assets/images/empty-cart.png')} 
+			/>			
 		</Container>
 	);
 	return content;

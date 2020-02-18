@@ -1,5 +1,5 @@
 import { ReverseGeocode, PlacesAutoComplete, PlaceDetailsById, LoginApi, GenerateOtpApi, VerificationApi, UpdateUsernameApi, InitializeApi, 
-	     UpdateTokenApi, AddAddressApi, RetrieveAddressApi, GetAllShopsApi, ShopInformationApi, ShopBasicInformationApi, GetCategoriesApi, 
+	     UpdateTokenApi, AddAddressApi, RetrieveAddressApi, DeleteAddressApi, GetAllShopsApi, ShopInformationApi, ShopBasicInformationApi, GetCategoriesApi, 
 	     SearchAutosuggestApi, SearchApi, AddCartApi, RetrieveCartApi, GetOrderDetailsApi, InsertOrderApi, GetCouponApi, 
 	     ActivateCouponApi, UpdateCustomerInfoApi } from "../constants/Urls";
 
@@ -66,6 +66,15 @@ export const RetrieveAddress = async(customerId) => {
 	const result = await response.json();
 	return result;
 }
+export const DeleteAddress = async(data) => {
+	const response = await fetch(DeleteAddressApi,{
+		method : 'POST',
+		body : data
+	});
+	const result = await response.json();
+	return result;
+}
+
 export const GetAllShops = async(coordinates) => {
 	const url = `${GetAllShopsApi}?coordinates=${coordinates}`;
 	const response = await fetch(url);

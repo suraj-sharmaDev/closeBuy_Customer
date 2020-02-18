@@ -41,7 +41,7 @@ const ShopScreenBody = ({ Shop, available, navigation }) => {
 			renderItem={({item}) => (
 				<ShopItem
 					data={item}
-					available={'1'}
+					available={available}
 				/>
 			)}
 	        renderSectionHeader={renderSectionHeader}

@@ -15,6 +15,7 @@ export const UpdateTokenApi = `${serverUrl}/customer/tokenApi/updateToken`;
 
 export const AddAddressApi = `${serverUrl}/customer/addressApi/addAddress`;
 export const RetrieveAddressApi = `${serverUrl}/customer/addressApi/retrieveAddress`;
+export const DeleteAddressApi = `${serverUrl}/customer/addressApi/deleteAddress`;
 
 export const GetAllShopsApi = `${serverUrl}/customer/shopApi/getAllShopsWithinLimit`;
 export const ShopInformationApi = `${serverUrl}/customer/shopApi/shopInformation`;

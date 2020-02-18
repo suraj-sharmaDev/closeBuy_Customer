@@ -29,7 +29,7 @@ const AddressView = ({address, place_id, type, onLocationSelect, ...props}) => {
 	if(type==='SavedLocation')
 	{
 		addressTitle = address.savedAs;
-		addressInfo = address.houseDetail+','+address.landmark;
+		addressInfo = address.coordinate.reverseAddress.title+', '+address.houseDetail+','+address.landmark;
 		if(address.savedAs === 'Home'){
 			IconName="home-outline";
 		}else if(address.savedAs === 'Work'){

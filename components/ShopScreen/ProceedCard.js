@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styled from "styled-components";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import Color from "../../constants/Colors";
 import Font from "../../constants/Fonts";
 
@@ -65,7 +66,7 @@ const ProceedCard = props => {
 				</View>
 				<View style={{ flexDirection:'row' }}>
 					<Text>View Cart</Text>
-					<Icon name="arrow-right-drop-circle" style={{ color : 'white', fontSize:22}}/>						
+					<SimpleLineIcons name="bag" style={{ color : 'white', fontSize:22}}/>						
 				</View>
 			</Container>
 		);

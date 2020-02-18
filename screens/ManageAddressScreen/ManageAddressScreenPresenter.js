@@ -9,14 +9,19 @@ const {height, width} = Dimensions.get('window');
 
 const Theme = styled.View`
   background-color : ${Color.homeBackgroundColor};
+  height : ${height};
 `;
 
-const ManageAddressScreenPresenter = ({navigation, store}) => {
+const ManageAddressScreenPresenter = ({navigation, store, deleteAddress}) => {
   let content = (
     <Theme>
       <Header navigation={navigation}/>
       <ScrollView>
-	      <ScreenBody store={store.savedAddresses} navigation={navigation}/>
+	      <ScreenBody 
+          store={store.savedAddresses} 
+          navigation={navigation}
+          deleteAddress={deleteAddress}
+        />
 	  </ScrollView>
 	  <Footer navigation={navigation}/>
     </Theme>

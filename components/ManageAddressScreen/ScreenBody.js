@@ -18,21 +18,49 @@ const InfoText = styled.Text`
 	font-size : 13px;
 	font-family : ${Font.normalFont};	
 	text-transform : uppercase;
+	text-align : center;
 `;
 const ScreenBody = ({store, ...props}) => {
-	let content = (
+	let content = null;
+	if(Object.keys(store).length > 0){
+		content = (
+			<React.Fragment>
+				<InfoBox>
+					<InfoText>Saved Address</InfoText>
+				</InfoBox>
+				<View>
+				{
+					store.map((s, index)=>(
+						<AddressView 
+							key={index} 
+							address={s} 
+							index={index}
+							navigation={props.navigation}
+							deleteAddress={props.deleteAddress}
+						/>
+					))
+				}
+				</View>
+			</React.Fragment>
+		)
+	}else{
+		content = (
+			<React.Fragment>
+				<View>
+					<InfoBox>
+						<InfoText>
+							No Saved Addresses
+						</InfoText>
+					</InfoBox>
+				</View>
+			</React.Fragment>
+		);
+	}
+	return (
 		<Container>
-			<InfoBox>
-				<InfoText>Saved Address</InfoText>
-			</InfoBox>
-			<View>
-			{
-				store.map((s, index)=>(<AddressView key={index} address={s} index={index} navigation={props.navigation}/>))
-			}
-			</View>
+			{content}
 		</Container>
 	);
-	return content;
 }
 
 export default ScreenBody;

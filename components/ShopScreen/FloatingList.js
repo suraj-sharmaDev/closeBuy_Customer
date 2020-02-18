@@ -60,7 +60,7 @@ const FloatingList = ({active, scroll, categoryList, updateActive}) => {
 		deviceWidth={width}
 		deviceHeight={height}
 		backdropColor={Color.lightGreenColor}
-		backdropOpacity={0.07}
+		backdropOpacity={0.16}
 		style={{ justifyContent:'flex-end', alignItems:'center', paddingBottom : 25}}>
 			<Container>
 				{modalBody}

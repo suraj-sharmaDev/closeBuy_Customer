@@ -11,13 +11,16 @@ const View = styled.View`
 `;
 const Image = styled.Image`
 	height : 70%;
-	width : 70%;
+	width : 100%;
 `;
 
 const LoginImage = props => {
 	let content = (
 		<View>
-			<Image source={require('../../assets/images/loginBanner.png')} />		
+			<Image 
+				resizeMode="center"
+				source={require('../../assets/images/loginBanner.png')} 
+			/>		
 		</View>
 	);
 	return content;

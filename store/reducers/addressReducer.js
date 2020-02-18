@@ -69,7 +69,7 @@ const onEditAddress = (state, data) => {
 }
 const onDeleteAddress = (state, index) => {
 	let newState = {...state};
-	console.warn(index);
+	newState.savedAddresses = newState.savedAddresses.filter((address, i)=>i!==index)
 	return newState;	
 }
 const onSelectAddress = (state, index) => {
