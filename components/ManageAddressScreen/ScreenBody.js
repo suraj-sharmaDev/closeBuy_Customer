@@ -28,7 +28,7 @@ const ScreenBody = ({store, ...props}) => {
 				<InfoBox>
 					<InfoText>Saved Address</InfoText>
 				</InfoBox>
-				<View>
+				<View style={{paddingBottom : 60}}>
 				{
 					store.map((s, index)=>(
 						<AddressView 

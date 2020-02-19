@@ -66,6 +66,7 @@ const MapScreenPresenter = ({navigation, ...props}) => {
     houseAddr = '';
     landmarkAddr = '';
     saveAs = '';
+    isEdit = false;
     if(navigation.getParam('placeId')){
       PlaceDetails(navigation.getParam('placeId'))
       .then((resultData)=>{
@@ -88,6 +89,7 @@ const MapScreenPresenter = ({navigation, ...props}) => {
       houseAddr = address.houseDetail;
       landmarkAddr = address.landmark;
       saveAs = address.savedAs;
+      isEdit = true;
       onLocation(data);
     }
     else{
@@ -183,6 +185,7 @@ const MapScreenPresenter = ({navigation, ...props}) => {
           inputFocused={inputFocused}
           inputBlurred={inputBlurred}
           addressSave={addressSave}
+          isEdit={isEdit}
         />
       </Theme>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 
+import GeolocationService from '../middleware/GeolocationService';
 import {AlertService} from '../middleware/AlertService';
 import {Initialize} from '../middleware/API';
 
@@ -18,12 +19,17 @@ const AuthNavigator = (props) => {
 		//After login is done we have to refresh our localstorage
 		//for saved addresses and other details stored in cloud
 		SplashScreen.hide();
+		GeolocationService(true, ()=>{}, onLocation, false);
 		//This hides splash screen on app start
 		return ()=>{
+			GeolocationService(false, ()=>{}, onLocation, false);
 			updateInitialized('unmounted');
 		}
 	},[])
 
+	const onLocation = (data) => {
+		coordinates = data;
+	}
 	const appInitializer = async() => {
 		if(initialized===null ){
 			Initialize(props.user.userId)
@@ -32,8 +38,12 @@ const AuthNavigator = (props) => {
 						//If there are no saved addresses
 						// updateInitialized('initialized');
 					} else {
-						//if saved addresses found retrieve it for use
+						//if saved addresses found in server save it in app for use
+						if(!result.address.error){
+							result.address.reason.coordinates = coordinates;
+						}
 						await props.onRetrieveData(result);
+						//along with get geolocation and change current
 						updateInitialized('initialized');
 					}
 				})

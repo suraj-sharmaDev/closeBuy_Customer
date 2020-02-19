@@ -33,8 +33,54 @@ const onServiceUnavailable = (state, data) => {
 	newState.serviceUnavailable = data;
 	return newState;
 }
+const current_address = (data) => {
+	currentCoords = data.coordinates;
+	homeAddr = data.home;
+	workAddr = data.work;
+	otherAddr = JSON.parse(data.other);
+	distance = [];
+	if(homeAddr!==null){
+		distance.push(haversine_distance(currentCoords, JSON.parse(homeAddr).coordinate));
+	}if(workAddr!==null){
+		distance.push(haversine_distance(currentCoords, JSON.parse(workAddr).coordinate));
+	}
+	if(otherAddr!==null){
+		if(otherAddr.constructor === Array){
+			//if multidimensional array
+			otherAddr.map((other)=>{
+				distance.push(haversine_distance(currentCoords, other.coordinate));
+			})
+		}else{
+			//if single object
+			distance.push(haversine_distance(currentCoords, otherAddr.coordinate));
+		}
+	}
+	unSortedDistance = [...distance]; 
+	return unSortedDistance.indexOf(distance.sort(function(a, b){return a-b})[0]);
+	
+	function haversine_distance(coords1, coords2){
+		var dLat = toRad(coords2.latitude - coords1.latitude);
+		var dLon = toRad(coords2.longitude - coords1.longitude);
+		var a =
+			Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+			Math.cos(toRad(coords1.latitude)) *
+				Math.cos(toRad(coords2.latitude)) *
+				Math.sin(dLon / 2) *
+				Math.sin(dLon / 2);
+
+		return 12742 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	}
+    function toRad(x) {
+        return x * Math.PI / 180;
+    }
+}
+
 const onRetrieveAddress = (state, data) => {
-	let newState = {currentAddress : 0, savedAddresses : []};
+	let selectedAddress = current_address(data);
+	let newState = {
+		currentAddress : selectedAddress!==-1 ? selectedAddress : 0, 
+		savedAddresses : []
+	};
 	newState.serviceUnavailable = state.serviceUnavailable;
 	if(data.home!==null){
 		newState.savedAddresses.push(JSON.parse(data.home));

@@ -1,7 +1,7 @@
 import Geolocation from 'react-native-geolocation-service';
 import { PermissionsAndroid} from 'react-native';
 
-const GeolocationService = (mounted, onPermissionDenial, onLocation) => {
+const GeolocationService = (mounted, onPermissionDenial, onLocation, accuracy=true) => {
 	const requestPermission = async () => {
 		try {
 			const granted = await PermissionsAndroid.request(
@@ -38,7 +38,7 @@ const GeolocationService = (mounted, onPermissionDenial, onLocation) => {
 			error => {
 				onPermissionDenial();
 			},
-			{enableHighAccuracy: true, timeout: 15000, maximumAge: 10000, distanceFilter:5},
+			{enableHighAccuracy: accuracy, timeout: 15000, maximumAge: 10000, distanceFilter:5},
 		);
 	};
 //Start geolocation services function

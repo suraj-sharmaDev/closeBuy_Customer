@@ -47,6 +47,7 @@ const Button = styled.TouchableOpacity`
 `;
 
 const MapInput = props => {
+  const isEdit = props.isEdit;
   const [focused, updateFocused] = React.useState(false);
   const [saveAs, updateSaveAs] = React.useState(props.saveAs);
   const [houseAddr, updateHouseAddr] = React.useState(props.houseAddr);
@@ -137,7 +138,7 @@ const MapInput = props => {
         <SaveAs>
           <Label style={{ fontFamily  : Font.normalFont}}>Save As</Label>
           <ButtonGroup>
-            <Button onPress={()=>saveLocation('home')} disabled={homeAlreadySaved}>
+            <Button onPress={()=>saveLocation('home')} disabled={homeAlreadySaved || isEdit}>
               <Icon 
                 name={saveAs==='home' ? "home" : "home-outline"} 
                 style={{fontSize : 20, color : homeAlreadySaved ? Colors.lightGreyColor : 'black' }}
@@ -145,19 +146,19 @@ const MapInput = props => {
               <Text style={{fontSize : 16, color : homeAlreadySaved ? Colors.lightGreyColor : 'black' }}>Home</Text>
             </Button>
 
-            <Button onPress={()=>saveLocation('work')} disabled={workAlreadySaved}>
+            <Button onPress={()=>saveLocation('work')} disabled={workAlreadySaved || isEdit}>
               <Icon 
                 name={saveAs==='work' ? "briefcase" : "briefcase-outline"} 
                 style={{fontSize : 20, color : workAlreadySaved ? Colors.lightGreyColor : 'black' }} 
               />            
               <Text style={{fontSize : 16, color : workAlreadySaved ? Colors.lightGreyColor : 'black' }}>Work</Text>
             </Button>
-            <Button onPress={()=>saveLocation('other')}>
+            <Button onPress={()=>saveLocation('other')} disabled={isEdit}>
               <Icon 
                 name={saveAs==='other' ? "map-marker" : "map-marker-outline"} 
-                style={{fontSize : 20}} 
+                style={{fontSize : 20, color : isEdit ? Colors.lightGreyColor : 'black'}} 
               />            
-              <Text style={{fontSize : 16}}>Other</Text>
+              <Text style={{fontSize : 16, color : isEdit ? Colors.lightGreyColor : 'black'}}>Other</Text>
             </Button>
           </ButtonGroup>
         </SaveAs>

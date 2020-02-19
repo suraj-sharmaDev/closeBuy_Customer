@@ -70,7 +70,7 @@ const HomeScreenPresenter = ({navigation, ...props}) => {
     }
   }
   const fetchShops = () => {
-    if(!currentAddress){
+    if(Object.keys(props.address.savedAddresses).length === 0){
       navigation.navigate('LocationSelector');      
     }else{
       updateLoading(true);      
@@ -80,8 +80,7 @@ const HomeScreenPresenter = ({navigation, ...props}) => {
         if(result.error){
           if(typeof outOfRange=='undefined'){
             outOfRange=true;
-            props.onServiceUnavailable(true);          
-            updateLoading(false);
+            props.onServiceUnavailable(true);
           }
           else
           {
@@ -89,9 +88,9 @@ const HomeScreenPresenter = ({navigation, ...props}) => {
               //if outofRange has already been set don't set again
               outOfRange=true;
               props.onServiceUnavailable(true);
-              updateLoading(false);                          
             }
           }
+          updateLoading(false);
         }
         else
         {
