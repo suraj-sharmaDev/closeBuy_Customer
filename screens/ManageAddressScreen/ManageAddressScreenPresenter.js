@@ -12,13 +12,15 @@ const Theme = styled.View`
   height : ${height};
 `;
 
-const ManageAddressScreenPresenter = ({navigation, store, deleteAddress}) => {
+const ManageAddressScreenPresenter = ({navigation, address, cart, deleteAddress}) => {
   let content = (
     <Theme>
       <Header navigation={navigation}/>
       <ScrollView>
 	      <ScreenBody 
-          store={store.savedAddresses} 
+          store={address.savedAddresses} 
+          currentAddress={address.currentAddress}
+          trackingOrder={cart.tracking}
           navigation={navigation}
           deleteAddress={deleteAddress}
         />

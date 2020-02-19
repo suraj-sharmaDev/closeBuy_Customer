@@ -20,7 +20,7 @@ const InfoText = styled.Text`
 	text-transform : uppercase;
 	text-align : center;
 `;
-const ScreenBody = ({store, ...props}) => {
+const ScreenBody = ({store, currentAddress, ...props}) => {
 	let content = null;
 	if(Object.keys(store).length > 0){
 		content = (
@@ -35,6 +35,8 @@ const ScreenBody = ({store, ...props}) => {
 							key={index} 
 							address={s} 
 							index={index}
+							currentAddress={currentAddress}
+							trackingOrder={props.trackingOrder}
 							navigation={props.navigation}
 							deleteAddress={props.deleteAddress}
 						/>

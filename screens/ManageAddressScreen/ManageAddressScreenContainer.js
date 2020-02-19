@@ -42,7 +42,8 @@ class ManageAddressScreenContainer extends Component {
   }
   render() {
     return <ManageAddressScreenPresenter 
-    		    store={this.props.address}
+    		    address={this.props.address}
+            cart={this.props.cart}
     		    navigation={this.props.navigation}
             deleteAddress={this._deleteAddress}
            />;
@@ -52,7 +53,8 @@ class ManageAddressScreenContainer extends Component {
 const mapStateToProps = state => {
 	return {
 		address: state.address,
-    user: state.user
+    user: state.user,
+    cart : state.cart
 	};
 };
 const mapDispatchToProps = dispatch => {

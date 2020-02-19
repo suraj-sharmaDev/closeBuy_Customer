@@ -48,7 +48,7 @@ const DeleteText = styled.Text`
 	font-size : 15px;
 	color : ${Color.redColor};
 `;
-const AddressView = ({address, index, ...props}) => {
+const AddressView = ({address, index, currentAddress, trackingOrder, ...props}) => {
 	let IconName;
 	let addressInfo = address.coordinate.reverseAddress.title+', '+address.houseDetail+','+address.landmark;
 	if(address.savedAs === 'home'){
@@ -60,7 +60,21 @@ const AddressView = ({address, index, ...props}) => {
 	}
 
 	const deleteAddress = () => {
-	    AlertService('Delete', 'Are you sure?', ()=>props.deleteAddress(address, index));		
+		if(index==currentAddress){
+	        AlertService(
+	          'Notice', 
+	          'CloseBuy is using this address as your location.\n Change current address?', 
+	          ()=>{props.navigation.navigate('LocationSelector')}
+	        );
+		}else if(trackingOrder){
+	        AlertService(
+	          'Notice', 
+	          'Your order is being deliverd to you. Please save your address till the delivery is completed.', 
+	          ()=>{}
+	        );			
+		}else{
+		    AlertService('Delete', 'Are you sure?', ()=>props.deleteAddress(address, index));					
+		}
 	}
 	let content = (
 		<Container>

@@ -48,7 +48,7 @@ const Button = styled.TouchableOpacity`
 
 const MapInput = props => {
   const isEdit = props.isEdit;
-  const [focused, updateFocused] = React.useState(false);
+  const [disabled, updateDisabled] = React.useState(false);
   const [saveAs, updateSaveAs] = React.useState(props.saveAs);
   const [houseAddr, updateHouseAddr] = React.useState(props.houseAddr);
   const [landmarkAddr, updateLandmarkAddr] = React.useState(props.landmarkAddr);
@@ -85,6 +85,7 @@ const MapInput = props => {
     }
   }  
   const addressSave = () => {
+    updateDisabled(true);
     props.addressSave({
       house : houseAddr,
       landmark : landmarkAddr,
@@ -92,11 +93,18 @@ const MapInput = props => {
     });
   } 
   if(houseAddr.length == 0){
-    warning = 'ENTER HOUSE /FLAT /BLOCK NO'
+    warning = 'ENTER HOUSE /FLAT /BLOCK NO';
+    disabledSubmit = true;
   }else if(landmarkAddr.length == 0){
-    warning = 'ENTER LANDMARK'
+    warning = 'ENTER LANDMARK';
+    disabledSubmit = true;
   }else {
     warning = 'SAVE AND PROCEED'
+    if(!disabled){
+      disabledSubmit = false;
+    }else{
+      disabledSubmit = true;
+    }
   }
   return (
     <Container style={{width: width}}>
@@ -141,17 +149,17 @@ const MapInput = props => {
             <Button onPress={()=>saveLocation('home')} disabled={homeAlreadySaved || isEdit}>
               <Icon 
                 name={saveAs==='home' ? "home" : "home-outline"} 
-                style={{fontSize : 20, color : homeAlreadySaved ? Colors.lightGreyColor : 'black' }}
+                style={{fontSize : 20, color : homeAlreadySaved || isEdit ? Colors.lightGreyColor : 'black' }}
               />
-              <Text style={{fontSize : 16, color : homeAlreadySaved ? Colors.lightGreyColor : 'black' }}>Home</Text>
+              <Text style={{fontSize : 16, color : homeAlreadySaved || isEdit ? Colors.lightGreyColor : 'black' }}>Home</Text>
             </Button>
 
             <Button onPress={()=>saveLocation('work')} disabled={workAlreadySaved || isEdit}>
               <Icon 
                 name={saveAs==='work' ? "briefcase" : "briefcase-outline"} 
-                style={{fontSize : 20, color : workAlreadySaved ? Colors.lightGreyColor : 'black' }} 
+                style={{fontSize : 20, color : workAlreadySaved || isEdit ? Colors.lightGreyColor : 'black' }} 
               />            
-              <Text style={{fontSize : 16, color : workAlreadySaved ? Colors.lightGreyColor : 'black' }}>Work</Text>
+              <Text style={{fontSize : 16, color : workAlreadySaved || isEdit ? Colors.lightGreyColor : 'black' }}>Work</Text>
             </Button>
             <Button onPress={()=>saveLocation('other')} disabled={isEdit}>
               <Icon 
@@ -163,7 +171,7 @@ const MapInput = props => {
           </ButtonGroup>
         </SaveAs>
         <NB_Button block 
-          disabled={!(warning==='SAVE AND PROCEED')}
+          disabled={disabledSubmit}
           onPress = {addressSave}
           style = {{ backgroundColor : (warning==='SAVE AND PROCEED') ? Colors.greenColor : Colors.disabledGreenColor }}
         >
