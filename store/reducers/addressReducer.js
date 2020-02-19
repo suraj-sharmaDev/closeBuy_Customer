@@ -76,7 +76,7 @@ const current_address = (data) => {
 }
 
 const onRetrieveAddress = (state, data) => {
-	let selectedAddress = current_address(data);
+	let selectedAddress = data.coordinates!==null ? current_address(data) : 0;
 	let newState = {
 		currentAddress : selectedAddress!==-1 ? selectedAddress : 0, 
 		savedAddresses : []

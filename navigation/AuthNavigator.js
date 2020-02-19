@@ -19,7 +19,7 @@ const AuthNavigator = (props) => {
 		//After login is done we have to refresh our localstorage
 		//for saved addresses and other details stored in cloud
 		SplashScreen.hide();
-		GeolocationService(true, ()=>{}, onLocation, false);
+		GeolocationService(true, onLocation, onLocation, false);		
 		//This hides splash screen on app start
 		return ()=>{
 			GeolocationService(false, ()=>{}, onLocation, false);
@@ -29,6 +29,10 @@ const AuthNavigator = (props) => {
 
 	const onLocation = (data) => {
 		coordinates = data;
+		if(typeof coordinates == 'undefined'){
+			coordinates = null;
+		}
+		appInitializer();
 	}
 	const appInitializer = async() => {
 		if(initialized===null ){
@@ -57,7 +61,6 @@ const AuthNavigator = (props) => {
 	let content = null;
 	if(props.user.loggedIn && props.user.verified && props.user.userName){
 		//initialize app only when user has been verified and not already initialized
-		appInitializer();
 		if(initialized === 'initialized'){
 			content = <AppNavigator />;
 		}
