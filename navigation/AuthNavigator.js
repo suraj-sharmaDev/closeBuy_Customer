@@ -18,14 +18,16 @@ const AuthNavigator = (props) => {
 	React.useEffect(()=>{
 		//After login is done we have to refresh our localstorage
 		//for saved addresses and other details stored in cloud
-		SplashScreen.hide();
-		GeolocationService(true, onLocation, onLocation, false);		
-		//This hides splash screen on app start
+		if(props.user.loggedIn && props.user.verified && props.user.userName)
+		{
+			GeolocationService(true, onLocation, onLocation, false);					
+		}
+		//This hides splash screen on app start		
+		SplashScreen.hide();		
 		return ()=>{
 			GeolocationService(false, ()=>{}, onLocation, false);
-			updateInitialized('unmounted');
 		}
-	},[])
+	},[props.user])
 
 	const onLocation = (data) => {
 		coordinates = data;
