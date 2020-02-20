@@ -23,7 +23,7 @@ const SearchScreenPresenter = ({navigation, ...props}) => {
 	const [selectedId, setSelectedId] = useState(null);	
 	useEffect(() => {
 		initialization();
-	},[props.address.currentAddress]);
+	},[props.address]);
 	const initialization = () => {
 		if(!props.address.serviceUnavailable)
 		{

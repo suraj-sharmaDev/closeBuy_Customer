@@ -18,7 +18,7 @@ class App extends Component
   {
     return(
       <Container>
-        <GeneralStatusBar backgroundColor="#FFFFFF" barStyle="dark-content"/>
+        <GeneralStatusBar backgroundColor="transparent" translucent={true} barStyle="dark-content"/>
         <Provider store = { configureStore }>
           <PersistGate loading={null} persistor={persistor}>
             <AuthNavigator />
