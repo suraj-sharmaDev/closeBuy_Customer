@@ -28,8 +28,8 @@ const Text = styled.Text``;
 
 const MapScreenPresenter = ({navigation, ...props}) => {
   const [userLocation, updateUserLocation] = React.useState(null);
-  let mapHeight = new Animated.Value(height * 0.4);
-  let formHeight = new Animated.Value(height* 0.6);
+  let mapHeight = new Animated.Value(height * 0.5);
+  let formHeight = new Animated.Value(height* 0.5);
   let mapAnimationStyle = { height : mapHeight};  
   let formAnimationStyle = { height : formHeight};    
   React.useEffect(() => {
@@ -124,11 +124,11 @@ const MapScreenPresenter = ({navigation, ...props}) => {
   const inputBlurred = () => {
     Animated.parallel([
       Animated.timing(mapHeight,{
-        toValue : height*0.4,
+        toValue : height*0.5,
         duration : 350
       }),
       Animated.timing(formHeight,{
-        toValue : height*0.6,
+        toValue : height*0.5,
         duration : 350
       })      
     ]).start();    

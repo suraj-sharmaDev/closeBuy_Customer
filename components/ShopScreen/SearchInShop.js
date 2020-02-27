@@ -1,18 +1,19 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, ScrollView } from 'react-native';
 import SearchIcon from "react-native-vector-icons/Feather";
 import CloseIcon from "react-native-vector-icons/Ionicons";
 import Modal from "react-native-modal";
 import styled from 'styled-components';
 import Entypo from "react-native-vector-icons/Entypo";
-import Color from "../../constants/Colors";
-import Font from "../../constants/Fonts";
+
+import Colors from "../../constants/Colors";
+import Fonts from "../../constants/Fonts";
 
 const {height, width}=Dimensions.get('window');
 
 const Container = styled.View`
 	width : ${width};
-	padding : 10px 10px;
+	padding : 10px 10px 60px 10px;
 	background-color : white;
 `;
 const Header = styled.View`
@@ -21,7 +22,11 @@ const Header = styled.View`
 	justify-content : space-between;
 	background-color : white;
 `; 
-const Text = styled.Text``;
+const Text = styled.Text`
+	font-family : ${Fonts.normalFont};
+	color : ${Colors.darkGreyColor};
+	font-size : 15px;
+`;
 const Button = styled.TouchableOpacity``;
 const SearchBarContainer = styled.View`
   flex-direction : row;
@@ -30,22 +35,24 @@ const SearchBarContainer = styled.View`
   padding : 0px 10px;
   height : 40px;
   border-radius : 12px;
-  background-color : ${Color.searchBarColor};
+  background-color : ${Colors.searchBarColor};
 `;
 const Input = styled.TextInput`
-	width : ${width*0.5};
+	width : ${width*0.7};
 `;
 const SearchOutputItem = styled.TouchableOpacity`
 	padding : 20px 10px;
 `;
 const SearchOutput = ({data, onSearchItemPress}) => {
 	let Body = (
-		<SearchOutputItem onPress={()=>onSearchItemPress(data.sectionIndex, data.itemIndex)}>
-			<Text>{data.itemName}</Text>
+		<SearchOutputItem onPress={()=>onSearchItemPress(data.sectionIndex, data.subCategoryName, data.itemIndex)}>
+			<Text>{data.name}</Text>
+			<Text>In {data.subCategoryName}</Text>
 		</SearchOutputItem>
 	);
 	return Body;
 }
+
 const ModalHeader = props => {
 	let timeOut = 0;
 	onChangeHandler = (text) => {
@@ -54,7 +61,7 @@ const ModalHeader = props => {
 		if(text.length===0){
 			props.doSearch('cleanSlateMode');
 		}
-		if(text.length>3)
+		if(text.length>2)
 		{
 			props.doSearch(text.toLowerCase());
 		}
@@ -62,10 +69,10 @@ const ModalHeader = props => {
 	let header = (
 		<Header>
 		  <Button onPress={props.updateActive}>
-			  <Entypo name="chevron-left" size={30} color={Color.greenColor}/>
+			  <Entypo name="chevron-left" size={30} color={Colors.greenColor}/>
 		  </Button>
 	      <SearchBarContainer>
-	        <SearchIcon name="search" size={22} color={Color.darkGreyColor} />      
+	        <SearchIcon name="search" size={22} color={Colors.lightGreyColor} />      
 	        <Input placeholder="Search for grocery, food, shop..."
 	        	   value={props.searchTerm} 
 	               underlineColorAndroid="transparent"
@@ -102,7 +109,7 @@ const SearchInShop = ({data, scroll, ...props}) => {
 		}else{
 			for(i=0,maxI=data.length;i<maxI;i++){
 				for(j=0,maxJ=data[i].children.length;j<maxJ;j++){
-					itemName = data[i].children[j].itemName.toLowerCase();
+					itemName = data[i].children[j].name.toLowerCase();
 					if(itemName.indexOf(text)!=-1){
 						contentBody.push(
 							<SearchOutput 
@@ -118,9 +125,9 @@ const SearchInShop = ({data, scroll, ...props}) => {
 			updateModalBody(contentBody);
 		}
 	}
-	const onSearchItemPress = (sectionIndex, itemIndex) =>{
+	const onSearchItemPress = (sectionIndex, subCategoryName, itemIndex) =>{
 		props.updateActive();
-		scroll(sectionIndex, itemIndex);
+		scroll(sectionIndex, subCategoryName, itemIndex);
 	}
 	let content=(
 		<React.Fragment>
@@ -146,7 +153,9 @@ const SearchInShop = ({data, scroll, ...props}) => {
 					{
 						modalBody.length>0
 						?
-						modalBody
+						<ScrollView>
+							{modalBody}
+						</ScrollView>
 						:
 						null
 					}

@@ -25,6 +25,7 @@ const MapDisplay = (props) => {
         ref={props._mapRef}
         initialRegion={props.userLocation}
         showsUserLocation = {true}
+        customMapStyle={CustomMap}
         onRegionChangeComplete={props.onRegionChange}
       />
       {

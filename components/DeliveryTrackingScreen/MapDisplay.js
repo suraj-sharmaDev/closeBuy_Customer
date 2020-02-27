@@ -43,6 +43,7 @@ const MapDisplay = (props) => {
         ref={_mapRef}
         initialRegion={props.userLocation}
         onRegionChangeComplete={onRegionChange}
+        customMapStyle={CustomMap}
         onMapReady={()=>updateMapReady(true)}
       >
             <MapView.Marker 

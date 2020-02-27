@@ -7,6 +7,7 @@ import CheckOutScreen from "../screens/CheckOutScreen";
 import ExploreScreen from "../screens/ExploreScreen";
 import MapScreen from "../screens/MapScreen";
 import ShopScreen from "../screens/ShopScreen";
+import ShopScreenCategory from "../screens/ShopScreenCategory";
 import SearchFetchScreen from "../screens/SearchFetchScreen";
 import LocationSelectionScreen from "../screens/LocationSelectionScreen";
 
@@ -67,7 +68,14 @@ const ScreensStack = createStackNavigator(
         header: null,
         headerTransparent: true
       }
-    }        
+    },
+    ShopCategory: {
+      screen: ShopScreenCategory,
+      navigationOptions: {
+        header: null,
+        headerTransparent: true
+      }
+    }                    
   },
   {
     initialRouteName: "Tabs",

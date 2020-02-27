@@ -45,7 +45,12 @@ const SearchScreenPresenter = ({navigation, ...props}) => {
 
 	let content = <LoadingScreen />;
 	if(props.address.serviceUnavailable){
-		content = <ServiceOutOfRange />;
+		content = (
+			<React.Fragment>
+				<View style={{height : 57}} />
+				<ServiceOutOfRange />
+			</React.Fragment>
+		);
 	}
 	else if(selectedId!==null){
 		content = (

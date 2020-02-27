@@ -21,22 +21,6 @@ const Container = styled.View`
   border-top-right-radius : 20px;  
   padding : 10px 20px;
 `;
-
-const MenuItem = styled.TouchableOpacity`
-	align-items: center;
-	justify-content: center;
-	height: 100px;
-	border-radius: 5px;
-	background-color: blue;
-	margin-vertical: 10px;
-	margin-horizontal: 10px;
-`;
-
-const SubCategoryName = styled.Text`
-	font-size: 16px;
-	font-family  : ${Font.normalFont};
-`;
-
 const BigWarningText = styled.Text`
 	font-size: 30px;
 	font-family  : ${Font.normalFont};

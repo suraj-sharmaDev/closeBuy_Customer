@@ -15,7 +15,7 @@ class ShopScreenContainer extends React.PureComponent {
   }
   componentDidMount() {
     // Ajax call will get Shop actually
-    // const shopId = 1;
+    // const shopId = 2;
     const shopId = this.props.navigation.state.params.shopId;
     ShopInformation(shopId)
     .then((result)=>{

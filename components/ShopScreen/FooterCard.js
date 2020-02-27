@@ -2,6 +2,8 @@ import React from 'react';
 import {Keyboard} from 'react-native';
 import styled from "styled-components";
 import {connect} from 'react-redux';
+import {withNavigationFocus} from 'react-navigation';
+
 import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
 import ProceedCard from './ProceedCard';
@@ -9,6 +11,7 @@ import FloatingButton from './FloatingButton';
 import FloatingList from './FloatingList';
 
 const Container = styled.View`
+	elevation : 17;
 	width : 100%;
 	position : absolute;
 	bottom : 0px;
@@ -41,17 +44,30 @@ const FooterCard = props => {
 	    }        		
 	})	
 	const showFooter = () => {
-		updateShow(true);
+		if(props.isFocused){
+			updateShow(true);
+		}
 	}
 	const hideFooter = () => {
-		updateShow(false);
+		if(props.isFocused){
+			updateShow(false);
+		}
 	}
 	let content = null;
 	if(!props.loading && show && !props.tracking){
 		content = (
 			<Container>
-				<FloatingList active={active} scroll={props.scroll} categoryList={props.categoryList} updateActive={()=>updateActive(!active)}/>
-				<FloatingButton updateActive={()=>updateActive(!active)}/>
+				{
+					// <FloatingList 
+					// 	active={active} 
+					// 	scroll={props.scroll} 
+					// 	categoryList={props.categoryList} 
+					// 	updateActive={()=>updateActive(!active)}
+					// />
+					// <FloatingButton 
+					// 	updateActive={()=>updateActive(!active)}
+					// />
+				}
 				<ProceedCard {...props}/>
 			</Container>
 		);
@@ -71,4 +87,4 @@ const mapStateToProps = state => {
 		tracking : state.cart.tracking
 	}
 }
-export default connect(mapStateToProps,{})(FooterCard);
+export default connect(mapStateToProps,{})(withNavigationFocus(FooterCard));
