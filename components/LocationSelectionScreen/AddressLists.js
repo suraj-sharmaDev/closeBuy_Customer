@@ -41,6 +41,7 @@ const AddressLists = props => {
           <AddressView
             key={index}
             address={s}
+            isCurrent={props.address.currentAddress === index}
             place_id={index}
             type={'SavedLocation'}
             onLocationSelect={props.onSavedLocationSelect}

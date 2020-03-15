@@ -5,6 +5,7 @@ import Icon  from "react-native-vector-icons/MaterialCommunityIcons";
 import Fonts from '../../constants/Fonts';
 import Colors from '../../constants/Colors';
 import OrderDetailModal from './OrderDetailModal';
+import OrderStatusInfoView from './OrderStatusInfoView';
 
 const Container = styled.ScrollView`
 	padding : 0px 10px;
@@ -64,32 +65,10 @@ const OrderDetail = props =>{
 	let content = (
 		<Container>
 			<Row style={{ justifyContent:'space-between', borderTopWidth : 0.5, paddingTop : 10, paddingBottom : 10}}>
-				{
-					orderPlaced
-					?
-					<React.Fragment>
-						<View style={{alignItems:'center'}}>
-							<DeliveryImage>
-								<Icon name="account" size={50} color={Colors.greyColor}/>
-							</DeliveryImage>
-							<Text style={{color : Colors.semiDarkGreyColor, fontSize : 15}}>
-								{props.order.deliveryBoyName}
-							</Text>
-						</View>
-						<CallButton activeOpacity={0.8} style={{padding : 12}} onPress={()=>callDeliveryBoy(props.order.deliveryBoyMobile)}>
-							<Icon name="phone" size={24} color={Colors.greenColor} />
-						</CallButton>
-					</React.Fragment>										
-					:					
-					<React.Fragment>
-						<DeliveryImage>
-							<Icon name="account" size={50} color={Colors.greyColor}/>
-						</DeliveryImage>
-						<Text style={{color : Colors.semiDarkGreyColor, fontSize : 15}}>
-							Waiting for dealer to accept your order
-						</Text>
-					</React.Fragment>										
-				}
+				<OrderStatusInfoView 
+					order={props.order}
+					callDeliveryBoy={()=>callDeliveryBoy(props.order.deliveryBoyMobile)}
+				/>
 			</Row>
 			<Row style={{justifyContent:'space-between', borderTopWidth : 0.5, paddingTop : 10}}>
 				<View>

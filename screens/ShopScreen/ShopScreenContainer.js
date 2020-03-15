@@ -3,6 +3,7 @@ import {Text} from 'react-native';
 import ShopScreenPresenter from './ShopScreenPresenter';
 
 import LoadingScreen from '../../components/LoadingScreen';
+import AbortController from '../../middleware/AbortController';
 import {ShopInformation} from '../../middleware/API';
 import {AlertService} from '../../middleware/AlertService';
 
@@ -12,6 +13,7 @@ class ShopScreenContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {isLoading: true, Shop: {}};
+    this.abortController = new AbortController();
   }
   componentDidMount() {
     // Ajax call will get Shop actually
@@ -19,16 +21,20 @@ class ShopScreenContainer extends React.PureComponent {
     const shopId = this.props.navigation.state.params.shopId;
     ShopInformation(shopId)
     .then((result)=>{
-      this.setState({
-        Shop : result,
-        isLoading : false
-      })
+      if(!this.abortController._signal()){
+        this.setState({
+          Shop : result,
+          isLoading : false
+        })        
+      }
     })
     .catch((err)=>{
       AlertService('Error','An error occurred, sorry of inconvenience!', ()=>{});
     })
   }
-
+  componentWillUnmount() {
+    this.abortController._abort();
+  }
   render() {
     if (this.state.isLoading) {
       return <LoadingScreen/>;

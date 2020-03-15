@@ -15,6 +15,7 @@ const Container = styled.View`
 	border-color : ${Colors.lightGreenColor};
 `;
 const OrderView = styled.View`
+	width : 100%;
 	flex-direction : row;
 	justify-content : space-between;
 `;
@@ -26,7 +27,7 @@ const Text = styled.Text`
 const Item = ({order}) => {
 	let item = (
 		<OrderView>
-			<Text numberOfLines={1} style={{paddingRight:10}}>{order.name}</Text>
+			<Text numberOfLines={1} style={{paddingRight:10, width : '70%'}}>{order.name}</Text>
 			<Text>Rs {order.price} x {order.qty}</Text>
 		</OrderView>
 	);

@@ -6,7 +6,7 @@ import Font from "../../constants/Fonts";
 
 const Container = styled.View`
 	position : absolute;
-	bottom : 80px;
+	bottom : 30px;
 	width : 100%;
 	padding : 10px;
 	border-width : 1px;

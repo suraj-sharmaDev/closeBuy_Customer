@@ -53,7 +53,7 @@ const ShopScreenCategoryPresenter = ({navigation, items, ...props }) => {
 		setSelected(subCategoryName);
 	}
 	const _scrollTo = (sectionIndex, subCategoryName, itemIndex) => {
-		if(itemIndex!==undefined && itemIndex > 2){
+		if(itemIndex!==undefined){
 			flatListRef.current.scrollToIndex({ animated: true, index: itemIndex });
 		}
 	}

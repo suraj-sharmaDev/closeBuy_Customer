@@ -28,7 +28,7 @@ const ScreenBody = props => {
 	},[props.itemIndex]);
 
 	const renderListFooter = () => {
-		return <View style={{paddingBottom: 170}} />
+		return <View style={{paddingBottom: 270}} />
 	}	
 	let content = (
 		<Container>

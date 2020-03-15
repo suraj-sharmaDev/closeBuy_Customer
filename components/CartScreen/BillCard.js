@@ -6,7 +6,7 @@ import Font from "../../constants/Fonts";
 import ChargeDetail from './ChargeDetail';
 
 const Container = styled.View`
-	padding : 10px 20px 20px 10px;
+	padding : 10px 20px 20px 20px;
 `;
 const BillTitle = styled.Text`
 	font-size : 18px;

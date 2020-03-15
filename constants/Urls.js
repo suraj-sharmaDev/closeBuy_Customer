@@ -1,4 +1,4 @@
-const serverUrl = `http://34.94.115.243`;
+const serverUrl = `https://www.adastratech.in`;
 
 export const ReverseGeocode = `https://maps.googleapis.com/maps/api/geocode/json`;
 export const PlacesAutoComplete = `https://maps.googleapis.com/maps/api/place/autocomplete/json`;
@@ -19,6 +19,7 @@ export const DeleteAddressApi = `${serverUrl}/customer/addressApi/deleteAddress`
 
 export const GetAllShopsApi = `${serverUrl}/customer/shopApi/getAllShopsWithinLimit`;
 export const ShopInformationApi = `${serverUrl}/customer/shopApi/shopInformation`;
+export const ShopStocksBySubCategoryApi = `${serverUrl}/customer/shopApi/shopStocksBySubCategory`;
 export const ShopBasicInformationApi = `${serverUrl}/customer/shopApi/shopBasicInformation`;
 export const GetCategoriesApi = `${serverUrl}/customer/categoryApi/getCategories`;
 export const SearchAutosuggestApi = `${serverUrl}/customer/shopApi/searchAutoSuggest`;

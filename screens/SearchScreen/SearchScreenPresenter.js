@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 
 import Color from "../../constants/Colors";
 
+import AbortController from '../../middleware/AbortController';
 import {GetCategories} from '../../middleware/API';
 import {AlertService} from '../../middleware/AlertService';
 
@@ -21,17 +22,23 @@ const Theme = styled.View`
 
 const SearchScreenPresenter = ({navigation, ...props}) => {
 	const [selectedId, setSelectedId] = useState(null);	
+	abortController = new AbortController();
 	useEffect(() => {
 		initialization();
+		return ()=>{
+			abortController._abort();			
+		}
 	},[props.address]);
 	const initialization = () => {
 		if(!props.address.serviceUnavailable)
 		{
 			GetCategories()
 			.then((result)=>{
-				DATA = result;			
-				selectedCategory = DATA[0];		
-				setSelectedId(DATA[0].categoryId);
+				if(!abortController._signal()){
+					DATA = result;			
+					selectedCategory = DATA[0];		
+					setSelectedId(DATA[0].categoryId);
+				}
 			})
 			.catch((err)=>{
 				AlertService('Error','An error occurred, sorry of inconvenience!', ()=>{});

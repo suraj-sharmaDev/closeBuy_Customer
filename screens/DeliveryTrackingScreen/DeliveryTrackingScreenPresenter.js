@@ -73,7 +73,9 @@ const DeliveryTrackingScreenPresenter = (props) => {
       <Text>Loading</Text>
   let content = (
   <Theme stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
-    {map}
+    {
+    //map
+    }
     <OrderDetail order={props.cart}/>
   </Theme>
   );

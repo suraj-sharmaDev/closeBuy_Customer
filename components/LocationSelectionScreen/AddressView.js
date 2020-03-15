@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Color from "../../constants/Colors";
+import Colors from "../../constants/Colors";
 import Font from "../../constants/Fonts";
 
 const View = styled.View``;
@@ -13,7 +13,7 @@ const AddressRow = styled.TouchableOpacity`
 const Address = styled.Text`
 	text-transform : uppercase;
 	font-family : ${Font.boldFont};
-	color : ${Color.blackColor};
+	color : ${Colors.blackColor};
 	font-size : 15px;
 `;
 const AddressDetail = styled.Text`
@@ -29,13 +29,16 @@ const AddressView = ({address, place_id, type, onLocationSelect, ...props}) => {
 	if(type==='SavedLocation')
 	{
 		addressTitle = address.savedAs;
-		addressInfo = address.coordinate.reverseAddress.title+', '+address.houseDetail+','+address.landmark;
-		if(address.savedAs === 'Home'){
-			IconName="home-outline";
-		}else if(address.savedAs === 'Work'){
-			IconName="briefcase-outline";
+		addressInfo = address.houseDetail+', '+address.landmark+', '+address.coordinate.reverseAddress.title;
+		if(address.savedAs === 'home'){
+			IconName=props.isCurrent ? "home" : "home-outline";
+			color=props.isCurrent ? Colors.darkGreenColor : Colors.blackColor; 
+		}else if(address.savedAs === 'work'){
+			IconName=props.isCurrent ? "briefcase" : "briefcase-outline";
+			color=props.isCurrent ? Colors.darkGreenColor : Colors.blackColor; 
 		}else{
-			IconName="map-marker-outline";
+			IconName=props.isCurrent ? "map-marker" : "map-marker-outline";
+			color=props.isCurrent ? Colors.darkGreenColor : Colors.blackColor; 
 		}
 	}else{
 		addressTitle = address.structured_formatting.main_text;
@@ -45,7 +48,7 @@ const AddressView = ({address, place_id, type, onLocationSelect, ...props}) => {
 	content = (
 		<AddressRow onPress={()=>onLocationSelect(place_id)}>
 			<View style={{marginRight : 20}}>
-				<Icon name={IconName} size={22} />
+				<Icon name={IconName} size={22} color={color}/>
 			</View>
 			<View style={{justifyContent:'center'}}>
 				<Address>{addressTitle}</Address>				

@@ -8,7 +8,7 @@ const CategoryItem = styled.TouchableOpacity`
   flex-direction : column;
   align-items : center;
   justify-content : center;
-  width : 80px;
+  width : 100px;
   height : 60px;
   margin-vertical: 5px;
   margin-horizontal: 4px;

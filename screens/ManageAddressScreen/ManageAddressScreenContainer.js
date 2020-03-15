@@ -13,7 +13,7 @@ class ManageAddressScreenContainer extends Component {
   _prepareAddress = (index) => {
     //if other address was to be deleted 
     //first delete it from redux and then prepare it
-    otherAddress = this.props.address.savedAddresses.filter((address, i)=>i!==index)
+    otherAddress = this.props.address.savedAddresses.filter((address, i)=>i!==index && address.savedAs==='other')
     if(Object.keys(otherAddress).length===0){
       return '';
     }else{

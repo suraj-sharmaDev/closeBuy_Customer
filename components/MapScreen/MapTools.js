@@ -7,7 +7,7 @@ const {height, width} = Dimensions.get('window');
 const Marker = styled.View`
   position : absolute;
   left : ${width/2 - 20};
-  top : ${height*0.2 - 32};
+  top : ${height*0.25 - 32};
 `;
 const MarkerImage = styled.Image`
   border-radius: 12px;
@@ -20,7 +20,7 @@ const Button = styled.TouchableOpacity`
   backgroundColor : white;
   padding : 5px;
   left : ${width - 50};
-  top : ${height * 0.4 - 40};
+  top : ${height * 0.5 - 40};
 `;
 const TargetImage = styled.Image`
   height: 25px;

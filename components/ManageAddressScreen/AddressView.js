@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {AlertService} from '../../middleware/AlertService';
-import Color from "../../constants/Colors";
+import Colors from "../../constants/Colors";
 import Font from "../../constants/Fonts";
 
 const Container = styled.View`
@@ -20,7 +20,7 @@ const AddressRow = styled.View`
 const Address = styled.Text`
 	text-transform : uppercase;
 	font-family : ${Font.boldFont};
-	color : ${Color.blackColor};
+	color : ${Colors.blackColor};
 	font-size : 15px;
 `;
 const AddressDetail = styled.Text`
@@ -33,30 +33,33 @@ const ButtonRow = styled.View`
 	justify-content : space-around;
 	margin-top : 10px;
 	border-bottom-width : 1px;
-	border-bottom-color : ${Color.greyColor};
+	border-bottom-color : ${Colors.greyColor};
 `;
 const Button = styled.TouchableOpacity``;
 const EditText = styled.Text`
 	text-transform : uppercase;
 	font-family : ${Font.boldFont};
 	font-size : 15px;
-	color : ${Color.greenColor};
+	color : ${Colors.greenColor};
 `;
 const DeleteText = styled.Text`
 	text-transform : uppercase;
 	font-family : ${Font.boldFont};
 	font-size : 15px;
-	color : ${Color.redColor};
+	color : ${Colors.redColor};
 `;
 const AddressView = ({address, index, currentAddress, trackingOrder, ...props}) => {
 	let IconName;
-	let addressInfo = address.coordinate.reverseAddress.title+', '+address.houseDetail+','+address.landmark;
+	let addressInfo = address.houseDetail+', '+address.landmark+', '+address.coordinate.reverseAddress.title;
 	if(address.savedAs === 'home'){
-		IconName="home-outline";
+		IconName = index===currentAddress ? "home" : "home-outline";
+		color = index===currentAddress ? Colors.darkGreenColor : Colors.blackColor; 		
 	}else if(address.savedAs === 'work'){
-		IconName="briefcase-outline";
+		IconName = index===currentAddress ? "briefcase" : "briefcase-outline";
+		color = index===currentAddress ? Colors.darkGreenColor : Colors.blackColor; 		
 	}else{
-		IconName="map-marker-outline";
+		IconName = index===currentAddress ? "map-marker" : "map-marker-outline";
+		color = index===currentAddress ? Colors.darkGreenColor : Colors.blackColor; 		
 	}
 
 	const deleteAddress = () => {
@@ -80,7 +83,7 @@ const AddressView = ({address, index, currentAddress, trackingOrder, ...props}) 
 		<Container>
 			<AddressRow>
 				<View style={{ marginRight : 10 }}>
-					<Icon name= {IconName} size={22}/>
+					<Icon name= {IconName} size={22} color={color}/>
 				</View>
 				<View style={{ flexDirection : 'column', width:'70%' }}>
 					<Address>{address.savedAs}</Address>

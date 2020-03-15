@@ -47,14 +47,19 @@ const HomeScreenPresenter = ({navigation, ...props}) => {
       props.onTrackEnd();   
     }
     else if(data.type==='accepted'){
+      //when dealer accepts the order
+      //doesnot mean delivery boy is selected
       parsedData = JSON.parse(JSON.parse(data.payload).from);
       let region={
         latitude : parseFloat(parsedData.latitude),
-        longitude : parseFloat(parsedData.longitude)
+        longitude : parseFloat(parsedData.longitude),
+        deliveryStatus : 'pending'
       }
       props.onUpdateTrack(region);
     }
     else if(data.type==='coordinates'){
+      //when delivery boy sends his coordinates
+      //this also means he has accepted the order
       parsedData = JSON.parse(data.payload);      
       let region={
         latitude : parseFloat(parsedData.latitude),
@@ -62,6 +67,7 @@ const HomeScreenPresenter = ({navigation, ...props}) => {
       }
       props.onUpdateTrack(region);
     }else if(data.type==='delivery_message'){
+      //when there's an update in delivery status
       if(data.payload === 'completed'){
         props.onTrackEnd();
       }else{

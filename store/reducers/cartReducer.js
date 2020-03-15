@@ -182,6 +182,7 @@ const onTrackEnd = () => {
 const onUpdateTrackCoordinate = (state, data) => {
   const newState = {...state};
   newState.deliveryCoordinate = data;
+  newState.deliveryStatus = data.deliveryStatus ? data.deliveryStatus : newState.deliveryStatus;
   return newState;
 }
 const cartReducer = (state = initialState, action) => {

@@ -28,7 +28,7 @@ const ServiceOutOfRange = () => {
 		<Container>
 			<Image source={require('../assets/images/service_out_of_range.png')} />
 			<ErrorText>Service out of range</ErrorText>
-			<InfoText>Don't worry we are soon reaching you!</InfoText>
+			<InfoText>Don't worry, we are reaching you soon!</InfoText>
 		</Container>
 	);
 	return content;
