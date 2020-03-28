@@ -25,4 +25,5 @@ export default {
   leftBoxColor: "#FDDCFD",
   rightBoxColor: "#B2FAFF",
   preLoadingColor: "#DCE2DE",
+  transparentColor: "rgba(255,255,255, 0.5)"
 };

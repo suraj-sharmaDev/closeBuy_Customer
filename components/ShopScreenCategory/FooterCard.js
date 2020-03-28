@@ -7,6 +7,8 @@ import {withNavigationFocus} from 'react-navigation';
 import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
 import ProceedCard from './ProceedCard';
+import FloatingButton from './FloatingButton';
+import FloatingList from './FloatingList';
 
 const Container = styled.View`
 	elevation : 17;
@@ -55,12 +57,34 @@ const FooterCard = props => {
 	if(!props.loading && show && !props.tracking){
 		content = (
 			<Container>
+				<React.Fragment>
+					<FloatingList 
+						active={active} 
+						scroll={props.scroll} 
+						productList={props.productList} 
+						updateActive={()=>updateActive(!active)}
+					/>
+					<FloatingButton 
+						updateActive={()=>updateActive(!active)}
+					/>
+				</React.Fragment>						
 				<ProceedCard {...props}/>
 			</Container>
 		);
 	}else if(show){
 		content = (
 			<Container>
+				<React.Fragment>
+					<FloatingList 
+						active={active} 
+						scroll={props.scroll} 
+						productList={props.productList} 
+						updateActive={()=>updateActive(!active)}
+					/>
+					<FloatingButton 
+						updateActive={()=>updateActive(!active)}
+					/>
+				</React.Fragment>									
 				<TrackView activeOpacity={0.6} onPress={()=>props.navigation.navigate('CartStack')}>
 					<Text>Track Your Current Order</Text>
 				</TrackView>

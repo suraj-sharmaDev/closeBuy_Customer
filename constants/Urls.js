@@ -22,6 +22,8 @@ export const ShopInformationApi = `${serverUrl}/customer/shopApi/shopInformation
 export const ShopStocksBySubCategoryApi = `${serverUrl}/customer/shopApi/shopStocksBySubCategory`;
 export const ShopBasicInformationApi = `${serverUrl}/customer/shopApi/shopBasicInformation`;
 export const GetCategoriesApi = `${serverUrl}/customer/categoryApi/getCategories`;
+export const SearchInShopApi = `${serverUrl}/customer/shopApi/searchInShop`;
+
 export const SearchAutosuggestApi = `${serverUrl}/customer/shopApi/searchAutoSuggest`;
 export const SearchApi = `${serverUrl}/customer/shopApi/searchResult`;
 

@@ -1,67 +1,59 @@
 import React from 'react';
+import {View} from 'react-native';
 import styled from 'styled-components';
-import Colors from '../../constants/Colors';
-import Fonts from '../../constants/Fonts';
-import ShopQuantityButton from '../ShopScreen/ShopQuantityButton';
+
+import ShopQuantityButton from './ShopQuantityButton';
+import {width} from '../../constants/Layout';
+import Colors from "../../constants/Colors";
+import Fonts from "../../constants/Fonts";
 
 const Container = styled.View`
-	width : 45%;
-	justify-content : center;
-	margin-top : 10px;
-	margin-bottom : 15px;	
+  height : 100px;
+  padding : 5px 10px;
+  flex-direction : row;
+  align-items : center;
+`;
+const Text = styled.Text`
+  font-size : 15px;
+  font-family  : ${Fonts.normalFont};
+  color : ${Colors.darkGreyColor};
 `;
 const Image = styled.Image`
-	width : 100%;
-	height : 140px;
-	border-radius : 7px;
+  background-color : ${Colors.preLoadingColor};
+  width : 100%;
+  height : 100%;
 `;
-const View = styled.View`
-	flex-direction : row;
-	align-items : center;
-`;
-const ItemName = styled.Text`
-	text-transform : capitalize;
-	font-family : ${Fonts.normalFont};
-	font-size : 15px;
-	color : ${Colors.darkGreyColor};
-`;
-const ItemPrice = styled.Text`
-	font-family : ${Fonts.normalFont};
-	font-size : 15px;	
-	color : ${Colors.darkGreyColor};
-`;
-const StockInfo = styled.Text`
-	font-family : ${Fonts.normalFont};
-	font-size : 12px;	
-	color : ${Colors.darkGreyColor};
-`;
-const ProductItem = props => {
-	let content = (
-		<Container style={{marginLeft : props.index%2!=0 ? 'auto' : 0}}>
-			<View>
-				<Image 
-					source={{uri:props.item.image}} 
-					resizeMode='cover'
-				/>
-			</View>
-			<View>
-				<ItemName numberOfLines={1}>{props.item.name}</ItemName>
-			</View>
-			<View style={{justifyContent:'space-between'}}>
-				<ItemPrice>Rs {props.item.price}</ItemPrice>
-				{
-					props.item.shopAvailable!==0 && props.item.stock!==0
-					?
-					<ShopQuantityButton 
-						item={props.item}
-					/>
-					:
-					<StockInfo>Not Available</StockInfo>
-				}
-			</View>
-		</Container>
-	);
-	return content;
+
+const ProductItem = ({item, props}) => {
+  let content = (
+    <Container>
+      <View style={{ width : '27%'}}>
+        <Image source={{ uri : item.image }}/>
+      </View>
+      <View style={{ width : '45%', justifyContent : 'center', padding : 10}}>
+        <Text>{item.name}</Text>
+        <Text>Rs {item.price}/-</Text>
+      </View>
+      <View style={{ width : '28%', alignItems : 'center', justifyContent:'center'}}>
+        {
+          item.stock > 0
+          ?
+          <ShopQuantityButton 
+            item={{
+                 shopId : item.shopId, 
+                 id : item.productId, 
+                 name : item.name, 
+                 price : item.price,
+                 extras : item.extras
+              }}
+          />
+          :
+          <Text style={{color : Colors.lightGreyColor}}>Unavailable</Text>          
+        }
+      </View>
+    </Container>
+  );
+  return content;
 }
 
 export default ProductItem;

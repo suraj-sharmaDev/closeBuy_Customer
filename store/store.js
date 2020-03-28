@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 
 import userReducer from './reducers/userReducer';
+import shopReducer from './reducers/shopReducer';
 import cartReducer from './reducers/cartReducer';
 import searchReducer from './reducers/searchReducer';
 import addressReducer from './reducers/addressReducer';
@@ -16,6 +17,7 @@ const userPersistConfig = {
 
 const rootReducer = combineReducers({
   user : persistReducer(userPersistConfig,userReducer),
+  shop : shopReducer,
   cart : cartReducer,
   search : searchReducer,
   address : addressReducer

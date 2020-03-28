@@ -3,98 +3,40 @@ import ShopScreenCategoryPresenter from './ShopScreenCategoryPresenter';
 import LoadingScreen from '../../components/LoadingScreen';
 
 const DATA = {
-  categoryName : 'Grocery',
-  children : [
+  "shopId" : 2,
+  "categoryName": "Beverages",
+  "categoryId": "4",
+  "subCategories": [
     {
-      id : 1,
-      name : 'tilopia',
-      image : 'https://dummyimage.com/300',
-      subCategoryName : 'fish',
-      price : 100,
-      shopId : 1,
-      extras : null
+      "subCategoryId": "19",
+      "subCategoryName": "Coffee",
+      "subCategoryChild": [
+        {
+          "subCategoryChildName": "Instant Coffee",
+          "subCategoryChildId": "61"
+        }
+      ]
     },
     {
-      id : 2,
-      name : 'Vala',
-      image : 'https://dummyimage.com/300',      
-      subCategoryName : 'fish',
-      price : 100,
-      shopId : 1,
-      extras : null      
+      "subCategoryId": "18",
+      "subCategoryName": "Tea",
+      "subCategoryChild": [
+        {
+          "subCategoryChildName": "Leaf & Dust Tea",
+          "subCategoryChildId": "58"
+        }
+      ]
     },
     {
-      id : 3,
-      name : 'Chala',
-      image : 'https://dummyimage.com/300',
-      subCategoryName : 'fish',
-      price : 100,
-      shopId : 1,
-      extras : null
-    },
-    {
-      id : 4,
-      name : 'lung fish',
-      image : 'https://dummyimage.com/300',      
-      subCategoryName : 'fish',
-      price : 100,
-      shopId : 1,
-      extras : null      
-    },
-    {
-      id : 5,
-      name : 'shark',
-      image : 'https://dummyimage.com/300',
-      subCategoryName : 'fish',
-      price : 100,
-      shopId : 1,
-      extras : null
-    },
-    {
-      id : 6,
-      name : 'dolphin',
-      image : 'https://dummyimage.com/300',      
-      subCategoryName : 'fish',
-      price : 100,
-      shopId : 1,
-      extras : null      
-    },        
-    {
-      id : 7,
-      name : 'sth',
-      image : 'https://dummyimage.com/300',
-      subCategoryName : 'fish',
-      price : 100,
-      shopId : 1,
-      extras : null
-    },
-    {
-      id : 8,
-      name : 'mth',
-      image : 'https://dummyimage.com/300',      
-      subCategoryName : 'fish',
-      price : 100,
-      shopId : 1,
-      extras : null      
-    },            
-    {
-      id : 9,
-      name : 'Sun Feast',
-      image : 'https://dummyimage.com/300',      
-      subCategoryName : 'Packed Food',
-      price : 100,
-      shopId : 1,
-      extras : null      
-    },
-    {
-      id : 10,
-      name : 'Parle G',
-      image : 'https://dummyimage.com/300',      
-      subCategoryName : 'Packed Food',
-      price : 100,
-      shopId : 1,
-      extras : null      
-    }            
+      "subCategoryId": "22",
+      "subCategoryName": "Fruit Juices & Drinks",
+      "subCategoryChild": [
+        {
+          "subCategoryChildName": "Juices",
+          "subCategoryChildId": "69"
+        }
+      ]
+    }
   ]
 }
 class ShopScreenCategoryContainer extends React.PureComponent {
@@ -103,20 +45,18 @@ class ShopScreenCategoryContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      items: this.props.navigation.state.params.items,
-      selected : this.props.navigation.state.params.selected,
-      itemIndex : this.props.navigation.state.params.itemIndex
-    };    
-    // this.state = {items: DATA};        
+      items : this.props.navigation.state.params.items
+    };
+    // this.state = {
+    //   items : DATA
+    // };
   }
 
   render() {
     return (
       <ShopScreenCategoryPresenter 
-        navigation={this.props.navigation} 
         items={this.state.items}
-        selected={this.state.selected}
-        itemIndex={this.state.itemIndex} 
+        navigation={this.props.navigation} 
       />
     );
   }

@@ -78,7 +78,7 @@ const ScreensStack = createStackNavigator(
     }                    
   },
   {
-    initialRouteName: "Tabs",
+    initialRouteName: "Shop",
     headerMode: "screen"
   }
 );

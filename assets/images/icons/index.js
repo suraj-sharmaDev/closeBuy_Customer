@@ -1,5 +1,6 @@
 export default {
 "beauty": require("./beauty.png"),
+"beverages": require("./beverages.png"),
 "boxer": require("./boxer.png"),
 "bread": require("./bread.png"),
 "broom": require("./broom.png"),

@@ -20,9 +20,12 @@ const ShopCategoryList = ({categoryList, ...props}) => {
 			<Label>Categories</Label>
 			<FlatList
 				numColumns={4}
-				data={categoryList}
+				data={categoryList.categories}
 				renderItem={({item}) => (
-					<CategoryButton item={item} navigation={props.navigation} />
+					<CategoryButton 
+						item={item} 
+						navigateToCategory={props.navigateToCategory} 
+					/>
 				)}
 				keyExtractor={(item, index) => 'key'+index}
 				extraData={categoryList}

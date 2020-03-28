@@ -1,4 +1,3 @@
-
 import { RETRIEVE_CART, INC_ITEM, DEC_ITEM, DISCOUNT, TRACK_START, STATUS_UPDATE, TRACK_END, UPDATE_TRACK_COORDINATE } from './types';
 
 export const retrieveCart = data => {

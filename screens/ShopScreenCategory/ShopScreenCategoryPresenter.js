@@ -1,14 +1,17 @@
 import React from "react";
 import { Platform } from 'react-native';
 import styled from "styled-components";
+
+import AbortController from '../../middleware/AbortController';
+import {ShopStocksBySubCategory} from '../../middleware/API';
 import {height, width} from '../../constants/Layout';
 import Colors from "../../constants/Colors";
-import LoadingScreen from '../../components/LoadingScreen';
 
-import Header from '../../components/ShopScreenCategory/Header';
-import ScrollMenu from '../../components/ShopScreenCategory/ScrollMenu';
-import ScreenBody from '../../components/ShopScreenCategory/ScreenBody';
-import FooterCard from "../../components/ShopScreen/FooterCard";
+import LoadingScreen from '../../components/LoadingScreen';
+import Header from "../../components/ShopScreenCategory/Header";
+import SubCategoryList from "../../components/ShopScreenCategory/SubCategoryList";
+import ProductsList from "../../components/ShopScreenCategory/ProductsList";
+import FooterCard from "../../components/ShopScreenCategory/FooterCard";
 
 const Theme = styled.View`
   background-color : ${Colors.homeBackgroundColor};
@@ -16,71 +19,81 @@ const Theme = styled.View`
 `;
 
 const ShopScreenCategoryPresenter = ({navigation, items, ...props }) => {
-	const [selected, setSelected] = React.useState(null);
-	const flatListRef = React.useRef();	
-	// const [selectedSubCategory, setSelectedSubCategory] = React.useState(null);
+	const [selected, setSelected] = React.useState({
+		selected : null,
+		collections : {}
+	});
 	React.useEffect(()=>{
-		createSubCategories();
+		abortController = new AbortController();		
+		updateSelected(items.subCategories[0]['subCategoryId']);
+		return () => {
+			abortController._abort();
+		}
 	},[]);
-	const createSubCategories = () => {
-		subCategoriesFormatted = {};
-		subCategories = [];
-		items.children.map((i)=>{
-			if(i.subCategoryName in subCategoriesFormatted){
-				//subcategory name already exist then push 
-				//data into it
-				subCategoriesFormatted[i.subCategoryName].push(i);
-			}else{
-				//if subcategory name doesn't exist then create an empty array with that
-				subCategories.push(i.subCategoryName);
-				subCategoriesFormatted[i.subCategoryName] = [];
-				subCategoriesFormatted[i.subCategoryName].push(i);
-			}
-		});
-		if(props.selected){
-			selectedSubCategory = subCategoriesFormatted[props.selected];
-			// setSelectedSubCategory(subCategoriesFormatted[props.selected]);
-			setSelected(props.selected);
+
+	const updateSelected = (subCategoryId) => {
+		//to speed up the process and lower api calls we store the api results
+		//locally and everytime user changes the catgeory we check if the data is stored locally
+		//else get data and store
+		if(selected.collections[subCategoryId]===undefined){
+			ShopStocksBySubCategory(items.shopId, subCategoryId)
+			.then((result)=>{
+		    	if(!abortController._signal()){
+					global.products = result;	    	
+					if(selected.selected!==subCategoryId){
+						let data = {
+							selected : subCategoryId,
+							collections : selected.collections
+						}
+						data.collections[subCategoryId] = result;  
+						setSelected(data);
+					}
+		    	}
+			})
+			.catch((error)=>{
+				console.warn('error');
+			})
 		}else{
-			selectedSubCategory = subCategoriesFormatted[subCategories[0]];
-			// setSelectedSubCategory(subCategoriesFormatted[subCategories[0]]);
-			setSelected(subCategories[0]);			
+			global.products = selected.collections[subCategoryId];
+			let data = {
+				selected : subCategoryId,
+				collections : selected.collections
+			}			
+			setSelected(data);			
 		}
 	}
-	const updateSelectedCategory = (subCategoryName) => {
-		selectedSubCategory = subCategoriesFormatted[subCategoryName];
-		// setSelectedSubCategory(subCategoriesFormatted[subCategoryName]);
-		setSelected(subCategoryName);
+	_listRef = (ref) => {
+		_list = ref;
 	}
-	const _scrollTo = (sectionIndex, subCategoryName, itemIndex) => {
-		if(itemIndex!==undefined){
-			flatListRef.current.scrollToIndex({ animated: true, index: itemIndex });
-		}
+	const scroll = (sectionIndex, itemIndex) => {
+		// updateSearchActive(false);
+		_list.scrollToLocation({
+         animated: true,
+         sectionIndex: sectionIndex,
+         itemIndex: itemIndex
+		})
 	}
-	if(selected===null){
+	if(selected.selected===null){
 		content = <LoadingScreen />
 	}else{
 		content = (
 			<Theme>
 				<Header 
-					title={items.categoryName} 
 					navigation={navigation}
-					items={items}
-					scroll={_scrollTo}
+					title={items.categoryName}
 				/>
-				<ScrollMenu 
-					subCategories={subCategories} 
-					selected={selected}
-					updateSelected={updateSelectedCategory}
-				/>				
-				<ScreenBody 
-					selectedSubCategory = {selectedSubCategory}
-					selected={selected}
-					itemIndex={props.itemIndex}
-					flatListRef={flatListRef}
-					_scrollTo={_scrollTo}
+				<SubCategoryList 
+					subCategories={items.subCategories}
+					selected={selected.selected}
+					setSelected={updateSelected}
+				/>
+				<ProductsList 
+					products={global.products}
+					selected={selected.selected}
 				/>
 				<FooterCard 
+					scroll={scroll}
+					productList={selected.collections[selected.selected]}
 					navigation={navigation} 
 				/>	  					
 			</Theme>

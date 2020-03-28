@@ -27,7 +27,7 @@ const ShopScreenHeader = ({Shop,...props}) => {
 				navigation={props.navigation} 
 			/>	
 			<SearchInShop
-				data={props.categoryList}
+				shopId={props.shopId}
 				scroll={props.scroll}
 				active={searchActive}
 				updateActive={() => updateSearchActive(!searchActive)}

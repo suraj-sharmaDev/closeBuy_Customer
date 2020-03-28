@@ -1,17 +1,15 @@
 import React from 'react';
-import {ScrollView } from 'react-native';
-import {connect} from 'react-redux';
+import { Dimensions, ScrollView } from 'react-native';
 import SearchIcon from "react-native-vector-icons/Feather";
 import CloseIcon from "react-native-vector-icons/Ionicons";
 import Modal from "react-native-modal";
 import styled from 'styled-components';
 import Entypo from "react-native-vector-icons/Entypo";
 
-import {SearchInShope} from '../../middleware/API';
-import {addToCacheFromSearch} from '../../store/actions/shop';
-import {height, width} from '../../constants/Layout';
 import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
+
+const {height, width}=Dimensions.get('window');
 
 const Container = styled.View`
 	width : ${width};
@@ -45,7 +43,7 @@ const Input = styled.TextInput`
 const SearchOutputItem = styled.TouchableOpacity`
 	padding : 20px 10px;
 `;
-const SearchOutput = ({data, onSearchItemPress, shopId}) => {
+const SearchOutput = ({data, onSearchItemPress}) => {
 	let Body = (
 		<SearchOutputItem onPress={()=>onSearchItemPress(data.sectionIndex, data.subCategoryName, data.itemIndex)}>
 			<Text>{data.name}</Text>
@@ -56,7 +54,7 @@ const SearchOutput = ({data, onSearchItemPress, shopId}) => {
 }
 
 const ModalHeader = props => {
-	const [timeOut, updateTimeOut] = React.useState(null);
+	let timeOut = 0;
 	onChangeHandler = (text) => {
 		props.updateSearchTerm(text);
 		if(timeOut) clearTimeout(timeOut);
@@ -65,9 +63,7 @@ const ModalHeader = props => {
 		}
 		if(text.length>2)
 		{
-			updateTimeOut(setTimeout(function() {
-				props.doSearch(text.toLowerCase());
-			}, 500))
+			props.doSearch(text.toLowerCase());
 		}
 	}
 	let header = (
@@ -77,7 +73,7 @@ const ModalHeader = props => {
 		  </Button>
 	      <SearchBarContainer>
 	        <SearchIcon name="search" size={22} color={Colors.lightGreyColor} />      
-	        <Input placeholder="Search for products"
+	        <Input placeholder="Search for grocery, food, shop..."
 	        	   value={props.searchTerm} 
 	               underlineColorAndroid="transparent"
 	               autoFocus={true}
@@ -111,74 +107,23 @@ const SearchInShop = ({data, scroll, ...props}) => {
 		if(text==='cleanSlateMode'){
 			updateModalBody([]);
 		}else{
-			//Here we make an API call to get all searched items for this shop
-			//but search for the item in our cache if not found then only make an API call
-			const categoryLength = Object.keys(props.shop.categories).length;
-			if(categoryLength > 0){
-				var content = searchInArray(props.shop.categories, text);
-				console.warn(props.shop.categories);
-				if(content.length > 0){
-					console.warn(content);
-				}else{
-					//if searched item not found
-					fetch(text)
-					.then((result)=>{
-						console.warn(result);
-					})
-					.catch((error)=>{
-						console.warn('error nested', error);	
-					});					
-				}
-			}else{
-				//if cache is empty
-				fetch(text)
-				.then((result)=>{
-					console.warn(result);
-				})
-				.catch((error)=>{
-					console.warn('error', error);	
-				});
-			}
-		}
-		// if(contentBody.length>0){
-		// 	updateModalBody(contentBody);
-		// }
-	}
-	const fetch = async(text) => {
-		var data = [];
-		const result = await SearchInShope(props.shopId, text);
-		if(result.error === undefined){
-			props.addToCache({category: result, shopId: props.shopId});
-			const products = result[0].data;
-			const productsLength = Object.keys(products).length;
-			for(var i=0; i<productsLength; i++){
-				data.push({productName : products[i].name, pos : [i]})
-			}
-		}
-		return data;
-	}
-	const searchInArray = (array, key) => {
-		var arrayLength = Object.keys(array).length;
-		var data = [];
-		for (var i = 0; i < arrayLength; i++) {
-			var subCategory = array[i].subCategories;
-			var subCategoryLength = Object.keys(subCategory).length;
-			for (var j = 0; j < subCategoryLength; j++) {
-				var subCategoryChild = subCategory[j].subCategoryChild;
-				var subCategoryChildLength = Object.keys(subCategoryChild).length;
-				for (var k = 0; k < subCategoryChildLength; k++) {
-					var products = subCategoryChild[k].products;
-					var productsLength = Object.keys(products).length;
-					for (var l = 0; l < productsLength; l++) {
-						var productName = products[l].name.toLowerCase();
-						if (productName.includes(key.toLowerCase())) {
-							data.push({productName : productName, pos : [i,j,k,l]})
-						}
+			for(i=0,maxI=data.length;i<maxI;i++){
+				for(j=0,maxJ=data[i].children.length;j<maxJ;j++){
+					itemName = data[i].children[j].name.toLowerCase();
+					if(itemName.indexOf(text)!=-1){
+						contentBody.push(
+							<SearchOutput 
+								key={data[i].children[j].id} 
+								data={data[i].children[j]} 
+								onSearchItemPress={onSearchItemPress}
+						/>); 
 					}
 				}
 			}
 		}
-		return data;
+		if(contentBody.length>0){
+			updateModalBody(contentBody);
+		}
 	}
 	const onSearchItemPress = (sectionIndex, subCategoryName, itemIndex) =>{
 		props.updateActive();
@@ -221,17 +166,4 @@ const SearchInShop = ({data, scroll, ...props}) => {
 	return content;
 }
 
-const mapStateToProps = state => {
-	return {
-		shop : state.shop,
-	};
-};
-const mapDispatchToProps = dispatch => {
-	return {
-		addToCache: data => {
-			dispatch(addToCacheFromSearch(data));
-		}		
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchInShop);
+export default SearchInShop;

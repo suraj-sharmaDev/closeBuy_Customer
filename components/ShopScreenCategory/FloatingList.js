@@ -30,20 +30,20 @@ const ListItem = styled.TouchableOpacity`
 const Label = styled.Text`
 	color : ${Color.darkGreyColor};
 	text-transform : capitalize;
-	font-size : 22px;
+	font-size : 18px;
 	font-family : ${Font.normalFont};
 `;
-const FloatingList = ({active, scroll, categoryList, updateActive}) => {
+const FloatingList = ({active, scroll, productList, updateActive}) => {
 	const onCategorySelect = (sectionIndex) => {
 		updateActive();
 		scroll(sectionIndex, 0);
 	}
 	let modalBody = (<Label>Nothing!</Label>);
-	if(categoryList.length!==0){
+	if(productList!==undefined && productList.length!==0){
 		modalBody = (
-			categoryList.map((category, index)=>(
-				<ListItem key={index} onPress={()=>onCategorySelect(category.sectionIndex)}>
-					<Label>{category.categoryName}</Label>
+			productList.map((product, index)=>(
+				<ListItem key={index} onPress={()=>onCategorySelect(index)}>
+					<Label>{product.title}</Label>
 					<View>
 						<Entypo name="chevron-right" size={30} color={Color.greenColor} />
 					</View>

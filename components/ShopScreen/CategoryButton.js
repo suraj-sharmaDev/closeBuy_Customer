@@ -32,7 +32,7 @@ const CategoryName = styled.Text`
 const CategoryButton = props =>{
   let iconName = props.item.categoryName.toLowerCase().replace(' ', '_');
   let content = (
-    <CategoryItem onPress={()=>props.navigation.navigate('ShopCategory', {items : props.item})}>
+    <CategoryItem onPress={()=>props.navigateToCategory(props.item)}>
       <Image source={Icon[iconName]} />
       <CategoryName>{props.item.categoryName}</CategoryName>
     </CategoryItem>

@@ -1,7 +1,7 @@
 import { ReverseGeocode, PlacesAutoComplete, PlaceDetailsById, LoginApi, GenerateOtpApi, VerificationApi, UpdateUsernameApi, InitializeApi, 
-	     UpdateTokenApi, AddAddressApi, RetrieveAddressApi, DeleteAddressApi, GetAllShopsApi, ShopInformationApi, ShopBasicInformationApi, GetCategoriesApi, 
-	     SearchAutosuggestApi, SearchApi, AddCartApi, RetrieveCartApi, GetOrderDetailsApi, InsertOrderApi, GetCouponApi, 
-	     ActivateCouponApi, UpdateCustomerInfoApi } from "../constants/Urls";
+	     UpdateTokenApi, AddAddressApi, RetrieveAddressApi, DeleteAddressApi, GetAllShopsApi, ShopInformationApi, ShopStocksBySubCategoryApi,
+	     ShopBasicInformationApi, GetCategoriesApi, SearchInShopApi, SearchAutosuggestApi, SearchApi, AddCartApi, RetrieveCartApi, GetOrderDetailsApi, 
+	     InsertOrderApi, GetCouponApi, ActivateCouponApi, UpdateCustomerInfoApi } from "../constants/Urls";
 
 import API_KEY from "../constants/Api";
 
@@ -87,6 +87,12 @@ export const ShopInformation = async(shopId) => {
 	const result = await response.json();
 	return result;
 }
+export const ShopStocksBySubCategory = async(shopId, subCategoryId) => {
+	const url = `${ShopStocksBySubCategoryApi}?shopId=${shopId}&subCategoryId=${subCategoryId}`;
+	const response = await fetch(url);
+	const result = await response.json();
+	return result;
+}
 export const ShopBasicInformation = async(shopId) => {
 	const url = `${ShopBasicInformationApi}?shopId=${shopId}`;
 	const response = await fetch(url);
@@ -95,6 +101,12 @@ export const ShopBasicInformation = async(shopId) => {
 }
 export const GetCategories = async() => {
 	const response = await fetch(GetCategoriesApi);
+	const result = await response.json();
+	return result;
+}
+export const SearchInShope = async(shopId, search) => {
+	const url = `${SearchInShopApi}?shopId=${shopId}&search=${search}`;
+	const response = await fetch(url);
 	const result = await response.json();
 	return result;
 }
