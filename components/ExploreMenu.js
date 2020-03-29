@@ -29,7 +29,7 @@ const BigWarningText = styled.Text`
 const HeaderText = styled.Text`
   font-family  : ${Fonts.normalFont};
   font-size : 18px;
-  color : ${Colors.blackColor};
+  color : ${Colors.darkGreyColor};
 `;
 const View = styled.View`
   padding : 10px;
@@ -38,7 +38,7 @@ const View = styled.View`
 const _renderHeader = ({title}) => {
   let content = (
     <View>
-      <HeaderText>{title}</HeaderText>
+      <HeaderText>{title} Shops Near You</HeaderText>
     </View>
   );
   return content;

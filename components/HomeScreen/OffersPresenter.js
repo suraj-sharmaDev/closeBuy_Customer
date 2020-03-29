@@ -1,18 +1,20 @@
 import React from 'react';
 import { TouchableOpacity, FlatList, StyleSheet, Text, ToastAndroid} from 'react-native';
 import styled from "styled-components";
+
+import {width} from '../../constants/Layout';
 import Color from "../../constants/Colors";
 import Font from "../../constants/Fonts";
 
 const Container = styled.SafeAreaView`
   flex : 1;
-  padding : 20px 0px 20px 10px;
+  padding : 10px 0px 10px 10px;
 `; 
 
 const OfferItem = styled.TouchableOpacity`
   background-color : ${Color.preLoadingColor};  
   height: 150px;
-  width: 150px;
+  width: ${width * 0.45};
   border-width : 1px;
   border-color : ${Color.greyColor};
   border-radius: 12px;  
@@ -22,7 +24,7 @@ const OfferItem = styled.TouchableOpacity`
 
 const Image = styled.Image`
   height: 150px;
-  width: 150px;
+  width: ${width * 0.43};
   border-radius: 12px;  
 `;
 

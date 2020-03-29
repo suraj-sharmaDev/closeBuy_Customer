@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {AlertService} from '../../middleware/AlertService';
 import Color from '../../constants/Colors';
 import Font from "../../constants/Fonts";
 
@@ -22,8 +23,11 @@ const Text = styled.Text`
 `;
 
 const ProceedCard = props => {
+	const confirmation = () => {
+		AlertService('Proceed','Do you wish to procced with this order?', props.onPlaceOrder);
+	}
 	let content = (
-		<Container activeOpacity={0.6} onPress={props.onPlaceOrder}>
+		<Container activeOpacity={0.6} onPress={confirmation}>
 			<Text>Proceed Order</Text>
 			<Icon name="arrow-right-drop-circle" style={{ color : 'white', fontSize:22}}/>
 		</Container>

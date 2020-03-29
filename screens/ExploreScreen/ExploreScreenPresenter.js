@@ -35,7 +35,7 @@ const ExploreScreenPresenter = ({navigation, ...props}) => {
      let coordinates = JSON.stringify(props.address.savedAddresses[props.address.currentAddress].coordinate);
      SearchWithSubCategory(subCategoryId, coordinates)
      .then((result)=>{
-      products = result;
+      global.products = result;
       setSelectedId(subCategoryId);      
      })
      .catch((err)=>{
@@ -56,7 +56,7 @@ const ExploreScreenPresenter = ({navigation, ...props}) => {
       <Theme>
         <ExploreScreenHeader navigation={navigation} categoryName={currentCategoryData.categoryName}/>
         <ScrollCategory selected={selectedId} onSelect = {onSelect} data={currentCategoryData.subCategory}/>
-        <ExploreMenu navigation={navigation} products={products} selectedId={selectedId}/>
+        <ExploreMenu navigation={navigation} products={global.products} selectedId={selectedId}/>
       </Theme>
     );
   }

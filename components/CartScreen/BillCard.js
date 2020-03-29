@@ -81,6 +81,12 @@ const BillCard = ({ store, deliveryFee, discountAmount, distance, totalAmountPre
 						<BillText>{totalAmount - discountAmount}</BillText>
 					</View>
 				</BillItem>
+				<BillItem>
+					<BillText>Payment Method</BillText>
+					<View>
+						<BillText>COD</BillText>
+					</View>
+				</BillItem>				
 			</Bill>
 		</Container>
 	);

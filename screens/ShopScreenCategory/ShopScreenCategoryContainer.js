@@ -48,7 +48,8 @@ class ShopScreenCategoryContainer extends React.PureComponent {
       items : this.props.navigation.state.params.items,
       categoryId : this.props.navigation.state.params.categoryId,
       subCategoryId : this.props.navigation.state.params.subCategoryId!=undefined ? this.props.navigation.state.params.subCategoryId : null,
-      subCategoryChildId :  this.props.navigation.state.params.subCategoryChildId!=undefined ? this.props.navigation.state.params.subCategoryChildId : null
+      subCategoryChildId :  this.props.navigation.state.params.subCategoryChildId!=undefined ? this.props.navigation.state.params.subCategoryChildId : null,
+      onlineStatus : this.props.navigation.state.params.onlineStatus
     };
     // this.state = {
     //   items : DATA

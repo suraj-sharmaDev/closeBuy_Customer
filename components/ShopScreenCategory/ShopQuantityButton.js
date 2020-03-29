@@ -131,7 +131,9 @@ const ShopQuantityButton = ({item, ...props }) => {
 	{
 		content = (
 			<React.Fragment>
-				<DefaultButtonContainer 
+				<DefaultButtonContainer
+					disabled={props.onlineStatus==0}
+					style={{opacity : props.onlineStatus==0 ? 0.4 : 1}} 
 					onPress={()=>{item.extras!==null ? updateActive(true) : onIncrement(item.shopId, item.id, item.name, item.price)}}
 				>
 					<View style={{flex:1, flexDirection :'row', alignItems : 'center', jusitfyContent : 'center'}}>

@@ -20,7 +20,7 @@ const ShopScreenPresenter = ({navigation, Shop }) => {
 	const navigateToCategory = (item) => {
 		// This function used in version 2 is used instead for scroll
 		item.shopId = Shop.dist_point_id;
-		navigation.navigate('ShopCategory', {items : item, categoryId : item.categoryId});
+		navigation.navigate('ShopCategory', {items : item, categoryId : item.categoryId, onlineStatus : Shop.online_status});
 	}
 	const searchHandler = (data) => {
 		// This function used in version 2 is used instead for scroll
@@ -37,7 +37,9 @@ const ShopScreenPresenter = ({navigation, Shop }) => {
 		item.shopId = Shop.dist_point_id;
 		navigation.navigate('ShopCategory', {items : item, categoryId : item.categoryId,
 											 subCategoryId : data.subCategoryId, 
-											 subCategoryChildId : data.subCategoryChildId});
+											 subCategoryChildId : data.subCategoryChildId,
+											 onlineStatus : Shop.online_status
+											});
 	} 		
 	let content = null;
 	if(categoryList===null){

@@ -83,7 +83,7 @@ const ShopDetailCard = ({ info, navigation }) => {
   return (
     <Product activeOpacity={0.8} onPress={()=>navigation.navigate('Shop', {shopId : info.dist_point_id})}>
       <ImageView>
-        <Image source ={{ uri : info.image }} style={{opacity : info.online_status==='1' ? 1 : 0.4}}/>
+        <Image source ={{ uri : info.image }} style={{opacity : info.online_status==1 ? 1 : 0.4}}/>
       </ImageView>
       <InfoBox style={{opacity : info.online_status==='1' ? 1 : 0.6}}>
         <TopBox>

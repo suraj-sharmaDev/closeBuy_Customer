@@ -24,7 +24,7 @@ const Image = styled.Image`
   height : 100%;
 `;
 
-const ProductItem = ({item, props}) => {
+const ProductItem = ({item, ...props}) => {
   let content = (
     <Container>
       <View style={{ width : '27%'}}>
@@ -46,6 +46,7 @@ const ProductItem = ({item, props}) => {
                  price : item.price,
                  extras : item.extras
               }}
+            onlineStatus={props.onlineStatus}
           />
           :
           <Text style={{color : Colors.lightGreyColor}}>Unavailable</Text>          
