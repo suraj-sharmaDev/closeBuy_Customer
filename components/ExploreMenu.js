@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import {FlatList} from 'react-native';
+import {SectionList} from 'react-native';
 import styled from 'styled-components';
 import Colors from '../constants/Colors';
-import Font from "../constants/Fonts";
-
-import ProductItem from './ExploreScreen/ProductItem';
+import Fonts from "../constants/Fonts";
+import {height} from '../constants/Layout';
+import ShopDetailCard from './HomeScreen/ShopDetailCard';
 
 const Container = styled.View`
   min-height : 100%;
@@ -23,17 +23,33 @@ const Container = styled.View`
 `;
 const BigWarningText = styled.Text`
 	font-size: 30px;
-	font-family  : ${Font.normalFont};
+	font-family  : ${Fonts.normalFont};
 	color: ${Colors.lightGreyColor};
 `;
-const View = styled.View``;
+const HeaderText = styled.Text`
+  font-family  : ${Fonts.normalFont};
+  font-size : 18px;
+  color : ${Colors.blackColor};
+`;
+const View = styled.View`
+  padding : 10px;
+`;
+
+const _renderHeader = ({title}) => {
+  let content = (
+    <View>
+      <HeaderText>{title}</HeaderText>
+    </View>
+  );
+  return content;
+}
 
 const ExploreMenu = ({navigation, products, selectedId}) => {
 	let content = null;
 	const renderListFooter = () => {
 		return <View style={{paddingBottom: 100}} />
 	}
-	if (Object.keys(products).length===0) {
+	if (products.error) {
 		content = (
 			<Container>
 				<View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -44,18 +60,18 @@ const ExploreMenu = ({navigation, products, selectedId}) => {
 	} else {
 		content = (
 			<Container>
-				<FlatList
-					numColumns={2}
-					showsVerticalScrollIndicator={false}
-					data={products}
-					contentContainerStyle={{ paddingBottom: 140}}
-					renderItem={({item, index}) => (
-						<ProductItem data={item} navigation={navigation} />
-					)}
-			        ListFooterComponent={renderListFooter}					
-					keyExtractor={item => item.product_id}
-					extraData={selectedId}
-				/>
+		      <SectionList
+		        sections={products}
+		        renderItem={({item})=><ShopDetailCard navigation={navigation} info={item} />}
+		        renderSectionHeader={({ section: { title } }) => (
+		          <_renderHeader title={title} />
+		        )}
+		        ListFooterComponent={<View style={{height : height * 0.35}} />}
+		        getItemLayout={(data, index) => (
+		          {length: 81.5, offset: 81.5 * index, index}
+		        )}        
+		        keyExtractor={(item, index) => item + index}        
+		      />
 			</Container>
 		);
 	}

@@ -20,12 +20,24 @@ const ShopScreenPresenter = ({navigation, Shop }) => {
 	const navigateToCategory = (item) => {
 		// This function used in version 2 is used instead for scroll
 		item.shopId = Shop.dist_point_id;
-		navigation.navigate('ShopCategory', {items : item});
+		navigation.navigate('ShopCategory', {items : item, categoryId : item.categoryId});
 	}
-	const scroll = (categoryIndex, subCategoryName, itemIndex) => {
+	const searchHandler = (data) => {
 		// This function used in version 2 is used instead for scroll
-		console.warn(categoryIndex, subCategoryName, itemIndex);
-		// navigation.navigate('ShopCategory', {items : categoryList[categoryIndex], selected : subCategoryName, itemIndex : itemIndex});
+		let found = -1;
+		let categories = Shop.categories;
+		let categoryLength = Object.keys(categories).length;
+		for(var i =0; i<categoryLength; i++){
+			if(categories[i].categoryId == data.categoryId){
+				found = i;
+				break;
+			}
+		}
+		let item = Shop.categories[found];
+		item.shopId = Shop.dist_point_id;
+		navigation.navigate('ShopCategory', {items : item, categoryId : item.categoryId,
+											 subCategoryId : data.subCategoryId, 
+											 subCategoryChildId : data.subCategoryChildId});
 	} 		
 	let content = null;
 	if(categoryList===null){
@@ -37,7 +49,7 @@ const ShopScreenPresenter = ({navigation, Shop }) => {
 		  		shopId={Shop.dist_point_id}
 				navigation={navigation}
 				categoryList={categoryList}
-				scroll={scroll}
+				searchHandler={searchHandler}
 				Shop={Shop}
 		  	/>
 		  	<ShopCategoryList 
@@ -47,7 +59,7 @@ const ShopScreenPresenter = ({navigation, Shop }) => {
 			<FooterCard 
 				loading={categoryList===null} 
 				navigation={navigation} 
-				scroll={scroll} 
+				scroll={searchHandler} 
 				categoryList={categoryList}
 			/>	  	
 		   </Theme>

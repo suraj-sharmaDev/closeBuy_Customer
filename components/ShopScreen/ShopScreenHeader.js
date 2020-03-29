@@ -28,7 +28,7 @@ const ShopScreenHeader = ({Shop,...props}) => {
 			/>	
 			<SearchInShop
 				shopId={props.shopId}
-				scroll={props.scroll}
+				searchHandler={props.searchHandler}
 				active={searchActive}
 				updateActive={() => updateSearchActive(!searchActive)}
 			/>

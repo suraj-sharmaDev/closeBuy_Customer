@@ -48,13 +48,14 @@ const SubCategoryName = styled.Text`
 
 function Item({subCategory, index, navigation, selectedCategory})
 {
+    let icon = subCategory.subCategoryName.replace(/[^A-Z0-9]+/ig, "_").toLowerCase();	
 	return(
 		<MenuItem 
 			activeOpacity={0.8}
 			onPress={()=> navigation.navigate('Explore',{categoryData : selectedCategory, selectedId : subCategory.subCategoryId, index:index })}
 		>
 			<View>
-				<Image source={Icon[subCategory.subCategoryIcon]} />
+				<Image source={Icon[icon]} />
 				<SubCategoryName>
 					{subCategory.subCategoryName}
 				</SubCategoryName>
@@ -65,7 +66,7 @@ function Item({subCategory, index, navigation, selectedCategory})
 }
 const SearchMenu = ({selectedCategory, selectedId, navigation}) => {
 	const Title = selectedCategory.categoryName;
-	const data = selectedCategory.subCategory;
+	const data = selectedCategory.subCategories;
 	let content = (
 	  <Container>
 	      <FlatList

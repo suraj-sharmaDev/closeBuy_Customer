@@ -26,6 +26,7 @@ export const SearchInShopApi = `${serverUrl}/customer/shopApi/searchInShop`;
 
 export const SearchAutosuggestApi = `${serverUrl}/customer/shopApi/searchAutoSuggest`;
 export const SearchApi = `${serverUrl}/customer/shopApi/searchResult`;
+export const SearchWithSubCategoryApi = `${serverUrl}/customer/shopApi/searchWithSubCategoryId`;
 
 export const AddCartApi = `${serverUrl}/customer/cartApi/addCart`;
 export const RetrieveCartApi = `${serverUrl}/customer/cartApi/retrieveCart`;

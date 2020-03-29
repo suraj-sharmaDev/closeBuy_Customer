@@ -11,7 +11,7 @@ import { ADD_TO_CACHE_FROM_SEARCH, ADD_TO_CACHE_FROM_API } from '../actions/type
 // 					subCategoryChild : [
 // 						{
 // 							subCategoryChildId : 1,
-// 							products : [
+// 							data : [
 // 								{
 // 									productId : 1,
 // 									productName : 'Tea Leaves'
@@ -41,34 +41,51 @@ const initialState = {
 
 const createNewArray = (array, data) => {
 	let newState = array;
+	let subCategoryIndex = -1;	
 	for (category of data.category) {
-		let subCategoryIndex = 0;
-		pushData = {
-			categoryId: category.mainCategoryId,
-			subCategories: [
-				{
-					subCategoryId: category.categoryId,
-					subCategoryChild: [
-						{
-							subCategoryChildId: category.subCategoryChildId,
-							products: [],
-						},
-					],
-				},
-			],
-		};
-		for (product of category.data) {
-			pushData.subCategories[subCategoryIndex].subCategoryChild[0].products.push(
-				product,
-			);
-		}
-		if(Array.isArray(newState)){
-			newState.push(pushData);
+		if(subCategoryIndex > -1){
+			let subCategoryChild = {
+				subCategoryChildId: category.subCategoryChildId,
+				title : category.title,
+				data: [],					
+			};
+			for (product of category.data) {
+				subCategoryChild.data.push(
+					product
+				);
+			}
+			pushData.subCategories[0].subCategoryChild.push(subCategoryChild);
+			subCategoryIndex++;			
 		}else{
-			return pushData;
+			pushData = {
+				categoryId: category.mainCategoryId,
+				subCategories: [
+					{
+						subCategoryId: category.categoryId,
+						subCategoryChild: [
+							{
+								subCategoryChildId: category.subCategoryChildId,
+								title : category.title,
+								data: [],
+							},
+						],
+					},
+				],
+			};
+			for (product of category.data) {
+				pushData.subCategories[0].subCategoryChild[0].data.push(
+					product
+				);
+			}
+			subCategoryIndex++;
 		}
 	}
-	return newState;
+	if(Array.isArray(newState)){
+		newState.push(pushData);
+		return newState;
+	}else{
+		return pushData;
+	}	
 }
 const pushToArray = (array, data) => {
 
@@ -92,27 +109,15 @@ const onAddToCacheFromSearch = (state, data) => {
 		  		//find if subCategoryId exists or not
 				const subCategoryIndex = newState.categories[categoryIndex].subCategories.findIndex(item => item.subCategoryId === category.categoryId);
 				if(subCategoryIndex>-1){
-					//check if subCategoryChildId exists
-					const subCategoryChildIndex = newState.categories[categoryIndex]
-														  .subCategories
-														  [subCategoryIndex]
-														  .subCategoryChild
-														  .findIndex(item => item.subCategoryChildId === category.subCategoryChildId);
-					if(subCategoryChildIndex > -1){
-						for(product of category.data){
-							newState.categories[categoryIndex].subCategories[subCategoryIndex].subCategoryChild[subCategoryChildIndex].push(product);
-						}
-					}else{
-						//else create a new subCategoryChild and insert into newState
-						const pushData = {
-							subCategoryChildId : category.subCategoryChildId,
-							products : []
-						}
-						for(product of category.data){
-							pushData.products.push(product);
-						}
-						newState.categories[categoryIndex].subCategories[subCategoryIndex].subCategoryChild.push(pushData);	
+					const pushData = {
+						subCategoryChildId : category.subCategoryChildId,
+						title : category.title,
+						data : []
 					}
+					for(product of category.data){
+						pushData.data.push(product);
+					}
+					newState.categories[categoryIndex].subCategories[subCategoryIndex].subCategoryChild.push(pushData);	
 				}else{
 					//if subCategory doesn't exist create one and push into newState
 					const pushData = {
@@ -120,12 +125,13 @@ const onAddToCacheFromSearch = (state, data) => {
 						subCategoryChild : [
 							{
 								subCategoryChildId : category.subCategoryChildId,
-								products : []
+								title : category.title,
+								data : []
 							}
 						],
 					}
 					for(product of category.data){
-						pushData.subCategoryChild[0].products.push(product);
+						pushData.subCategoryChild[0].data.push(product);
 					}
 					newState.categories[categoryIndex].subCategories.push(pushData);						
 				}

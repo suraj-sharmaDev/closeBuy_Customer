@@ -1,7 +1,7 @@
 import { ReverseGeocode, PlacesAutoComplete, PlaceDetailsById, LoginApi, GenerateOtpApi, VerificationApi, UpdateUsernameApi, InitializeApi, 
 	     UpdateTokenApi, AddAddressApi, RetrieveAddressApi, DeleteAddressApi, GetAllShopsApi, ShopInformationApi, ShopStocksBySubCategoryApi,
-	     ShopBasicInformationApi, GetCategoriesApi, SearchInShopApi, SearchAutosuggestApi, SearchApi, AddCartApi, RetrieveCartApi, GetOrderDetailsApi, 
-	     InsertOrderApi, GetCouponApi, ActivateCouponApi, UpdateCustomerInfoApi } from "../constants/Urls";
+	     ShopBasicInformationApi, GetCategoriesApi, SearchInShopApi, SearchAutosuggestApi, SearchApi, SearchWithSubCategoryApi, AddCartApi, 
+	     RetrieveCartApi, GetOrderDetailsApi, InsertOrderApi, GetCouponApi, ActivateCouponApi, UpdateCustomerInfoApi } from "../constants/Urls";
 
 import API_KEY from "../constants/Api";
 
@@ -118,6 +118,12 @@ export const SearchAutosuggest = async(searchTerm) => {
 }
 export const Search = async(searchTerm, coordinates) => {
 	const url = `${SearchApi}?search=${searchTerm}&coordinates=${coordinates}`;
+	const response = await fetch(url);
+	const result = await response.json();
+	return result;
+}
+export const SearchWithSubCategory = async(subCategoryId, coordinates) => {
+	const url = `${SearchWithSubCategoryApi}?subCategoryId=${subCategoryId}&coordinates=${coordinates}`;
 	const response = await fetch(url);
 	const result = await response.json();
 	return result;

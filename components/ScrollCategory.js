@@ -37,7 +37,7 @@ function Item({ info, index, selected, onSelect })
 {
   id = info.categoryId ? info.categoryId : info.subCategoryId;
   name = info.categoryName ? info.categoryName : info.subCategoryName;
-  icon = info.categoryIcon ? info.categoryIcon : info.subCategoryIcon;
+  icon = info.categoryName ? info.categoryName.replace(/[^A-Z0-9]+/ig, "_").toLowerCase() : info.subCategoryName.replace(/[^A-Z0-9]+/ig, "_").toLowerCase();
   let content = (
     <CategoryItem 
     onPress={() => onSelect(info.categoryId ? info.categoryId : info.subCategoryId, index)} activeOpacity={0.8}

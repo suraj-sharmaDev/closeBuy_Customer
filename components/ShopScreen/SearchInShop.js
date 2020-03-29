@@ -28,6 +28,7 @@ const Text = styled.Text`
 	font-family : ${Fonts.normalFont};
 	color : ${Colors.darkGreyColor};
 	font-size : 15px;
+	text-transform : capitalize;
 `;
 const Button = styled.TouchableOpacity``;
 const SearchBarContainer = styled.View`
@@ -45,15 +46,6 @@ const Input = styled.TextInput`
 const SearchOutputItem = styled.TouchableOpacity`
 	padding : 20px 10px;
 `;
-const SearchOutput = ({data, onSearchItemPress, shopId}) => {
-	let Body = (
-		<SearchOutputItem onPress={()=>onSearchItemPress(data.sectionIndex, data.subCategoryName, data.itemIndex)}>
-			<Text>{data.name}</Text>
-			<Text>In {data.subCategoryName}</Text>
-		</SearchOutputItem>
-	);
-	return Body;
-}
 
 const ModalHeader = props => {
 	const [timeOut, updateTimeOut] = React.useState(null);
@@ -88,7 +80,16 @@ const ModalHeader = props => {
 	);
 	return header;
 }
-const SearchInShop = ({data, scroll, ...props}) => {
+const SearchOutput = ({data, onSearchItemPress}) => {
+	let Body = (
+		<SearchOutputItem onPress={()=>onSearchItemPress(data)}>
+			<Text>{data.name}</Text>
+			<Text>In {data.subCategoryName}</Text>
+		</SearchOutputItem>
+	);
+	return Body;
+}	
+const SearchInShop = ({data, searchHandler, ...props}) => {
 	let contentBody = [];
 	const [searchTerm, updateSearchTerm] = React.useState('');
 	const [modalBody, updateModalBody] = React.useState([]);
@@ -116,14 +117,13 @@ const SearchInShop = ({data, scroll, ...props}) => {
 			const categoryLength = Object.keys(props.shop.categories).length;
 			if(categoryLength > 0){
 				var content = searchInArray(props.shop.categories, text);
-				console.warn(props.shop.categories);
 				if(content.length > 0){
-					console.warn(content);
+					updateModalBody(content);
 				}else{
 					//if searched item not found
 					fetch(text)
 					.then((result)=>{
-						console.warn(result);
+						updateModalBody(result);
 					})
 					.catch((error)=>{
 						console.warn('error nested', error);	
@@ -133,16 +133,13 @@ const SearchInShop = ({data, scroll, ...props}) => {
 				//if cache is empty
 				fetch(text)
 				.then((result)=>{
-					console.warn(result);
+					updateModalBody(result);
 				})
 				.catch((error)=>{
 					console.warn('error', error);	
 				});
 			}
 		}
-		// if(contentBody.length>0){
-		// 	updateModalBody(contentBody);
-		// }
 	}
 	const fetch = async(text) => {
 		var data = [];
@@ -152,8 +149,19 @@ const SearchInShop = ({data, scroll, ...props}) => {
 			const products = result[0].data;
 			const productsLength = Object.keys(products).length;
 			for(var i=0; i<productsLength; i++){
-				data.push({productName : products[i].name, pos : [i]})
+				data.push(<SearchOutput key={i} 
+										data={{name : products[i].name, 
+											  subCategoryName : result[0].title, 
+											  categoryId : result[0].mainCategoryId, 
+											  subCategoryId : result[0].categoryId,
+											  subCategoryChildId : result[0].subCategoryChildId}
+										}
+										onSearchItemPress={onSearchItemPress}
+						  />
+				);
 			}
+		}else{
+			data.push(<SearchOutput key={'121'} data={{name : 'Searched Item unavailable', subCategoryName : 'this shop'}} onSearchItemPress={()=>{}} />);
 		}
 		return data;
 	}
@@ -167,12 +175,21 @@ const SearchInShop = ({data, scroll, ...props}) => {
 				var subCategoryChild = subCategory[j].subCategoryChild;
 				var subCategoryChildLength = Object.keys(subCategoryChild).length;
 				for (var k = 0; k < subCategoryChildLength; k++) {
-					var products = subCategoryChild[k].products;
+					var products = subCategoryChild[k].data;
 					var productsLength = Object.keys(products).length;
 					for (var l = 0; l < productsLength; l++) {
 						var productName = products[l].name.toLowerCase();
 						if (productName.includes(key.toLowerCase())) {
-							data.push({productName : productName, pos : [i,j,k,l]})
+							data.push(<SearchOutput key={`${i}${j}${k}${l}`} 
+													data={{name : productName, 
+														  subCategoryName : subCategoryChild[k].title, 
+														  categoryId : array[i].categoryId, 
+														  subCategoryId : subCategory[j].subCategoryId,
+														  subCategoryChildId : subCategoryChild[k].subCategoryChildId}
+													}
+													onSearchItemPress={onSearchItemPress}
+									  />
+							);
 						}
 					}
 				}
@@ -180,9 +197,9 @@ const SearchInShop = ({data, scroll, ...props}) => {
 		}
 		return data;
 	}
-	const onSearchItemPress = (sectionIndex, subCategoryName, itemIndex) =>{
+	const onSearchItemPress = (data) =>{
 		props.updateActive();
-		scroll(sectionIndex, subCategoryName, itemIndex);
+		searchHandler(data);
 	}
 	let content=(
 		<React.Fragment>

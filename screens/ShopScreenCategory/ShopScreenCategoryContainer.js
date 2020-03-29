@@ -45,7 +45,10 @@ class ShopScreenCategoryContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      items : this.props.navigation.state.params.items
+      items : this.props.navigation.state.params.items,
+      categoryId : this.props.navigation.state.params.categoryId,
+      subCategoryId : this.props.navigation.state.params.subCategoryId!=undefined ? this.props.navigation.state.params.subCategoryId : null,
+      subCategoryChildId :  this.props.navigation.state.params.subCategoryChildId!=undefined ? this.props.navigation.state.params.subCategoryChildId : null
     };
     // this.state = {
     //   items : DATA
@@ -55,7 +58,7 @@ class ShopScreenCategoryContainer extends React.PureComponent {
   render() {
     return (
       <ShopScreenCategoryPresenter 
-        items={this.state.items}
+        parentProps={this.state}
         navigation={this.props.navigation} 
       />
     );

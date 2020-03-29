@@ -21,7 +21,7 @@ const Text = styled.Text`
 const CallButton = styled.TouchableOpacity``;
 
 const OrderStatusInfoView = props => {
-	console.warn(props.order);
+	// console.warn(props.order);
 	let content = null;
 	if(props.orderPlaced && props.deliveryAssigned){
 		//when deliveryboy is assigned as well as dealer has accepted order

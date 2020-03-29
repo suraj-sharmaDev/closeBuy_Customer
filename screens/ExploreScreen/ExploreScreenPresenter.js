@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 import Color from "../../constants/Colors";
 
-import {Search} from '../../middleware/API';
+import {SearchWithSubCategory} from '../../middleware/API';
 import {AlertService} from '../../middleware/AlertService';
 import ExploreScreenLoader from '../../components/ExploreScreen/ExploreScreenLoader';
 import ExploreScreenHeader from "../../components/ExploreScreenHeader";
@@ -28,26 +28,26 @@ const ExploreScreenPresenter = ({navigation, ...props}) => {
     currentCategoryData = navigation.getParam('categoryData');
     currentId = navigation.getParam('selectedId');
     currentIndex = navigation.getParam('index');
-    searchTerm = currentCategoryData.subCategory[currentIndex].subCategoryName;          
-    fetchProducts(searchTerm);
+    subCategoryId = currentCategoryData.subCategories[currentIndex].subCategoryId;          
+    fetchProducts(subCategoryId);
   }
-  const fetchProducts = (searchTerm) => {
+  const fetchProducts = (subCategoryId) => {
      let coordinates = JSON.stringify(props.address.savedAddresses[props.address.currentAddress].coordinate);
-     Search(searchTerm, coordinates)
+     SearchWithSubCategory(subCategoryId, coordinates)
      .then((result)=>{
-      products = result.products;
-      setSelectedId(currentId);      
+      products = result;
+      setSelectedId(subCategoryId);      
      })
      .catch((err)=>{
         AlertService('Error','An error occurred, sorry of inconvenience!', ()=>{});
      })
   }
   const onSelect = (id, index) => {
-    selectedCategory = currentCategoryData.subCategory[currentIndex];
+    selectedCategory = currentCategoryData.subCategories[currentIndex];
     currentIndex = index;
     currentId = id;
-    searchTerm = currentCategoryData.subCategory[currentIndex].subCategoryName;          
-    fetchProducts(searchTerm);
+    subCategoryId = selectedCategory.subCategoryId;          
+    fetchProducts(subCategoryId);
   };
 
   let content = <ExploreScreenLoader />;
