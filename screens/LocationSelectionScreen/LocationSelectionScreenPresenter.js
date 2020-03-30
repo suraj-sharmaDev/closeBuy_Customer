@@ -61,7 +61,8 @@ const LocationSelectionScreenPresenter = props => {
         updateFetchedPredictions(result);
       })
       .catch((err)=>{
-        AlertService('Error','An error occurred, sorry of inconvenience!', ()=>{});
+        console.warn(err)
+        // AlertService('Error','An error occurred, sorry of inconvenience!', ()=>{});
       })
     }
   }

@@ -26,6 +26,7 @@ const AddressView = ({address, place_id, type, onLocationSelect, ...props}) => {
 	let addressTitle;
 	let addressInfo;
 	let content;
+	let color = Colors.blackColor;
 	if(type==='SavedLocation')
 	{
 		addressTitle = address.savedAs;
