@@ -43,7 +43,9 @@ const FloatingList = ({active, scroll, productList, updateActive}) => {
 		modalBody = (
 			productList.map((product, index)=>(
 				<ListItem key={index} onPress={()=>onCategorySelect(index)}>
-					<Label>{product.title}</Label>
+					<View style={{width : '90%'}}>
+						<Label numberOfLines={1}>{product.title}</Label>
+					</View>
 					<View>
 						<Entypo name="chevron-right" size={30} color={Color.greenColor} />
 					</View>

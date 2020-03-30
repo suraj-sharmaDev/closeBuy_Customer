@@ -29,7 +29,7 @@ const Image = styled.Image`
 `;
 
 const CategoryName = styled.Text`
-  font-size : 16px;
+  font-size : 15px;
   font-family : ${Font.normalFont};
   padding : 0px 5px;
 `;

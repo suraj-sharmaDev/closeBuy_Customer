@@ -1,5 +1,6 @@
 import React from 'react';
 import {FlatList} from 'react-native';
+import {width} from '../../constants/Layout';
 import styled from 'styled-components';
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
@@ -15,11 +16,13 @@ const Label = styled.Text`
 	margin-bottom : 10px;
 `;
 const ShopCategoryList = ({categoryList, ...props}) => {
+	//flatlist column should be in match to width of screen
+	let numColumns = width > 420 ? 4 : 3; 
 	let content = (
 		<Container>
 			<Label>Categories</Label>
 			<FlatList
-				numColumns={4}
+				numColumns={numColumns}
 				data={categoryList.categories}
 				renderItem={({item}) => (
 					<CategoryButton 

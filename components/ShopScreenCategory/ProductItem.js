@@ -17,6 +17,7 @@ const Text = styled.Text`
   font-size : 15px;
   font-family  : ${Fonts.normalFont};
   color : ${Colors.darkGreyColor};
+  text-transform : capitalize;
 `;
 const Image = styled.Image`
   background-color : ${Colors.preLoadingColor};

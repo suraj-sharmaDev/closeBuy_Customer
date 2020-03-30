@@ -8,7 +8,7 @@ const CategoryItem = styled.TouchableOpacity`
   flex-direction : column;
   align-items : center;
   justify-content : center;
-  width : 100px;
+  width : 110px;
   height : 60px;
   margin-vertical: 5px;
   margin-horizontal: 4px;
@@ -23,18 +23,18 @@ const Image = styled.Image`
 `;
 
 const CategoryName = styled.Text`
-	font-size : 16px;
+	font-size : 14px;
 	font-family : ${Fonts.normalFont};
   color : ${Colors.darkGreyColor};
   padding : 0px 5px;
 `;
 
 const CategoryButton = props =>{
-  let iconName = props.item.categoryName.toLowerCase().replace(' ', '_');
+  let iconName = props.item.categoryName.replace(/[^A-Z0-9]+/ig, "_").toLowerCase();
   let content = (
     <CategoryItem onPress={()=>props.navigateToCategory(props.item)}>
       <Image source={Icon[iconName]} />
-      <CategoryName>{props.item.categoryName}</CategoryName>
+      <CategoryName numberOfLines={1}>{props.item.categoryName}</CategoryName>
     </CategoryItem>
   );
   return content;
