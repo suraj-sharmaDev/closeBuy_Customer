@@ -21,7 +21,7 @@ function comingSoon(){
 }
 
 function customerSupport(){
-	Linking.openURL(`tel:${7994505594}`);
+	Linking.openURL(`tel:${7356722702}`);
 }
 
 const ProfileOptions = ({navigation}) => (
