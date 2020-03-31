@@ -34,7 +34,7 @@ const SearchTabNavigator = props => {
 	let barItemAnimationStyle = {width : 'auto', borderBottomColor:'Green', borderBottomWidth:2, opacity:itemOpacity};	
 
 	React.useEffect(()=>{
-		if(Object.keys(props.shops).length!=0){
+		if(Object.keys(props.products).length==0 && Object.keys(props.shops).length!=0){
 			shopSelect();
 		}
 	},[])
@@ -100,13 +100,13 @@ const SearchTabNavigator = props => {
 			<Animated.View style={[itemAnimationStyle, styles.itemDefault]}>
 				<SearchStaticResultItems
 					navigation={props.navigation} 
-					data={props.products} 
+					products={props.products} 
 				/>
 			</Animated.View>
 			<Animated.View style={[shopAnimationStyle, styles.shopDefault]}>
 				<SearchStaticResultShops 
 					navigation={props.navigation} 
-					data={props.shops} 
+					shops={props.shops} 
 				/>					
 			</Animated.View>						
 		</Container>

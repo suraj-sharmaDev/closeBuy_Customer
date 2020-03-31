@@ -17,6 +17,7 @@ import Color from '../../constants/Colors';
 
 import {SearchAutosuggest, Search} from '../../middleware/API';
 import {AlertService} from '../../middleware/AlertService';
+import AbortController from '../../middleware/AbortController';
 
 import SearchTabNavigator from '../../components/SearchTabNavigator';
 import SearchBarWithCart from '../../components/SearchBarWithCart';
@@ -29,6 +30,7 @@ const Theme = styled.ScrollView`
 `;
 
 const SearchFetchScreenPresenter = ({navigation, ...props}) => {
+	abortController = new AbortController();	
 	const [timeOut, updateTimeOut] = React.useState(null);  	
 	let body=null;
 	const [searchData, updateSearchData] = useState(null);
@@ -37,6 +39,7 @@ const SearchFetchScreenPresenter = ({navigation, ...props}) => {
 		backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
 		return()=>{
 			backHandler.remove();
+			abortController._abort();
 		}
 	},[]);
 
@@ -65,7 +68,7 @@ const SearchFetchScreenPresenter = ({navigation, ...props}) => {
 					//fetch API
 					SearchAutosuggest(text)
 						.then(result => {
-							if (!result.error) {
+							if (!result.error && !abortController._signal()) {
 								updateSearchData(result.reason);
 							}
 						})
@@ -80,10 +83,12 @@ const SearchFetchScreenPresenter = ({navigation, ...props}) => {
 		let coordinates = JSON.stringify(props.address.savedAddresses[props.address.currentAddress].coordinate);
 		Search(searchText, coordinates)
 		.then((result)=>{
-			shops=result.shops;
-			products = result.products;
-			props.updateRecent(searchText);
-			updateSearchSelected(true);			
+			if(!abortController._signal()){
+				shops=result;
+				products = result;				
+				props.updateRecent(searchText);
+				updateSearchSelected(true);			
+			}
 		})
 		.catch((err)=>{
 			AlertService('Error','An error occurred, sorry of inconvenience!', ()=>{});

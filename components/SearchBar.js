@@ -50,7 +50,7 @@ const SearchBar = (props) => {
         {
           props.searchTerm.length > 1
           ?
-          <TouchableOpacity onPress={props.clearSearch}>
+          <TouchableOpacity onPress={props.clearSearch} style={{padding : 5}}>
             <CloseIcon name="ios-close-circle" size={22} color={Colors.darkGreyColor} />                    
           </TouchableOpacity>          
           :

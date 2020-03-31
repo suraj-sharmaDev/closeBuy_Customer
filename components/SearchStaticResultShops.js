@@ -19,15 +19,14 @@ const ShopsContainer = props => {
 	        data={props.data}
 	        horizontal = {false}
 	        renderItem={({ item }) => {
-	        	item = {...item, online_status:'1'}
 		        return(
 		          <ShopDetailCard
-		            info = {item}
+		            info = {item.data[0]}
 		            navigation = {props.navigation}
 		          />
 		        )}
 	    	}
-	        keyExtractor={item => item.dist_point_id}
+	        keyExtractor={(item,index) => index+'key'}
 	        extraData={props.data}
 	      />
 	  </DataContainer> 
@@ -41,9 +40,9 @@ const SearchStaticResultShops = props => {
 	const content = (
 		<Container>
 		{
-			Object.keys(props.data).length > 0
+			Object.keys(props.shops).length > 0
 			?
-			<ShopsContainer data={props.data} navigation={props.navigation}/>
+			<ShopsContainer data={props.shops} navigation={props.navigation}/>
 			:
 			<EmptyScreen />
 		}

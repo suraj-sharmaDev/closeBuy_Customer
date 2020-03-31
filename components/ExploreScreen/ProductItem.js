@@ -7,11 +7,11 @@ const View = styled.View`
 
 `;
 const ItemContainer = styled.View`
-	flex-direction : row;
-	align-items : center;
+	flex-direction : column;
 	padding : 10px 10px;
 `;
 const ItemDetailView = styled.TouchableOpacity`
+	margin : 10px 0px;
 	flex-direction : row;
 	align-items : center;	
 `;
@@ -20,6 +20,7 @@ const ImageView = styled.View`
 	height : 100px;
 	border-radius : 7px;
 	background-color : ${Colors.preLoadingColor};
+	margin : 0px 20px 0px 0px;
 `;
 const ItemImage = styled.Image`
 	width : 100px;
@@ -30,6 +31,7 @@ const ItemName = styled.Text`
 	font-size : 16px;
 	font-family  : ${Font.normalFont};
 	color : ${Colors.blackColor};
+	text-transform : capitalize;
 `;
 const ItemSubCategory = styled.Text`
   font-size : 15px;
@@ -40,16 +42,17 @@ const ItemSubCategory = styled.Text`
 const ProductItem = ({ navigation, data }) => {
 	let content = null;
 	content = (
-		<ItemContainer onLayout={(event) => {console.warn(event.nativeEvent.layout.height)}}>
+		<ItemContainer>
+			<ItemName numberOfLines={1}>Product In {data.sub_category_child_name} Category</ItemName>
 			<ItemDetailView onPress={()=>navigation.navigate('Shop', {shopId : data.dist_point_id})}>
 				<ImageView>
 					<ItemImage 
-						source={{ uri : data.image}}
+						source={{ uri : data.product_image}}
 					/>			
 				</ImageView>
-				<View style={{alignItems : 'flex-start'}}>
-					<ItemName numberOfLines={1} ellipsizeMode = 'tail'>{data.dist_point_name}</ItemName>
-					<ItemSubCategory>{data.rating}</ItemSubCategory>
+				<View style={{alignItems : 'flex-start', width : '50%'}}>
+					<ItemName numberOfLines={2} ellipsizeMode = 'tail'>{data.product_name}</ItemName>
+					<ItemSubCategory>Rs {data.product_price}</ItemSubCategory>
 				</View>
 			</ItemDetailView>
 		</ItemContainer>

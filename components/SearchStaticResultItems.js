@@ -16,14 +16,14 @@ const ItemsContainer = props => {
 	  <DataContainer>
 	      <FlatList
 	        data={props.data}
-			numColumns={2}	        
+			numColumns={1}	        
 	        renderItem={({ item }) => (
 	          <ProductItem
 	            navigation = {props.navigation}	          
-	            data = {item}
+	            data = {item.data[0]}
 	          />
 	        )}
-	        keyExtractor={item => item.product_id}
+	        keyExtractor={item => item.subCategoryChildId}
 	        extraData={props.data}
 	      />
 	  </DataContainer> 
@@ -34,13 +34,12 @@ const ItemsContainer = props => {
 const SearchStaticResultItems = props => {
 	React.useEffect(()=>{
 	},[]);
-
 	const content = (
 		<Container>
 		{
-			Object.keys(props.data).length > 0
+			Object.keys(props.products).length > 0
 			?
-			<ItemsContainer data={props.data} navigation={props.navigation}/>
+			<ItemsContainer data={props.products} navigation={props.navigation}/>
 			:
 			<EmptyScreen />
 		}
