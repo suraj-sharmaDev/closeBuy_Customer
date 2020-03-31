@@ -65,6 +65,9 @@ const ShopScreenCategoryPresenter = ({navigation, parentProps, ...props }) => {
 		}	
 	}
 	const checkInCache = (categoryId, subCategoryId) => {
+		if(parentProps.items.shopId!==props.shop.shopId){
+			return null
+		}
 		let cachedData = null;
 		let cachedCategories = props.shop.categories; 
 		let categoryLength = Object.keys(cachedCategories).length;
