@@ -116,7 +116,10 @@ const SearchInShop = ({data, searchHandler, ...props}) => {
 			//but search for the item in our cache if not found then only make an API call
 			const categoryLength = Object.keys(props.shop.categories).length;
 			if(categoryLength > 0){
-				var content = searchInArray(props.shop.categories, text);
+				var content = [];
+				if(props.shop.shopId==props.shopId){
+					content = searchInArray(props.shop.categories, text);
+				}
 				if(content.length > 0){
 					updateModalBody(content);
 				}else{
