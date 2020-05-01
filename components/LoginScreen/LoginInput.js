@@ -13,8 +13,9 @@ const InputView = styled.View`
 	border-radius: 12px;
 `;
 const Code = styled.View`
-	width: 50px;
-	padding: 0px 2px 0px 10px;
+	justify-content: center;
+	align-items: center;	
+	padding: 0px 2px 0px 0px;
 `;
 const Input = styled.TextInput`
 	width: 90%;
@@ -23,10 +24,12 @@ const Text = styled.Text`
 	font-family  : ${Font.normalFont};
 `;
 const LoginInput = ({inputMobile, code}) =>{
+	const codeLength = code.length;
+	const width = codeLength > 2 ? codeLength * 10 + 50 : 50;
 	let content = (
 		<InputView>
-			<Code>
-				<Text style={{color: Color.darkGreyColor, fontSize: 20}}>+{code}</Text>
+			<Code style={{ width : width}}>
+				<Text style={{color: Color.darkGreyColor, fontSize: 19, padding : 0, marginTop : -3}}>+{code}</Text>
 			</Code>
 			<Input
 				placeholder="Enter Mobile Number"

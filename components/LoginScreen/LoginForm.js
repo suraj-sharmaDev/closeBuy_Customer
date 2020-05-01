@@ -33,7 +33,7 @@ const LoginForm = props => {
     const [mobile, updateMobile] = React.useState(0);
     const [disabled, updateDisabled] = React.useState(true);
     React.useEffect(()=>{
-		global.get_country = CountryToCode(props.country);
+		global.get_country = CountryToCode(props.country.trim());
 		updateLoading(false);    	
     },[])
 	const screenCheck = event => {

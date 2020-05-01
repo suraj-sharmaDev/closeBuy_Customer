@@ -4,18 +4,7 @@ import { PermissionsAndroid} from 'react-native';
 const GeolocationService = (mounted, onPermissionDenial, onLocation, accuracy=true) => {
 	const requestPermission = async () => {
 		try {
-			const granted = await PermissionsAndroid.request(
-				PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-				{
-					title: 'CloseBuy Location Permission',
-					message:
-						'CloseBuy needs to access your Geolocation' +
-						' so you can access nearby shops.',
-					buttonNeutral: 'Ask Me Later',
-					buttonNegative: 'Cancel',
-					buttonPositive: 'OK',
-				},
-			);
+			const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
 			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
 				getCurrentLocation();
 			} else {
@@ -42,10 +31,8 @@ const GeolocationService = (mounted, onPermissionDenial, onLocation, accuracy=tr
 		);
 	};
 //Start geolocation services function
-	if(mounted && accuracy){
+	if(mounted){
 		requestPermission();
-	}else if(mounted && !accuracy){
-		getCurrentLocation();
 	}
 }
 

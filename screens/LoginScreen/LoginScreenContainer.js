@@ -11,12 +11,19 @@ class LoginScreenContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isLoading : false,
-      country : 'IN'
+      isLoading : true,
+      country : null
     }
   }
   componentDidMount(){
-    // GeolocationService(true, ()=>{}, this.getCurrentLocation, false);
+    this._requestGeoCordinates();
+  }
+  _requestGeoCordinates = () => {
+    GeolocationService(true, this._permissionDenied, this.getCurrentLocation, false);    
+  }
+  _permissionDenied = () => {
+    // console.warn('denied')
+    AlertService('Important', 'We help you the best, when you provide us your location', this._requestGeoCordinates, false);
   }
   getCurrentLocation = (data) => {
     //find user geographic location to find the country of residence
@@ -28,7 +35,7 @@ class LoginScreenContainer extends Component {
       })
     })
     .catch((err)=>{
-      console.log(err)
+      console.warn(err)
     })
   };
   onLogin = (mobile) => {
