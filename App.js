@@ -30,9 +30,7 @@ class App extends Component
 }
 
 let updateOptions = {
-  updateDialog: true,
-  checkFrequency: CodePush.CheckFrequency.ON_APP_START,
-  installMode: CodePush.InstallMode.ON_NEXT_RESUME
+  checkFrequency: CodePush.CheckFrequency.ON_APP_START
 }
 
 App = CodePush(updateOptions)(App);
