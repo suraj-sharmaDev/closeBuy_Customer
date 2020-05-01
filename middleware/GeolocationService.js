@@ -42,8 +42,10 @@ const GeolocationService = (mounted, onPermissionDenial, onLocation, accuracy=tr
 		);
 	};
 //Start geolocation services function
-	if(mounted){
+	if(mounted && accuracy){
 		requestPermission();
+	}else if(mounted && !accuracy){
+		getCurrentLocation();
 	}
 }
 

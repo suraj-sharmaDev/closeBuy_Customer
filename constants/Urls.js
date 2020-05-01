@@ -37,3 +37,5 @@ export const InsertOrderApi =`${serverUrl}/customer/orderApi/insertOrder`;
 export const GetCouponApi = `${serverUrl}/customer/couponApi/getCoupon`;
 export const ActivateCouponApi = `${serverUrl}/customer/couponApi/activateCoupon`;
 export const UpdateCustomerInfoApi = `${serverUrl}/customer/customerApi/updateCustomerInfo`;
+
+export const GeoNameApi = 'http://api.geonames.org/countryCode?username=crypt4bits'

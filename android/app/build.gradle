@@ -133,8 +133,9 @@ android {
         applicationId "com.crypt4bits.closebuy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "1.2.1"
+        multiDexEnabled true
+        versionCode 9
+        versionName "1.2.2"
     }
     splits {
         abi {
@@ -198,6 +199,9 @@ android {
 }
 
 dependencies {
+    // for multidex support
+    implementation 'com.android.support:multidex:1.0.3'
+    //---------------------
     implementation project(':react-native-code-push')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules

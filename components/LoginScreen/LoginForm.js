@@ -2,7 +2,7 @@ import React from 'react';
 import {Platform, StyleSheet, Dimensions} from 'react-native';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import {CountryToCode} from '../../middleware/CountryToCode';
 import Color from '../../constants/Colors';
 import Font from "../../constants/Fonts";
 
@@ -28,10 +28,13 @@ const Text = styled.Text`
 	font-family  : ${Font.normalFont};
 `;
 const LoginForm = props => {
+	const [isLoading, updateLoading] = React.useState(true);	
     const [show, updateShow] = React.useState(false);  //actual initial value is true
     const [mobile, updateMobile] = React.useState(0);
     const [disabled, updateDisabled] = React.useState(true);
     React.useEffect(()=>{
+		global.get_country = CountryToCode(props.country);
+		updateLoading(false);    	
     },[])
 	const screenCheck = event => {
 		//since for now referral code is not being used we comment it for future use
@@ -48,29 +51,32 @@ const LoginForm = props => {
 	}
 	const loginHandler = () => {
 		updateDisabled(true);		
-		props.clickHandler(mobile);
+		props.clickHandler(`+${global.get_country.Phone}${mobile}`);
 	}
-	let content = (
-		<Form onLayout={event=> screenCheck(event)}>
-			<Text style={{color: Color.darkGreyColor, fontSize: 20}}>Get Started!</Text>
-			<LoginInput inputMobile={inputMobile}/>
-			{
-				show
-				?
-				<OptionView>
-					<OptionButton>
-						<Text>Have a refferal Code?</Text>
-					</OptionButton>
-					<OptionButton>
-						<Text>Skip</Text>
-					</OptionButton>
-				</OptionView>				
-				:
-				null
-			}
-			<LoginButton disabled={disabled} loginHandler={loginHandler}/>
-		</Form>
-	);
+	let content=null;
+	if(!isLoading){
+		content = (
+			<Form onLayout={event=> screenCheck(event)}>
+				<Text style={{color: Color.darkGreyColor, fontSize: 20}}>Get Started!</Text>
+				<LoginInput inputMobile={inputMobile} code={global.get_country.Phone}/>
+				{
+					show
+					?
+					<OptionView>
+						<OptionButton>
+							<Text>Have a refferal Code?</Text>
+						</OptionButton>
+						<OptionButton>
+							<Text>Skip</Text>
+						</OptionButton>
+					</OptionView>				
+					:
+					null
+				}
+				<LoginButton disabled={disabled} loginHandler={loginHandler}/>
+			</Form>
+		);
+	}
 	return content;
 };
 

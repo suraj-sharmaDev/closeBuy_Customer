@@ -22,11 +22,11 @@ const Input = styled.TextInput`
 const Text = styled.Text`
 	font-family  : ${Font.normalFont};
 `;
-const LoginInput = ({inputMobile}) =>{
+const LoginInput = ({inputMobile, code}) =>{
 	let content = (
 		<InputView>
 			<Code>
-				<Text style={{color: Color.darkGreyColor, fontSize: 20}}>+91</Text>
+				<Text style={{color: Color.darkGreyColor, fontSize: 20}}>+{code}</Text>
 			</Code>
 			<Input
 				placeholder="Enter Mobile Number"

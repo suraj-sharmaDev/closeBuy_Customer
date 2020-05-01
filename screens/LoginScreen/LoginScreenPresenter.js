@@ -11,7 +11,7 @@ const Theme = styled.View`
   background-color : ${Color.homeBackgroundColor};
 `;
 
-const LoginScreenPresenter = ({login, logout}) => {
+const LoginScreenPresenter = ({login, logout, country}) => {
   let imageHeight = new Animated.Value(height*0.60);
   let formHeight = new Animated.Value(height*0.40);
   let imageAnimationStyle = { height : imageHeight};  
@@ -60,6 +60,7 @@ const LoginScreenPresenter = ({login, logout}) => {
       <Animated.View style={formAnimationStyle}>
         <LoginForm 
           clickHandler={login}
+          country={country}
         />
       </Animated.View>      
     </Theme>

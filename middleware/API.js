@@ -1,9 +1,15 @@
-import { ReverseGeocode, PlacesAutoComplete, PlaceDetailsById, LoginApi, GenerateOtpApi, VerificationApi, UpdateUsernameApi, InitializeApi, 
+import { ReverseGeocode, PlacesAutoComplete, PlaceDetailsById, GeoNameApi, LoginApi, GenerateOtpApi, VerificationApi, UpdateUsernameApi, InitializeApi, 
 	     UpdateTokenApi, AddAddressApi, RetrieveAddressApi, DeleteAddressApi, GetAllShopsApi, ShopInformationApi, ShopStocksBySubCategoryApi,
 	     ShopBasicInformationApi, GetCategoriesApi, SearchInShopApi, SearchAutosuggestApi, SearchApi, SearchWithSubCategoryApi, AddCartApi, 
 	     RetrieveCartApi, GetOrderDetailsApi, InsertOrderApi, GetCouponApi, ActivateCouponApi, UpdateCustomerInfoApi } from "../constants/Urls";
 
 import API_KEY from "../constants/Api";
+
+export const GeoName = async(latitude, longitude) => {
+	const url = `${GeoNameApi}&lat=${latitude}&lng=${longitude}`;
+	const response = await fetch(url);
+	return response.text();
+}
 
 export const Login = async (data) => {
 	const response = await fetch(LoginApi,{
