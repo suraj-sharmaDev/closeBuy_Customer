@@ -10,6 +10,7 @@ export default class extends Component {
     return <DeliveryTrackingScreenPresenter 
     		navigation={this.props.navigation} 
     		cart={this.props.cart} 
+        userId={this.props.userId}
     		userLocation={this.props.userLocation}
     		focused={this.props.focused}
         onStatusUpdate={this.props.onStatusUpdate}

@@ -20,7 +20,10 @@ const ShopScreenPresenter = ({navigation, Shop }) => {
 	const navigateToCategory = (item) => {
 		// This function used in version 2 is used instead for scroll
 		item.shopId = Shop.dist_point_id;
-		navigation.navigate('ShopCategory', {items : item, categoryId : item.categoryId, onlineStatus : Shop.online_status});
+		navigation.navigate('ShopCategory', {items : item, 
+											 categoryId : item.categoryId, 
+											 onlineStatus : Shop.online_status, 
+											 deliveryAvailability : Shop.delivery_avail});
 	}
 	const searchHandler = (data) => {
 		// This function used in version 2 is used instead for scroll

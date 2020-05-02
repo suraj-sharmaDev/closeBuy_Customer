@@ -35,7 +35,7 @@ const CartBody = props => {
 			}
 			<CouponCard couponReedem={couponReedem}/>
 			<BillCard 
-				store={props.store.items} 
+				store={props.store} 
 				deliveryFee={props.deliveryFee} 
 				discountAmount={props.discountAmount} 
 				distance={props.distance}

@@ -124,7 +124,7 @@ export default createBottomTabNavigator(
     ProfileStack
   },
   {
-    initialRouteName: "HomeStack",
+    initialRouteName: "CartStack",
     tabBarOptions: {
       showLabel: true,
       style: {

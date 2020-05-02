@@ -33,6 +33,7 @@ export const RetrieveCartApi = `${serverUrl}/customer/cartApi/retrieveCart`;
 
 export const GetOrderDetailsApi = `${serverUrl}/customer/orderApi/getOrderDetails`;
 export const InsertOrderApi =`${serverUrl}/customer/orderApi/insertOrder`;
+export const CompleteOrderApi =`${serverUrl}/customer/orderApi/completeOrder`;
 
 export const GetCouponApi = `${serverUrl}/customer/couponApi/getCoupon`;
 export const ActivateCouponApi = `${serverUrl}/customer/couponApi/activateCoupon`;

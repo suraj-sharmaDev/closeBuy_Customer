@@ -52,7 +52,8 @@ const ProductsList = props => {
       <SectionList
         ref={_listRef}
         sections={props.products}
-        renderItem={({item})=><ProductItem item={item} onlineStatus={props.onlineStatus}/>}
+        renderItem={({item})=><ProductItem item={item} onlineStatus={props.onlineStatus} 
+                                           deliveryAvailability={props.deliveryAvailability}/>}
         renderSectionHeader={({ section: { title } }) => (
           <_renderHeader title={title} />
         )}

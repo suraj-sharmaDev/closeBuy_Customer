@@ -1,7 +1,7 @@
 import { ReverseGeocode, PlacesAutoComplete, PlaceDetailsById, GeoNameApi, LoginApi, GenerateOtpApi, VerificationApi, UpdateUsernameApi, InitializeApi, 
 	     UpdateTokenApi, AddAddressApi, RetrieveAddressApi, DeleteAddressApi, GetAllShopsApi, ShopInformationApi, ShopStocksBySubCategoryApi,
 	     ShopBasicInformationApi, GetCategoriesApi, SearchInShopApi, SearchAutosuggestApi, SearchApi, SearchWithSubCategoryApi, AddCartApi, 
-	     RetrieveCartApi, GetOrderDetailsApi, InsertOrderApi, GetCouponApi, ActivateCouponApi, UpdateCustomerInfoApi } from "../constants/Urls";
+	     RetrieveCartApi, GetOrderDetailsApi, InsertOrderApi, CompleteOrderApi, GetCouponApi, ActivateCouponApi, UpdateCustomerInfoApi } from "../constants/Urls";
 
 import API_KEY from "../constants/Api";
 
@@ -152,6 +152,15 @@ export const ActivateCoupon = async(data) => {
 }
 export const PlaceOrder = async(data) => {
 	const response = await fetch(InsertOrderApi,{
+		method : 'POST',
+		body : data
+	});
+	const result = await response.json();
+	return result;
+}
+export const CompleteOrder = async(data) => {
+	//Incase self_pickup
+	const response = await fetch(CompleteOrderApi,{
 		method : 'POST',
 		body : data
 	});

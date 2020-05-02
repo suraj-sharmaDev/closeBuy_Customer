@@ -76,7 +76,11 @@ const CartScreenPresenter = ({navigation, store, address, ...props}) => {
   const onPlaceOrder = () => {
     let data = prepareForm();
     data.append('deliveryAddress', JSON.stringify(address.savedAddresses[address.currentAddress]));
-    data.append('paymentType', 'COD');
+    if(store.shopDeliveryAvailability==0){
+      data.append('paymentType', 'SELF_PICKUP');
+    }else{
+      data.append('paymentType', 'COD');
+    }
     data.append('couponCode', store.couponCode);    
     PlaceOrder(formData)
     .then((result)=>{
@@ -100,6 +104,7 @@ const CartScreenPresenter = ({navigation, store, address, ...props}) => {
     content = (
       <DeliveryTrackingScreen 
         cart={store} 
+        userId={props.userId}
         userLocation={address} 
         focused={props.focused}
         onStatusUpdate={props.onStatusUpdate}
@@ -124,7 +129,7 @@ const CartScreenPresenter = ({navigation, store, address, ...props}) => {
             refresh = {refresh}
           />
         </ScrollView>
-        <ProceedCard onPlaceOrder={onPlaceOrder}/>
+        <ProceedCard onPlaceOrder={onPlaceOrder} deliveryAvail={store.shopDeliveryAvailability}/>
       </Theme>
     );
   }

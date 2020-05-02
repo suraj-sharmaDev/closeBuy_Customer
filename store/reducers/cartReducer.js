@@ -13,6 +13,8 @@ const initialState = {
   tracking : false,
   orderId : 0,
   shopCoordinate : null,
+  shopDeliveryAvailability : null,
+  paymentType : null,
   deliveryCoordinate : null,
   deliveryStatus : null,
   deliveryBoyName : '',
@@ -33,6 +35,7 @@ const onRetrieveCart = (state, data) => {
     tracking : false,
     orderId : 0,  
     shopCoordinate : null,
+    shopDeliveryAvailability : Object.keys(data.cart).length > 0 ? data.cart.delivery_avail : null,
     deliveryCoordinate : null,
     deliveryStatus : null,
     deliveryBoyName : '',
@@ -57,12 +60,14 @@ const onIncrement =(state, data)=> {
   {
     //when new data is coming in
     newState.shopId = data.shopId;
+    newState.shopDeliveryAvailability = data.deliveryAvail;
     newObj = { id : data.productId, name : data.name, price : data.price, qty : 1 };
     newState.items.push(newObj);    
   }
   else if(newState.shopId!==data.shopId){
     //when customer add items from another shop
     newState.shopId = data.shopId;
+    newState.shopDeliveryAvailability = data.deliveryAvail;
     newState.couponCode = '';
     newState.totalAmount = 0;
     newState.discountAmount = 0;
@@ -149,6 +154,7 @@ const onTrackStart = (state, data) => {
   newState.orderId = data.id;    
   newState.deliveryCoordinate = JSON.parse(data.deliveryBoy_coordinates);
   newState.shopCoordinate = JSON.parse(data.distribution_point_coordinates);
+  newState.paymentType = data.payment_type;
   newState.deliveryStatus = data.delivery_status;        
   newState.deliveryBoyName = data.deliveryBoy_name;
   newState.deliveryBoyMobile = data.deliveryBoy_mobile;
@@ -169,13 +175,16 @@ const onTrackEnd = () => {
     discountPercentage : 0,
     discountMinOrderAmount : 0,
     discountMaxAmount : 0,
-    totalAmount : 0,        
+    totalAmount : 0,
     tracking : false,
-    orderId : 0,        
+    orderId : 0,
+    shopCoordinate : null,
+    shopDeliveryAvailability : null,
+    paymentType : null,
     deliveryCoordinate : null,
     deliveryStatus : null,
     deliveryBoyName : '',
-    deliveryBoyMobile : 0        
+    deliveryBoyMobile : 0
   };  
   return initialState;
 }

@@ -41,7 +41,8 @@ const ProductItem = ({item, ...props}) => {
           ?
           <ShopQuantityButton 
             item={{
-                 shopId : item.shopId, 
+                 shopId : item.shopId,
+                 deliveryAvail : props.deliveryAvailability, 
                  id : item.productId, 
                  name : item.name, 
                  price : item.price,

@@ -35,7 +35,7 @@ const Button = styled.TouchableOpacity`
 `;
 const BillCard = ({ store, deliveryFee, discountAmount, distance, totalAmountPreserver }) => {
 	let amount = 0;
-	store.map(s=>{
+	store.items.map(s=>{
 		amount+=s.price*s.qty;
 	})
 	totalAmountPreserver(amount); //delivery fee not added
@@ -84,7 +84,15 @@ const BillCard = ({ store, deliveryFee, discountAmount, distance, totalAmountPre
 				<BillItem>
 					<BillText>Payment Method</BillText>
 					<View>
-						<BillText>COD</BillText>
+						<BillText>
+						{
+							store.shopDeliveryAvailability==0
+							?
+							'Self Pickup'
+							:
+							'COD'
+						}
+						</BillText>
 					</View>
 				</BillItem>				
 			</Bill>

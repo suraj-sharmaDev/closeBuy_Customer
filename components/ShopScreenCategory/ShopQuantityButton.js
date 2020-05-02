@@ -85,6 +85,7 @@ const ShopQuantityButton = ({item, ...props }) => {
 			}else{
 				props.incrementItem({
 					shopId: shopId,
+					deliveryAvail : item.deliveryAvail,
 					productId: productId,
 					name: name,
 					price: price,
@@ -94,6 +95,7 @@ const ShopQuantityButton = ({item, ...props }) => {
 			AlertService('Cart Not Empty','Your cart contains items from other shop. \n Replace it?!', ()=>{
 				props.incrementItem({
 					shopId: shopId,
+					deliveryAvail : item.deliveryAvail,
 					productId: productId,
 					name: name,
 					price: price,

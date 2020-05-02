@@ -24,7 +24,14 @@ const Text = styled.Text`
 
 const ProceedCard = props => {
 	const confirmation = () => {
-		AlertService('Proceed','Do you wish to procced with this order?', props.onPlaceOrder);
+		if(props.deliveryAvail==0)
+		{
+			AlertService('Proceed','Cash on Delivery (COD) not Available!\n\nDo you wish to proceed with self pickup?', 
+						props.onPlaceOrder);
+		}
+		else{
+			AlertService('Proceed','Do you wish to procced with this order?', props.onPlaceOrder);			
+		}
 	}
 	let content = (
 		<Container activeOpacity={0.6} onPress={confirmation}>

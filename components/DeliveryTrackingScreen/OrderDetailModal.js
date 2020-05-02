@@ -59,17 +59,41 @@ const OrderDetailModal = (props) => {
 							return <Item order={order} key={index} />
 						})
 					}
-					<OrderView style={{ borderBottomWidth:1, borderBottomColor : Colors.greyColor, paddingBottom : 10}}>
-						<Text>Delivery Charge</Text>
-						<Text>Rs 20</Text>
-					</OrderView>					
-					<OrderView style={{ paddingTop : 10}}>
-						<Text>Total Amount</Text> 
-						<Text>Rs {totalAmount+20}</Text>
-					</OrderView>
+					{
+						props.order.paymentType=='COD'
+						?
+						<React.Fragment>
+							<OrderView 
+								style={{ borderBottomWidth:1, borderBottomColor : Colors.greyColor, paddingBottom : 10}}
+							>
+								<Text>Delivery Charge</Text>
+								<Text>Rs 20</Text>
+							</OrderView>					
+							<OrderView style={{ paddingTop : 10}}>
+								<Text>Total Amount</Text> 
+								<Text>Rs {totalAmount+20}</Text>
+							</OrderView>
+						</React.Fragment>
+						:
+						<React.Fragment>
+							<OrderView style={{ paddingTop : 10}}>
+								<Text>Total Amount</Text> 
+								<Text>Rs {totalAmount}</Text>
+							</OrderView>
+						</React.Fragment>
+					}
+
 					<OrderView>
 						<Text>Payment Mode</Text> 
-						<Text>COD</Text>
+						<Text>
+						{
+							props.order.paymentType=='COD'
+							?
+							'COD'
+							:
+							'Self Pickup'
+						}
+						</Text>
 					</OrderView>				
 				</Container>				
 				:

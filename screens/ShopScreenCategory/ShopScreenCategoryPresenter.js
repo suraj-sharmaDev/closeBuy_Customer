@@ -129,6 +129,7 @@ const ShopScreenCategoryPresenter = ({navigation, parentProps, ...props }) => {
 					products={global.products}
 					selected={selected.selected}
 					onlineStatus={parentProps.onlineStatus}
+					deliveryAvailability={parentProps.deliveryAvailability}
 				/>
 				<FooterCard 
 					scroll={scroll}

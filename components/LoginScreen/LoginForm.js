@@ -57,7 +57,7 @@ const LoginForm = props => {
 	if(!isLoading){
 		content = (
 			<Form onLayout={event=> screenCheck(event)}>
-				<Text style={{color: Color.darkGreyColor, fontSize: 20}}>Get Started</Text>
+				<Text style={{color: Color.darkGreyColor, fontSize: 20}}>Get Started!</Text>
 				<LoginInput inputMobile={inputMobile} code={global.get_country.Phone}/>
 				{
 					show
