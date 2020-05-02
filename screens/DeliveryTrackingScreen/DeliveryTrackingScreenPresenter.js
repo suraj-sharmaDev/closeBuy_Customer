@@ -103,31 +103,31 @@ const DeliveryTrackingScreenPresenter = (props) => {
   //the condition is checked to make sure the loading of coordinates
   //has happened
   if(props.cart.paymentType=='SELF_PICKUP'){
-    // _map = markers.deliveryMarker!==null ?
-    //     <MapDisplaySelfPickup 
-    //       userLocation={userLocation}
-    //       markers={markers}
-    //       openNativeMaps={openNativeMaps}
-    //     />
-    //     :
-    //     <Text>Loading</Text>
+    _map = markers.deliveryMarker!==null ?
+        <MapDisplaySelfPickup 
+          userLocation={userLocation}
+          markers={markers}
+          openNativeMaps={openNativeMaps}
+        />
+        :
+        <Text>Loading</Text>
 
     _orderDetail = <OrderDetailSelfPickup order={props.cart} openNativeMaps={openNativeMaps} completeSelfPickUp={completeSelfPickUp}/>
   }else{
-    // _map = markers.deliveryMarker!==null ?
-    //     <MapDisplay 
-    //       userLocation={userLocation}
-    //       markers={markers}
-    //     />
-    //     :
-    //     <Text>Loading</Text>
+    _map = markers.deliveryMarker!==null ?
+        <MapDisplay 
+          userLocation={userLocation}
+          markers={markers}
+        />
+        :
+        <Text>Loading</Text>
 
     _orderDetail = <OrderDetail order={props.cart}/>
   }
   let content = (
   <Theme stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
     {
-      // _map 
+      _map 
     }
     {_orderDetail}
   </Theme>
